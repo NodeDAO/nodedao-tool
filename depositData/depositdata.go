@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/ethereum/go-ethereum/common"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -18,6 +19,62 @@ type DepositData struct {
 	ForkVersion           string `json:"fork_version"`
 	NetworkName           string `json:"network_name"`
 	DepositCliVersion     string `json:"deposit_cli_version"`
+}
+
+func SpiteDepositData(depositDataPath, outputDir string, validatorCount int) error {
+	data, err := os.ReadFile(depositDataPath)
+	if err != nil {
+		return err
+	}
+
+	var depositDatas []DepositData
+	err = json.Unmarshal(data, &depositDatas)
+	if err != nil {
+		return err
+	}
+
+	fileName := filepath.Base(depositDataPath)
+
+	writeFunc := func(i int, d []byte) {
+		fi, err := os.Create(filepath.Join(outputDir, fmt.Sprintf("%d-", i)+fileName))
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		_, err = fi.Write(d)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		fi.Close()
+	}
+
+	if len(depositDatas) <= validatorCount {
+		writeFunc(1, data)
+		return nil
+	}
+
+	count := len(depositDatas) / validatorCount
+	if len(depositDatas)%validatorCount != 0 {
+		count++
+	}
+
+	for i := 0; i < count; i++ {
+		start := i * validatorCount
+		end := start + validatorCount
+		if i == count-1 {
+			end = len(depositDatas)
+		}
+		tem := depositDatas[start:end]
+		d, err := json.Marshal(tem)
+		if err != nil {
+			return err
+		}
+
+		writeFunc(i+1, d)
+	}
+
+	return nil
 }
 
 func GenerateRegisterValidator(depositDataPath string) ([][]byte, [][]byte, [][32]byte, error) {

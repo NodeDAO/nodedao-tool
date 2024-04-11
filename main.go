@@ -16,6 +16,8 @@ var log = logging.Logger("main")
 var (
 	configPath          string
 	depositDataJsonPath string
+	outputDir           string
+	spiteSize           int
 )
 
 var rootCmd = &cobra.Command{
@@ -29,16 +31,31 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&configPath, "config", "c", "./conf/config.yaml", "path to configuration file")
 	registerValidatorCmd.PersistentFlags().StringVarP(&depositDataJsonPath, "depositDataJsonPath", "d", "", "deposit data file path")
+	spiteDepositDataCmd.PersistentFlags().StringVarP(&depositDataJsonPath, "depositDataJsonPath", "d", "", "deposit data file path")
+	spiteDepositDataCmd.PersistentFlags().StringVarP(&outputDir, "outputDir", "o", "", "output dir")
+	spiteDepositDataCmd.PersistentFlags().IntVarP(&spiteSize, "spiteSize", "s", 10, "spite size")
 }
 
 func main() {
 	_ = logging.SetLogLevel("*", "INFO")
 
-	rootCmd.AddCommand(registerValidatorCmd)
+	rootCmd.AddCommand(registerValidatorCmd, spiteDepositDataCmd)
 
 	_ = rootCmd.Execute()
 }
 
+var spiteDepositDataCmd = &cobra.Command{
+	Use:     "spite-depositdata",
+	Short:   "spite-depositdata",
+	Example: "./nodedao-tool spite-depositdata",
+	Run: func(cmd *cobra.Command, args []string) {
+		err := depositData.SpiteDepositData(depositDataJsonPath, outputDir, spiteSize)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+	},
+}
 var registerValidatorCmd = &cobra.Command{
 	Use:     "register-validator",
 	Short:   "register-validator",
