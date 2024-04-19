@@ -4,9 +4,11 @@ import (
 	"context"
 	"github.com/NodeDAO/nodedao-tool/conf"
 	"github.com/NodeDAO/nodedao-tool/contract/nodedaopool"
-	"github.com/NodeDAO/nodedao-tool/utils"
+	"github.com/NodeDAO/nodedao-tool/eth1"
+	"github.com/NodeDAO/nodedao-tool/eth2"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/params"
 	logging "github.com/ipfs/go-log/v2"
 	"math/big"
 )
@@ -19,7 +21,7 @@ var ValidatorRegistrationTopic = common.HexToHash("0xe585eadb0042252d35431ecfed1
 
 func scanValidators(addr common.Address) ([]string, error) {
 	config := conf.GetConfig()
-	eth1Client, cancel, err := utils.GetEthClient(config.Eth1Rpc)
+	eth1Client, cancel, err := eth1.GetEthClient(config.Eth1Rpc)
 	if err != nil {
 		return nil, err
 	}
@@ -62,11 +64,33 @@ func scanValidators(addr common.Address) ([]string, error) {
 
 			for _, pubkey := range pubkeys[0].([][]uint8) {
 				validator := common.Bytes2Hex(pubkey)
-				validators = append(validators, validator)
+				validators = append(validators, "0x"+validator)
 				log.Infow("scanValidators", "pubkey", validator)
 			}
 		}
 	}
 
 	return validators, nil
+}
+
+func calcEth2Balance(pubkeys []string, refSlot string) (*big.Int, error) {
+	validators, err := eth2.ConsensusClient.CustomizeBeaconService.ValidatorsByPubKey(context.Background(), refSlot, pubkeys)
+	if err != nil {
+		return nil, err
+	}
+
+	totalBeaconBalance := big.NewInt(0)
+	for _, validator := range validators {
+		totalBeaconBalance = big.NewInt(0).Add(totalBeaconBalance, big.NewInt(int64(validator.Balance)))
+	}
+
+	return GWEIToWEI(totalBeaconBalance), nil
+}
+
+func GWEIToWEI(value *big.Int) *big.Int {
+	return new(big.Int).Mul(value, big.NewInt(params.GWei))
+}
+
+func WEIToEth(value *big.Int) *big.Float {
+	return new(big.Float).Quo(new(big.Float).Quo(big.NewFloat(0).SetInt(value), big.NewFloat(params.GWei)), big.NewFloat(params.GWei))
 }

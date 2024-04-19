@@ -1,7 +1,15 @@
 package totalEth
 
 import (
+	"context"
+	"fmt"
 	"github.com/NodeDAO/nodedao-tool/conf"
+	"github.com/NodeDAO/nodedao-tool/contract/elreward"
+	"github.com/NodeDAO/nodedao-tool/contract/nodedaopool"
+	"github.com/NodeDAO/nodedao-tool/eth1"
+	"github.com/NodeDAO/nodedao-tool/eth2"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"math/big"
 	"strings"
 )
 
@@ -16,4 +24,88 @@ func scanNETHValidator() ([]string, error) {
 	}
 
 	return append(v1Pubkeys, v2Pubkeys...), nil
+}
+
+func calcNethEth1Balance(blockNumber int64) (*big.Int, *big.Int, error) {
+	config := conf.GetConfig()
+	eth1Client, cancel, err := eth1.GetEthClient(config.Eth1Rpc)
+	if err != nil {
+		return nil, nil, err
+	}
+	defer cancel()
+
+	elVault, err := elreward.NewElreward(conf.NethElVault, eth1Client)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	elReward, err := elVault.GetPoolRewards(&bind.CallOpts{
+		BlockNumber: big.NewInt(blockNumber),
+	})
+	if err != nil {
+		return nil, nil, err
+	}
+	log.Infow("neth", "elReward", elReward.String())
+	nethPoolBalance, err := eth1Client.BalanceAt(context.Background(), conf.NethPool, big.NewInt(blockNumber))
+	if err != nil {
+		return nil, nil, err
+	}
+
+	log.Infow("neth", "nethPoolBalance", nethPoolBalance.String())
+	clVaultBalance, err := eth1Client.BalanceAt(context.Background(), conf.NethClVault, big.NewInt(blockNumber))
+	if err != nil {
+		return nil, nil, err
+	}
+	log.Infow("neth", "clVaultBalance", clVaultBalance.String())
+
+	nethPoolContract, err := nodedaopool.NewPool(conf.NethPool, eth1Client)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	totalAssets, err := nethPoolContract.TotalAssets(&bind.CallOpts{
+		BlockNumber: big.NewInt(blockNumber),
+	})
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return big.NewInt(0).Add(big.NewInt(0).Add(elReward, nethPoolBalance), clVaultBalance), totalAssets, nil
+}
+
+func CalcNethTotalEth() error {
+	refSlot, err := eth2.ConsensusClient.CustomizeBeaconService.HeadSlot(context.Background())
+	if err != nil {
+		return err
+	}
+	executionBlock, err := eth2.ConsensusClient.CustomizeBeaconService.ExecutionBlock(context.Background(), refSlot.String())
+	if err != nil {
+		return err
+	}
+
+	pubkeys, err := scanNETHValidator()
+	if err != nil {
+		return err
+	}
+
+	eth1Balance, totalAssets, err := calcNethEth1Balance(executionBlock.BlockNumber.Int64())
+	if err != nil {
+		return err
+	}
+	log.Infow("neth", "eth1Balance", eth1Balance.String())
+
+	eth2Balance, err := calcEth2Balance(pubkeys, refSlot.String())
+	if err != nil {
+		return err
+	}
+	log.Infow("neth", "eth2Balance", eth2Balance.String())
+
+	totalETH := big.NewInt(0).Add(eth1Balance, eth2Balance)
+
+	fmt.Println("===========================================================")
+	fmt.Printf("totalETH : %f ETH (%s WEI) \n", WEIToEth(totalETH), totalETH.String())
+	fmt.Printf("totalAsset : %f ETH (%s WEI) \n", WEIToEth(totalAssets), totalAssets.String())
+	fmt.Printf("totalAsset - totalETH: %f ETH \n", WEIToEth(big.NewInt(0).Sub(totalAssets, totalETH)))
+	fmt.Println("===========================================================")
+	return nil
 }

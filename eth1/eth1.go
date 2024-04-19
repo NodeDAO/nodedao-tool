@@ -1,4 +1,4 @@
-package utils
+package eth1
 
 import (
 	"fmt"

@@ -1,15 +1,19 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"github.com/NodeDAO/nodedao-tool/conf"
 	depositContract "github.com/NodeDAO/nodedao-tool/contract/depositcontract"
 	"github.com/NodeDAO/nodedao-tool/contract/nodedaopool"
 	"github.com/NodeDAO/nodedao-tool/depositData"
-	"github.com/NodeDAO/nodedao-tool/utils"
+	"github.com/NodeDAO/nodedao-tool/eth1"
+	"github.com/NodeDAO/nodedao-tool/eth2"
+	"github.com/NodeDAO/nodedao-tool/totalEth"
 	"github.com/ethereum/go-ethereum/common"
 	logging "github.com/ipfs/go-log/v2"
 	"github.com/spf13/cobra"
+	"time"
 )
 
 var log = logging.Logger("main")
@@ -39,9 +43,47 @@ func init() {
 func main() {
 	_ = logging.SetLogLevel("*", "INFO")
 
-	rootCmd.AddCommand(registerValidatorCmd, spiteDepositDataCmd)
+	rootCmd.AddCommand(registerValidatorCmd, spiteDepositDataCmd, totalEThNethCmd, totalEThRNethCmd)
 
 	_ = rootCmd.Execute()
+}
+
+var totalEThNethCmd = &cobra.Command{
+	Use:     "totaleth-neth",
+	Short:   "totaleth-neth",
+	Example: "./nodedao-tool totaleth-neth",
+	Run: func(cmd *cobra.Command, args []string) {
+		conf.Init(configPath)
+		err := eth2.InitConsensusClient(context.Background(), conf.GetConfig().Eth2Rpc, 1*time.Minute)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+		err = totalEth.CalcNethTotalEth()
+		if err != nil {
+			log.Error(err)
+			return
+		}
+	},
+}
+
+var totalEThRNethCmd = &cobra.Command{
+	Use:     "totaleth-rneth",
+	Short:   "totaleth-rneth",
+	Example: "./nodedao-tool totaleth-rneth",
+	Run: func(cmd *cobra.Command, args []string) {
+		conf.Init(configPath)
+		err := eth2.InitConsensusClient(context.Background(), conf.GetConfig().Eth2Rpc, 1*time.Minute)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+		err = totalEth.CalcRnethTotalEth()
+		if err != nil {
+			log.Error(err)
+			return
+		}
+	},
 }
 
 var spiteDepositDataCmd = &cobra.Command{
@@ -56,6 +98,7 @@ var spiteDepositDataCmd = &cobra.Command{
 		}
 	},
 }
+
 var registerValidatorCmd = &cobra.Command{
 	Use:     "register-validator",
 	Short:   "register-validator",
@@ -63,7 +106,7 @@ var registerValidatorCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		conf.Init(configPath)
 		config := conf.GetConfig()
-		client, cancel, err := utils.GetEthClient(config.Eth1Rpc)
+		client, cancel, err := eth1.GetEthClient(config.Eth1Rpc)
 		if err != nil {
 			log.Error(err)
 			return
