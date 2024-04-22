@@ -33,6 +33,8 @@ func SpiteDepositData(depositDataPath, outputDir string, validatorCount int) err
 		return err
 	}
 
+	depositDatasLen := len(depositDatas)
+
 	fileName := filepath.Base(depositDataPath)
 
 	writeFunc := func(i int, d []byte) {
@@ -59,6 +61,7 @@ func SpiteDepositData(depositDataPath, outputDir string, validatorCount int) err
 		count++
 	}
 
+	spiteLen := 0
 	for i := 0; i < count; i++ {
 		start := i * validatorCount
 		end := start + validatorCount
@@ -66,12 +69,20 @@ func SpiteDepositData(depositDataPath, outputDir string, validatorCount int) err
 			end = len(depositDatas)
 		}
 		tem := depositDatas[start:end]
+
+		spiteLen += len(tem)
+
 		d, err := json.Marshal(tem)
 		if err != nil {
 			return err
 		}
 
 		writeFunc(i+1, d)
+	}
+
+	if spiteLen != depositDatasLen {
+		fmt.Println("Length mismatch after splitting")
+		os.Exit(1)
 	}
 
 	return nil
