@@ -84,6 +84,13 @@ func calcEth2Balance(pubkeys []string, refSlot string) (*big.Int, error) {
 		totalBeaconBalance = big.NewInt(0).Add(totalBeaconBalance, big.NewInt(int64(validator.Balance)))
 	}
 
+	if len(validators) != len(pubkeys) {
+		// Newly registered validator
+		number := int64(len(pubkeys) - len(validators))
+		balance := big.NewInt(32000000000)
+		totalBeaconBalance = big.NewInt(0).Add(totalBeaconBalance, big.NewInt(0).Mul(big.NewInt(number), balance))
+	}
+
 	return GWEIToWEI(totalBeaconBalance), nil
 }
 
