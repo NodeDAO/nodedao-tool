@@ -20,6 +20,7 @@ var log = logging.Logger("main")
 var (
 	configPath          string
 	depositDataJsonPath string
+	format              string
 	outputDir           string
 	spiteSize           int
 )
@@ -35,6 +36,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&configPath, "config", "c", "./conf/config.yaml", "path to configuration file")
 	registerValidatorCmd.PersistentFlags().StringVarP(&depositDataJsonPath, "depositDataJsonPath", "d", "", "deposit data file path")
+	registerValidatorCmd.PersistentFlags().StringVarP(&format, "format", "f", "", "format: scan")
 	spiteDepositDataCmd.PersistentFlags().StringVarP(&depositDataJsonPath, "depositDataJsonPath", "d", "", "deposit data file path")
 	spiteDepositDataCmd.PersistentFlags().StringVarP(&outputDir, "outputDir", "o", "", "output dir")
 	spiteDepositDataCmd.PersistentFlags().IntVarP(&spiteSize, "spiteSize", "s", 10, "spite size")
@@ -128,7 +130,7 @@ var registerValidatorCmd = &cobra.Command{
 		fmt.Println("")
 		fmt.Printf("restakingPod: %s\n", conf.RestakingPod.String())
 		fmt.Println("")
-		pubkeyData, signatureData, depositDataRootData, err := depositData.GenerateRegisterValidator(depositDataJsonPath)
+		pubkeyData, signatureData, depositDataRootData, err := depositData.GenerateRegisterValidator(depositDataJsonPath, format)
 		if err != nil {
 			log.Error(err)
 			return

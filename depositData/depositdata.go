@@ -88,7 +88,7 @@ func SpiteDepositData(depositDataPath, outputDir string, validatorCount int) err
 	return nil
 }
 
-func GenerateRegisterValidator(depositDataPath string) ([][]byte, [][]byte, [][32]byte, error) {
+func GenerateRegisterValidator(depositDataPath, format string) ([][]byte, [][]byte, [][32]byte, error) {
 	data, err := os.ReadFile(depositDataPath)
 	if err != nil {
 		return nil, nil, nil, err
@@ -109,18 +109,30 @@ func GenerateRegisterValidator(depositDataPath string) ([][]byte, [][]byte, [][3
 		pubkeyData = append(pubkeyData, common.Hex2Bytes(deposit.Pubkey))
 		signatureData = append(signatureData, common.Hex2Bytes(deposit.Signature))
 		rootData := [32]byte{}
-		copy(rootData[:], common.Hex2Bytes(deposit.Pubkey))
+		copy(rootData[:], common.Hex2Bytes(deposit.DepositDataRoot))
 		depositDataRootData = append(depositDataRootData, rootData)
 
-		if i == 0 {
-			pubkeys = "\"0x" + deposit.Pubkey + "\""
-			signatures = "\"0x" + deposit.Signature + "\""
-			depositDataRoots = "\"0x" + deposit.DepositDataRoot + "\""
-			continue
+		if format == "scan" {
+			if i == 0 {
+				pubkeys = "0x" + deposit.Pubkey
+				signatures = "0x" + deposit.Signature
+				depositDataRoots = "0x" + deposit.DepositDataRoot
+				continue
+			}
+			pubkeys = fmt.Sprintf("%s,%s", pubkeys, "0x"+deposit.Pubkey)
+			signatures = fmt.Sprintf("%s,%s", signatures, "0x"+deposit.Signature)
+			depositDataRoots = fmt.Sprintf("%s,%s", depositDataRoots, "0x"+deposit.DepositDataRoot)
+		} else {
+			if i == 0 {
+				pubkeys = "\"0x" + deposit.Pubkey + "\""
+				signatures = "\"0x" + deposit.Signature + "\""
+				depositDataRoots = "\"0x" + deposit.DepositDataRoot + "\""
+				continue
+			}
+			pubkeys = fmt.Sprintf("%s,%s", pubkeys, "\"0x"+deposit.Pubkey+"\"")
+			signatures = fmt.Sprintf("%s,%s", signatures, "\"0x"+deposit.Signature+"\"")
+			depositDataRoots = fmt.Sprintf("%s,%s", depositDataRoots, "\"0x"+deposit.DepositDataRoot+"\"")
 		}
-		pubkeys = fmt.Sprintf("%s,%s", pubkeys, "\"0x"+deposit.Pubkey+"\"")
-		signatures = fmt.Sprintf("%s,%s", signatures, "\"0x"+deposit.Signature+"\"")
-		depositDataRoots = fmt.Sprintf("%s,%s", depositDataRoots, "\"0x"+deposit.DepositDataRoot+"\"")
 	}
 
 	if len(strings.Split(pubkeys, ",")) != len(strings.Split(signatures, ",")) || len(strings.Split(pubkeys, ",")) != len(strings.Split(depositDataRoots, ",")) {
