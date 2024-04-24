@@ -94,6 +94,24 @@ func calcEth2Balance(pubkeys []string, refSlot string) (*big.Int, error) {
 	return GWEIToWEI(totalBeaconBalance), nil
 }
 
+func getValidatorIndex(pubkeys []string, refSlot string) ([]uint64, error) {
+	validators, err := eth2.ConsensusClient.CustomizeBeaconService.ValidatorsByPubKey(context.Background(), refSlot, pubkeys)
+	if err != nil {
+		return nil, err
+	}
+
+	validatorIndexs := []uint64{}
+	for _, pubkey := range pubkeys {
+		if v, ok := validators[pubkey]; ok {
+			validatorIndexs = append(validatorIndexs, uint64(v.Index))
+		} else {
+			validatorIndexs = append(validatorIndexs, uint64(0))
+		}
+	}
+
+	return validatorIndexs, nil
+}
+
 func GWEIToWEI(value *big.Int) *big.Int {
 	return new(big.Int).Mul(value, big.NewInt(params.GWei))
 }

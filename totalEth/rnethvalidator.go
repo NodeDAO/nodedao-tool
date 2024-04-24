@@ -93,6 +93,25 @@ func calcRnethEth1Balance(blockNumber int64) (*big.Int, *big.Int, error) {
 	return big.NewInt(0).Add(big.NewInt(0).Add(elReward, rnethPoolBalance), clVaultBalance), totalAssets, nil
 }
 
+func GetRnethValidatorIndex() ([]string, []uint64, error) {
+	refSlot, err := eth2.ConsensusClient.CustomizeBeaconService.HeadSlot(context.Background())
+	if err != nil {
+		return nil, nil, err
+	}
+
+	pubkeys, err := scanRNETHValidator()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	indexs, err := getValidatorIndex(pubkeys, refSlot.String())
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return pubkeys, indexs, nil
+}
+
 func CalcRnethTotalEth() error {
 	refSlot, err := eth2.ConsensusClient.CustomizeBeaconService.HeadSlot(context.Background())
 	if err != nil {

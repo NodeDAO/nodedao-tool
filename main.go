@@ -45,7 +45,7 @@ func init() {
 func main() {
 	_ = logging.SetLogLevel("*", "INFO")
 
-	rootCmd.AddCommand(registerValidatorCmd, spiteDepositDataCmd, totalEThNethCmd, totalEThRNethCmd)
+	rootCmd.AddCommand(registerValidatorCmd, spiteDepositDataCmd, totalEThNethCmd, totalEThRNethCmd, getRNethValidatorCmd)
 
 	_ = rootCmd.Execute()
 }
@@ -85,6 +85,45 @@ var totalEThRNethCmd = &cobra.Command{
 			log.Error(err)
 			return
 		}
+	},
+}
+
+var getRNethValidatorCmd = &cobra.Command{
+	Use:     "rneth-validator",
+	Short:   "rneth-validator",
+	Example: "./nodedao-tool rneth-validator",
+	Run: func(cmd *cobra.Command, args []string) {
+		conf.Init(configPath)
+		err := eth2.InitConsensusClient(context.Background(), conf.GetConfig().Eth2Rpc, 1*time.Minute)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+		pubkeys, indexs, err := totalEth.GetRnethValidatorIndex()
+		if err != nil {
+			log.Error(err)
+			return
+		}
+
+		var pubkeyStr, validatorIndexStr string
+		for i, p := range pubkeys {
+			if i == 0 {
+				pubkeyStr = p
+				continue
+			}
+			pubkeyStr = fmt.Sprintf("%s,%s", pubkeyStr, p)
+		}
+		for i, index := range indexs {
+			if i == 0 {
+				validatorIndexStr = fmt.Sprintf("%d", index)
+				continue
+			}
+			validatorIndexStr = fmt.Sprintf("%s,%d", validatorIndexStr, index)
+		}
+
+		fmt.Printf("pubkeys: [%s] \n", pubkeyStr)
+		fmt.Printf("validatorIndex: [%s] \n", validatorIndexStr)
+
 	},
 }
 
