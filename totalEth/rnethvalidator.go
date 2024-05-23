@@ -67,14 +67,6 @@ func calcRnethEth1Balance(blockNumber int64) (*big.Int, *big.Int, error) {
 
 	var clVaultBalance = big.NewInt(0)
 	for _, pod := range restakingPods {
-		podBalance, err := eth1Client.BalanceAt(context.Background(), pod, big.NewInt(blockNumber))
-		if err != nil {
-			return nil, nil, err
-		}
-		log.Infow("rneth", "restakingpod", pod.String(), "podBalance", podBalance.String())
-
-		clVaultBalance = big.NewInt(0).Add(clVaultBalance, podBalance)
-
 		podContract, err := restakingpod.NewRestakingpod(pod, eth1Client)
 		if err != nil {
 			return nil, nil, err
@@ -88,6 +80,20 @@ func calcRnethEth1Balance(blockNumber int64) (*big.Int, *big.Int, error) {
 		}
 		log.Infow("rneth", "restakingpod", pod.String(), "withdrawals", withdrawals.String())
 		clVaultBalance = big.NewInt(0).Add(clVaultBalance, withdrawals)
+
+		eigenPod, err := podContract.EigenLayerEigenPod(nil)
+		if err != nil {
+			return nil, nil, err
+		}
+
+		eigenPodBalance, err := eth1Client.BalanceAt(context.Background(), eigenPod, big.NewInt(blockNumber))
+		if err != nil {
+			return nil, nil, err
+		}
+		log.Infow("rneth", "eigenPod", eigenPod.String(), "eigenPodBalance", eigenPodBalance.String())
+
+		clVaultBalance = big.NewInt(0).Add(clVaultBalance, eigenPodBalance)
+
 	}
 	log.Infow("rneth", "clVaultBalance", clVaultBalance.String())
 	return big.NewInt(0).Add(big.NewInt(0).Add(elReward, rnethPoolBalance), clVaultBalance), totalAssets, nil
