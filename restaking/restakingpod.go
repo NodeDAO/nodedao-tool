@@ -228,7 +228,7 @@ func getEthClient(rpcHost string) (*ethclient.Client, error) {
 func getKeyFromENV() (string, error) {
 	key, isExist := os.LookupEnv("PRIVATE_KEY")
 	if !isExist {
-		return "", errors.New("")
+		return "", errors.New("must set PRIVATE_KEY")
 	}
 	if key[:2] == "0x" {
 		return key[2:], nil
