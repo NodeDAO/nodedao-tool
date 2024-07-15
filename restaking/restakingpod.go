@@ -81,6 +81,12 @@ func VerifyWithdrawalCredentials(gasPrice int64, gasLimit uint64, chainID int64,
 		return err
 	}
 
+	if noSend {
+		fmt.Println("tx noSend")
+	} else {
+		fmt.Println("tx send success!")
+	}
+
 	fmt.Println("tx: ", tx.Hash().String())
 	return nil
 }

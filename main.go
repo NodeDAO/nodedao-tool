@@ -31,7 +31,6 @@ var (
 	gasLimit        uint64
 	chainID         int64
 	noSend          bool
-	rpcHost         string
 	oracleTimestamp uint64
 	callParamsPath  string
 )
