@@ -9,6 +9,7 @@ import (
 	"github.com/NodeDAO/nodedao-tool/depositData"
 	"github.com/NodeDAO/nodedao-tool/eth1"
 	"github.com/NodeDAO/nodedao-tool/eth2"
+	"github.com/NodeDAO/nodedao-tool/restaking"
 	"github.com/NodeDAO/nodedao-tool/totalEth"
 	"github.com/ethereum/go-ethereum/common"
 	logging "github.com/ipfs/go-log/v2"
@@ -23,6 +24,16 @@ var (
 	format              string
 	outputDir           string
 	spiteSize           int
+)
+
+var (
+	gasPrice        int64
+	gasLimit        uint64
+	chainID         int64
+	noSend          bool
+	rpcHost         string
+	oracleTimestamp uint64
+	callParamsPath  string
 )
 
 var rootCmd = &cobra.Command{
@@ -40,12 +51,28 @@ func init() {
 	spiteDepositDataCmd.PersistentFlags().StringVarP(&depositDataJsonPath, "depositDataJsonPath", "d", "", "deposit data file path")
 	spiteDepositDataCmd.PersistentFlags().StringVarP(&outputDir, "outputDir", "o", "", "output dir")
 	spiteDepositDataCmd.PersistentFlags().IntVarP(&spiteSize, "spiteSize", "s", 10, "spite size")
+
+	verifyAndProcessWithdrawalCmd.PersistentFlags().StringVarP(&callParamsPath, "callParamsPath", "p", ".", "verifyAndProcessWithdrawal callParams path")
+	verifyAndProcessWithdrawalCmd.PersistentFlags().StringVarP(&rpcHost, "rpcHost", "r", "", "eth rpcHost")
+	verifyAndProcessWithdrawalCmd.PersistentFlags().BoolVarP(&noSend, "noSend", "n", true, "no send tx")
+	verifyAndProcessWithdrawalCmd.PersistentFlags().Uint64VarP(&oracleTimestamp, "oracleTimestamp", "o", 0, "oracleTimestamp")
+	verifyAndProcessWithdrawalCmd.PersistentFlags().Uint64VarP(&gasLimit, "gasLimit", "l", 50000000, "gasLimit")
+	verifyAndProcessWithdrawalCmd.PersistentFlags().Int64VarP(&gasPrice, "gasPrice", "g", 5000000000, "gasPrice")
+	verifyAndProcessWithdrawalCmd.PersistentFlags().Int64VarP(&chainID, "chainID", "i", 1, "chainID")
+
+	verifyWithdrawalCredentialsCmd.PersistentFlags().StringVarP(&callParamsPath, "callParamsPath", "p", ".", "verifyAndProcessWithdrawal callParams path")
+	verifyWithdrawalCredentialsCmd.PersistentFlags().StringVarP(&rpcHost, "rpcHost", "r", "", "eth rpcHost")
+	verifyWithdrawalCredentialsCmd.PersistentFlags().BoolVarP(&noSend, "noSend", "n", true, "no send tx")
+	verifyWithdrawalCredentialsCmd.PersistentFlags().Uint64VarP(&oracleTimestamp, "oracleTimestamp", "o", 0, "oracleTimestamp")
+	verifyWithdrawalCredentialsCmd.PersistentFlags().Uint64VarP(&gasLimit, "gasLimit", "l", 50000000, "gasLimit")
+	verifyWithdrawalCredentialsCmd.PersistentFlags().Int64VarP(&gasPrice, "gasPrice", "g", 5000000000, "gasPrice")
+	verifyWithdrawalCredentialsCmd.PersistentFlags().Int64VarP(&chainID, "chainID", "i", 1, "chainID")
 }
 
 func main() {
 	_ = logging.SetLogLevel("*", "INFO")
 
-	rootCmd.AddCommand(registerValidatorCmd, spiteDepositDataCmd, totalEThNethCmd, totalEThRNethCmd, getRNethValidatorCmd)
+	rootCmd.AddCommand(registerValidatorCmd, spiteDepositDataCmd, totalEThNethCmd, totalEThRNethCmd, getRNethValidatorCmd, verifyAndProcessWithdrawalCmd, verifyWithdrawalCredentialsCmd)
 
 	_ = rootCmd.Execute()
 }
@@ -133,6 +160,44 @@ var spiteDepositDataCmd = &cobra.Command{
 	Example: "./nodedao-tool spite-depositdata",
 	Run: func(cmd *cobra.Command, args []string) {
 		err := depositData.SpiteDepositData(depositDataJsonPath, outputDir, spiteSize)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+	},
+}
+
+var verifyWithdrawalCredentialsCmd = &cobra.Command{
+	Use:     "verifyWithdrawalCredentials",
+	Short:   "verifyWithdrawalCredentials",
+	Example: "./nodedao-tool verifyWithdrawalCredentials",
+	Run: func(cmd *cobra.Command, args []string) {
+		vwp, err := restaking.ParseVerifyWithdrawalCredentialsCallParams(callParamsPath)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+
+		err = restaking.VerifyWithdrawalCredentials(gasPrice, gasLimit, chainID, noSend, rpcHost, oracleTimestamp, vwp)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+	},
+}
+
+var verifyAndProcessWithdrawalCmd = &cobra.Command{
+	Use:     "verifyAndProcessWithdrawal",
+	Short:   "verifyAndProcessWithdrawal",
+	Example: "./nodedao-tool verifyAndProcessWithdrawal",
+	Run: func(cmd *cobra.Command, args []string) {
+		vcp, err := restaking.ParseVerifyAndProcessWithdrawalCallParams(callParamsPath)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+
+		err = restaking.VerifyAndProcessWithdrawal(gasPrice, gasLimit, chainID, noSend, rpcHost, oracleTimestamp, vcp)
 		if err != nil {
 			log.Error(err)
 			return
