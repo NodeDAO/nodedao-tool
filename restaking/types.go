@@ -3,6 +3,10 @@ package restaking
 import (
 	"encoding/hex"
 	"encoding/json"
+	"github.com/NodeDAO/nodedao-tool/contract/restakingpod"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/pkg/errors"
+	"math/big"
 	"os"
 )
 
@@ -41,6 +45,54 @@ type VerifyWithdrawalCredentialsCallParams struct {
 	ValidatorFields       [][]string     `json:"validatorFields"`
 }
 
+type Withdrawal struct {
+	Staker      common.Address   `json:"staker"`
+	DelegatedTo common.Address   `json:"delegatedTo"`
+	Withdrawer  common.Address   `json:"withdrawer"`
+	Nonce       string           `json:"nonce"`
+	StartBlock  uint32           `json:"startBlock"`
+	Strategies  []common.Address `json:"strategies"`
+	Shares      []string         `json:"shares"`
+}
+
+func ParseCompleteQueuedWithdrawalsCallParams(p string) ([]restakingpod.IDelegationManagerWithdrawal, error) {
+	data, err := os.ReadFile(p)
+	if err != nil {
+		return nil, err
+	}
+
+	var withdrawals = []Withdrawal{}
+	err = json.Unmarshal([]byte(data), &withdrawals)
+	if err != nil {
+		return nil, err
+	}
+
+	var withdrawalCallParams []restakingpod.IDelegationManagerWithdrawal
+	for _, w := range withdrawals {
+		nonce, ok := big.NewInt(0).SetString(w.Nonce, 10)
+		if !ok {
+			return nil, errors.New("parse nonce failed")
+		}
+		var shares []*big.Int
+		for _, share := range w.Shares {
+			amount, ok := big.NewInt(0).SetString(share, 10)
+			if !ok {
+				return nil, errors.New("parse Shares failed")
+			}
+			shares = append(shares, amount)
+		}
+		withdrawalCallParams = append(withdrawalCallParams, restakingpod.IDelegationManagerWithdrawal{
+			Staker:      w.Staker,
+			DelegatedTo: w.DelegatedTo,
+			Withdrawer:  w.Withdrawer,
+			Nonce:       nonce,
+			StartBlock:  w.StartBlock,
+			Strategies:  w.Strategies,
+			Shares:      shares,
+		})
+	}
+	return withdrawalCallParams, nil
+}
 func ParseVerifyWithdrawalCredentialsCallParams(p string) (*VerifyWithdrawalCredentialsCallParams, error) {
 	data, err := os.ReadFile(p)
 	if err != nil {

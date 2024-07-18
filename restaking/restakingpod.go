@@ -17,6 +17,51 @@ import (
 	"os"
 )
 
+func CompleteQueuedWithdrawals(gasPrice int64, gasLimit uint64, chainID int64, noSend bool, rpcHost string, ccp []restakingpod.IDelegationManagerWithdrawal) error {
+	key, err := getKeyFromENV()
+	if err != nil {
+		return err
+	}
+
+	eth1Client, err := getEthClient(rpcHost)
+	if err != nil {
+		return err
+	}
+
+	pod, err := restakingpod.NewRestakingpod(conf.RestakingPod, eth1Client)
+	if err != nil {
+		return err
+	}
+
+	addr := crypto.PubkeyToAddress(str2pri(key).PublicKey)
+	fmt.Println("from: ", addr.String())
+	opts := MakeTxOpts(addr, gasPrice, gasLimit, chainID, key, noSend)
+
+	token := common.HexToAddress("0xbeac0eeeeeeeeeeeeeeeeeeeeeeeeeeeeeebeac0")
+	tokens := [][]common.Address{}
+	middlewareTimesIndexes := []*big.Int{}
+	receiveAsTokens := []bool{}
+	for range ccp {
+		tokens = append(tokens, []common.Address{token})
+		middlewareTimesIndexes = append(middlewareTimesIndexes, big.NewInt(0))
+		receiveAsTokens = append(receiveAsTokens, true)
+	}
+
+	tx, err := pod.CompleteQueuedWithdrawals(opts, ccp, tokens, middlewareTimesIndexes, receiveAsTokens)
+	if err != nil {
+		return err
+	}
+
+	if noSend {
+		fmt.Println("tx noSend")
+	} else {
+		fmt.Println("tx send success!")
+	}
+
+	fmt.Println("tx: ", tx.Hash().String())
+	return nil
+}
+
 func VerifyWithdrawalCredentials(gasPrice int64, gasLimit uint64, chainID int64, noSend bool, rpcHost string, oracleTimestamp uint64, vwp *VerifyWithdrawalCredentialsCallParams) error {
 	key, err := getKeyFromENV()
 	if err != nil {
@@ -74,7 +119,7 @@ func VerifyWithdrawalCredentials(gasPrice int64, gasLimit uint64, chainID int64,
 
 	addr := crypto.PubkeyToAddress(str2pri(key).PublicKey)
 	fmt.Println("from: ", addr.String())
-	opts := MakeTxOpts(addr, big.NewInt(gasPrice), gasLimit, chainID, key, noSend)
+	opts := MakeTxOpts(addr, gasPrice, gasLimit, chainID, key, noSend)
 
 	tx, err := pod.VerifyWithdrawalCredentials(opts, oracleTimestamp, stateRootProof, validatorIndices, validatorFieldsProofs, validatorFields)
 	if err != nil {
@@ -212,7 +257,7 @@ func VerifyAndProcessWithdrawal(gasPrice int64, gasLimit uint64, chainID int64, 
 
 	addr := crypto.PubkeyToAddress(str2pri(key).PublicKey)
 	fmt.Println("from: ", addr.String())
-	opts := MakeTxOpts(addr, big.NewInt(gasPrice), gasLimit, chainID, key, noSend)
+	opts := MakeTxOpts(addr, gasPrice, gasLimit, chainID, key, noSend)
 	tx, err := pod.VerifyAndProcessWithdrawals(opts, oracleTimestamp, stateRootProof, withdrawalProofs, validatorFieldsProofs, validatorFields, withdrawalFields)
 	if err != nil {
 		return err
@@ -247,7 +292,11 @@ func getKeyFromENV() (string, error) {
 	return key, nil
 }
 
-func MakeTxOpts(from common.Address, gasPrice *big.Int, gasLimit uint64, chainID int64, key string, noSend bool) *bind.TransactOpts {
+func MakeTxOpts(from common.Address, gasPrice int64, gasLimit uint64, chainID int64, key string, noSend bool) *bind.TransactOpts {
+	var txGasPrice *big.Int
+	if gasPrice != 0 {
+		txGasPrice = big.NewInt(gasPrice)
+	}
 	txOpts := &bind.TransactOpts{
 		From: from,
 		Signer: func(address common.Address, tx *types.Transaction) (*types.Transaction, error) {
@@ -258,7 +307,7 @@ func MakeTxOpts(from common.Address, gasPrice *big.Int, gasLimit uint64, chainID
 			fmt.Println("--inputdata--", hex.EncodeToString(tx.Data()))
 			return signedTx, nil
 		},
-		GasPrice: gasPrice,
+		GasPrice: txGasPrice,
 		GasLimit: gasLimit,
 		Context:  context.Background(),
 		NoSend:   noSend,
