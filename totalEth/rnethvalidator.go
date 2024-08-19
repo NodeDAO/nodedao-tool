@@ -46,11 +46,18 @@ func calcRnethEth1Balance(blockNumber int64) (*big.Int, *big.Int, error) {
 
 	log.Infow("rneth", "rnethPoolBalance", rnethPoolBalance.String())
 
-	rnethPoolContract, err := nodedaopool.NewPool(conf.RNethPool, eth1Client)
+	rnethPoolContract, err := nodedaopool.NewNodedaopool(conf.RNethPool, eth1Client)
 	if err != nil {
 		return nil, nil, err
 	}
 
+	strategyAmount, err := rnethPoolContract.StrategyAmount(&bind.CallOpts{
+		BlockNumber: big.NewInt(blockNumber),
+	})
+	if err != nil {
+		return nil, nil, err
+	}
+	log.Infow("rneth", "strategyAmount", strategyAmount.String())
 	totalAssets, err := rnethPoolContract.TotalAssets(&bind.CallOpts{
 		BlockNumber: big.NewInt(blockNumber),
 	})
@@ -96,7 +103,7 @@ func calcRnethEth1Balance(blockNumber int64) (*big.Int, *big.Int, error) {
 
 	}
 	log.Infow("rneth", "clVaultBalance", clVaultBalance.String())
-	return big.NewInt(0).Add(big.NewInt(0).Add(elReward, rnethPoolBalance), clVaultBalance), totalAssets, nil
+	return big.NewInt(0).Add(big.NewInt(0).Add(big.NewInt(0).Add(elReward, rnethPoolBalance), clVaultBalance), strategyAmount), totalAssets, nil
 }
 
 func GetRnethValidatorIndex() ([]string, []uint64, error) {

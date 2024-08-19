@@ -58,11 +58,18 @@ func calcNethEth1Balance(blockNumber int64) (*big.Int, *big.Int, error) {
 	}
 	log.Infow("neth", "clVaultBalance", clVaultBalance.String())
 
-	nethPoolContract, err := nodedaopool.NewPool(conf.NethPool, eth1Client)
+	nethPoolContract, err := nodedaopool.NewNodedaopool(conf.NethPool, eth1Client)
 	if err != nil {
 		return nil, nil, err
 	}
 
+	strategyAmount, err := nethPoolContract.StrategyAmount(&bind.CallOpts{
+		BlockNumber: big.NewInt(blockNumber),
+	})
+	if err != nil {
+		return nil, nil, err
+	}
+	log.Infow("neth", "strategyAmount", strategyAmount.String())
 	totalAssets, err := nethPoolContract.TotalAssets(&bind.CallOpts{
 		BlockNumber: big.NewInt(blockNumber),
 	})
@@ -70,7 +77,7 @@ func calcNethEth1Balance(blockNumber int64) (*big.Int, *big.Int, error) {
 		return nil, nil, err
 	}
 
-	return big.NewInt(0).Add(big.NewInt(0).Add(elReward, nethPoolBalance), clVaultBalance), totalAssets, nil
+	return big.NewInt(0).Add(big.NewInt(0).Add(big.NewInt(0).Add(elReward, nethPoolBalance), clVaultBalance), strategyAmount), totalAssets, nil
 }
 
 func CalcNethTotalEth() error {

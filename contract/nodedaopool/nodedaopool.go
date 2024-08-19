@@ -28,6 +28,7 @@ var (
 	_ = common.Big1
 	_ = types.BloomLookup
 	_ = event.NewSubscription
+	_ = abi.ConvertType
 )
 
 // WithdrawalRequestWithdrawalInfo is an auto generated low-level Go binding around an user-defined struct.
@@ -39,173 +40,174 @@ type WithdrawalRequestWithdrawalInfo struct {
 	ClaimAmount        *big.Int
 }
 
-// PoolMetaData contains all meta data concerning the Pool contract.
-var PoolMetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"CanUnstakeETH\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DelayTooLarge\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DepositRootMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"EigenPodMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InsufficientFunds\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidAmount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidApr\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidLength\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidParameter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidRequestId\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidVersion\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidtypeId\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"PermissionDenied\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"RestakingPodNotFound\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"TransferFailed\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"UnstakeNotEnabled\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"UpdateTimelocked\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"WithrawalsRequestCannotClaimed\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"previousAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_oldApr\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_apr\",\"type\":\"uint256\"}],\"name\":\"AprUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_totalUnderlyingAsset\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_estimatedRewards\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_blockNumber\",\"type\":\"uint256\"}],\"name\":\"AssetsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"beacon\",\"type\":\"address\"}],\"name\":\"BeaconUpgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_oldDao\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_dao\",\"type\":\"address\"}],\"name\":\"DaoChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_staker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_stakeAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_mintAmount\",\"type\":\"uint256\"}],\"name\":\"EthStake\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_unstakeAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_ethAmount\",\"type\":\"uint256\"}],\"name\":\"EthUnstake\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_oldAprManager\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_aprManager\",\"type\":\"address\"}],\"name\":\"RateManagerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"Received\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_restakingPod\",\"type\":\"address\"}],\"name\":\"RestakingPodAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"_oldUnstakeAllowed\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"_unstakeAllowed\",\"type\":\"bool\"}],\"name\":\"UnstakeAllowedUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"Upgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_oldValidatorManager\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"}],\"name\":\"ValidatorManagerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes[]\",\"name\":\"_pubkeys\",\"type\":\"bytes[]\"}],\"name\":\"ValidatorRegistration\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_oldValidatorManager\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"}],\"name\":\"ValidatorRegistryChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_oldWithdrawalDelayBlocks\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_withdrawalDelayBlocks\",\"type\":\"uint256\"}],\"name\":\"WithdrawalDelayChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_requestId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_claimAmount\",\"type\":\"uint256\"}],\"name\":\"WithdrawalsClaimed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_withdrawalAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_blockNumber\",\"type\":\"uint256\"}],\"name\":\"WithdrawalsRequest\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"APR_PERCENT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"BLOCK_NUMBER_PER_YEAR\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_APR\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_WITHDRAWAL_DELAY_BLOCKS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UPDATE_BLOCK_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_withdrawalDelayBlocks\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_apr\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalUnderlyingAsset\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_dao\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_poolToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_rateManager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_validatorRegistry\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_depositContract\",\"type\":\"address\"}],\"name\":\"__BasePool_init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_restakingPod\",\"type\":\"address\"}],\"name\":\"addRestakingPod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_requestId\",\"type\":\"uint256\"}],\"name\":\"canClaimWithdrawal\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claimDelayedWithdrawals\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"_requestIds\",\"type\":\"uint256[]\"}],\"name\":\"claimWithdrawals\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_unstakeAmount\",\"type\":\"uint256\"}],\"name\":\"convertToAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_stakeAmount\",\"type\":\"uint256\"}],\"name\":\"convertToShares\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentApr\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"dao\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"depositContract\",\"outputs\":[{\"internalType\":\"contractIDepositContract\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"eigenLayerEigenPodManager\",\"outputs\":[{\"internalType\":\"contractIEigenPodManager\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"elRewardsAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"exchangeRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCLVaultAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPoolAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRestakingPods\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"}],\"name\":\"getUserWithdrawals\",\"outputs\":[{\"components\":[{\"internalType\":\"uint96\",\"name\":\"withdrawalHeight\",\"type\":\"uint96\"},{\"internalType\":\"uint96\",\"name\":\"withdrawalExchange\",\"type\":\"uint96\"},{\"internalType\":\"uint64\",\"name\":\"isClaim\",\"type\":\"uint64\"},{\"internalType\":\"uint128\",\"name\":\"withdrawalAmount\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"claimAmount\",\"type\":\"uint128\"}],\"internalType\":\"structWithdrawalRequest.WithdrawalInfo[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"implementation\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_apr\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_dao\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_elRewardsAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_poolToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_rateManager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_validatorRegistry\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_depositContract\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_eigenLayerEigenPodManager\",\"type\":\"address\"},{\"internalType\":\"address[]\",\"name\":\"_restakingPods\",\"type\":\"address[]\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"poolToken\",\"outputs\":[{\"internalType\":\"contractILsdETH\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxiableUUID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rateManager\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"receiveRewards\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_depositContractRoot\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_restakingPod\",\"type\":\"address\"},{\"internalType\":\"bytes[]\",\"name\":\"_pubkeys\",\"type\":\"bytes[]\"},{\"internalType\":\"bytes[]\",\"name\":\"_signatures\",\"type\":\"bytes[]\"},{\"internalType\":\"bytes32[]\",\"name\":\"_depositDataRoots\",\"type\":\"bytes32[]\"}],\"name\":\"registerValidator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_unstakeAmount\",\"type\":\"uint256\"}],\"name\":\"requestWithdrawals\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rewardsUpdateBlock\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_rateManager\",\"type\":\"address\"}],\"name\":\"setRateManager\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_unstakeAllowed\",\"type\":\"bool\"}],\"name\":\"setUnstakeAllowed\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"}],\"name\":\"setValidatorManager\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_validatorRegistry\",\"type\":\"address\"}],\"name\":\"setValidatorRegistry\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_withdrawalDelayBlocks\",\"type\":\"uint256\"}],\"name\":\"setWithdrawalDelayBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakeETH\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalUnderlyingAsset\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalWithdrawalAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"typeId\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unstakeAllowed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_unstakeAmount\",\"type\":\"uint256\"}],\"name\":\"unstakeETH\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_apr\",\"type\":\"uint256\"}],\"name\":\"updateApr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"}],\"name\":\"upgradeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"upgradeToAndCall\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"validatorManager\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"validatorRegistry\",\"outputs\":[{\"internalType\":\"contractIValidatorRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawCredentials\",\"outputs\":[{\"internalType\":\"bytes[]\",\"name\":\"\",\"type\":\"bytes[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawalDelayBlocks\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
+// NodedaopoolMetaData contains all meta data concerning the Nodedaopool contract.
+var NodedaopoolMetaData = &bind.MetaData{
+	ABI: "[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"CanUnstakeETH\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DelayTooLarge\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"DepositRootMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"EigenPodMismatch\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InsufficientFunds\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidAddr\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidAmount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidApr\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidLength\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidParameter\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidRequestId\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidVersion\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"InvalidtypeId\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"PermissionDenied\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"RestakingPodNotFound\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"TransferFailed\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"UnstakeNotEnabled\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"UpdateTimelocked\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"WithrawalsRequestCannotClaimed\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"previousAdmin\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"AdminChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_oldApr\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_apr\",\"type\":\"uint256\"}],\"name\":\"AprUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_totalUnderlyingAsset\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_estimatedRewards\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_blockNumber\",\"type\":\"uint256\"}],\"name\":\"AssetsUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"beacon\",\"type\":\"address\"}],\"name\":\"BeaconUpgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_oldDao\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_dao\",\"type\":\"address\"}],\"name\":\"DaoChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_staker\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_stakeAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_mintAmount\",\"type\":\"uint256\"}],\"name\":\"EthStake\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_unstakeAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_ethAmount\",\"type\":\"uint256\"}],\"name\":\"EthUnstake\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\"}],\"name\":\"Initialized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_oldAprManager\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_aprManager\",\"type\":\"address\"}],\"name\":\"RateManagerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"Received\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_restakingPod\",\"type\":\"address\"}],\"name\":\"RestakingPodAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_strategyAmount\",\"type\":\"uint256\"}],\"name\":\"StrategyDeposited\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"StrategyReturn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_oldStrategyVault\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_strategyVault\",\"type\":\"address\"}],\"name\":\"StrategyVaultChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"_oldUnstakeAllowed\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"_unstakeAllowed\",\"type\":\"bool\"}],\"name\":\"UnstakeAllowedUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"implementation\",\"type\":\"address\"}],\"name\":\"Upgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_oldValidatorManager\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"}],\"name\":\"ValidatorManagerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes[]\",\"name\":\"_pubkeys\",\"type\":\"bytes[]\"}],\"name\":\"ValidatorRegistration\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_oldValidatorManager\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"}],\"name\":\"ValidatorRegistryChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_oldWithdrawalDelayBlocks\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_withdrawalDelayBlocks\",\"type\":\"uint256\"}],\"name\":\"WithdrawalDelayChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_requestId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_claimAmount\",\"type\":\"uint256\"}],\"name\":\"WithdrawalsClaimed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_withdrawalAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_blockNumber\",\"type\":\"uint256\"}],\"name\":\"WithdrawalsRequest\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"APR_PERCENT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"BLOCK_NUMBER_PER_YEAR\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_APR\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_WITHDRAWAL_DELAY_BLOCKS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"UPDATE_BLOCK_LIMIT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_ownerAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_withdrawalDelayBlocks\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_apr\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_totalUnderlyingAsset\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_dao\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_poolToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_rateManager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_depositContract\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_unstakeAllowed\",\"type\":\"bool\"}],\"name\":\"__BasePool_init\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_restakingPod\",\"type\":\"address\"}],\"name\":\"addRestakingPod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_requestId\",\"type\":\"uint256\"}],\"name\":\"canClaimWithdrawal\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"claimDelayedWithdrawals\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"},{\"internalType\":\"uint256[]\",\"name\":\"_requestIds\",\"type\":\"uint256[]\"}],\"name\":\"claimWithdrawals\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_unstakeAmount\",\"type\":\"uint256\"}],\"name\":\"convertToAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_stakeAmount\",\"type\":\"uint256\"}],\"name\":\"convertToShares\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentApr\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"dao\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"depositContract\",\"outputs\":[{\"internalType\":\"contractIDepositContract\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"eigenLayerEigenPodManager\",\"outputs\":[{\"internalType\":\"contractIEigenPodManager\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"elRewardsAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"exchangeRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getCLVaultAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPoolAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRestakingPods\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_receiver\",\"type\":\"address\"}],\"name\":\"getUserWithdrawals\",\"outputs\":[{\"components\":[{\"internalType\":\"uint96\",\"name\":\"withdrawalHeight\",\"type\":\"uint96\"},{\"internalType\":\"uint96\",\"name\":\"withdrawalExchange\",\"type\":\"uint96\"},{\"internalType\":\"uint64\",\"name\":\"isClaim\",\"type\":\"uint64\"},{\"internalType\":\"uint128\",\"name\":\"withdrawalAmount\",\"type\":\"uint128\"},{\"internalType\":\"uint128\",\"name\":\"claimAmount\",\"type\":\"uint128\"}],\"internalType\":\"structWithdrawalRequest.WithdrawalInfo[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"implementation\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_ownerAddr\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_apr\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_dao\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_elRewardsAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_poolToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_rateManager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_depositContract\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_eigenLayerEigenPodManager\",\"type\":\"address\"},{\"internalType\":\"address[]\",\"name\":\"_restakingPods\",\"type\":\"address[]\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"poolToken\",\"outputs\":[{\"internalType\":\"contractILsdETH\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proxiableUUID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rateManager\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"receiveRewards\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_depositContractRoot\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"_restakingPod\",\"type\":\"address\"},{\"internalType\":\"bytes[]\",\"name\":\"_pubkeys\",\"type\":\"bytes[]\"},{\"internalType\":\"bytes[]\",\"name\":\"_signatures\",\"type\":\"bytes[]\"},{\"internalType\":\"bytes32[]\",\"name\":\"_depositDataRoots\",\"type\":\"bytes32[]\"}],\"name\":\"registerValidator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_unstakeAmount\",\"type\":\"uint256\"}],\"name\":\"requestWithdrawals\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"rewardsUpdateBlock\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_dao\",\"type\":\"address\"}],\"name\":\"setDao\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_rateManager\",\"type\":\"address\"}],\"name\":\"setRateManager\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_strategyVault\",\"type\":\"address\"}],\"name\":\"setStrategyVault\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_unstakeAllowed\",\"type\":\"bool\"}],\"name\":\"setUnstakeAllowed\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_validatorManager\",\"type\":\"address\"}],\"name\":\"setValidatorManager\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_validatorRegistry\",\"type\":\"address\"}],\"name\":\"setValidatorRegistry\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_withdrawalDelayBlocks\",\"type\":\"uint256\"}],\"name\":\"setWithdrawalDelayBlocks\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stakeETH\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"strategyAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"strategyDeposit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"strategyReturn\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"strategyVault\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalAssets\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalUnderlyingAsset\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalWithdrawalAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"typeId\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unpause\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"unstakeAllowed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_unstakeAmount\",\"type\":\"uint256\"}],\"name\":\"unstakeETH\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_apr\",\"type\":\"uint256\"}],\"name\":\"updateApr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"}],\"name\":\"upgradeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newImplementation\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"upgradeToAndCall\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"validatorManager\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"validatorRegistry\",\"outputs\":[{\"internalType\":\"contractIValidatorRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"version\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawCredentials\",\"outputs\":[{\"internalType\":\"bytes[]\",\"name\":\"\",\"type\":\"bytes[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawalDelayBlocks\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]",
 }
 
-// PoolABI is the input ABI used to generate the binding from.
-// Deprecated: Use PoolMetaData.ABI instead.
-var PoolABI = PoolMetaData.ABI
+// NodedaopoolABI is the input ABI used to generate the binding from.
+// Deprecated: Use NodedaopoolMetaData.ABI instead.
+var NodedaopoolABI = NodedaopoolMetaData.ABI
+
 var NodeDaoPoolABI abi.ABI
 
 func init() {
 	var err error
-	NodeDaoPoolABI, err = abi.JSON(strings.NewReader(PoolABI))
+	NodeDaoPoolABI, err = abi.JSON(strings.NewReader(NodedaopoolABI))
 	if err != nil {
 		fmt.Println("err: ", err.Error())
 		os.Exit(1)
 	}
 }
 
-// Pool is an auto generated Go binding around an Ethereum contract.
-type Pool struct {
-	PoolCaller     // Read-only binding to the contract
-	PoolTransactor // Write-only binding to the contract
-	PoolFilterer   // Log filterer for contract events
+// Nodedaopool is an auto generated Go binding around an Ethereum contract.
+type Nodedaopool struct {
+	NodedaopoolCaller     // Read-only binding to the contract
+	NodedaopoolTransactor // Write-only binding to the contract
+	NodedaopoolFilterer   // Log filterer for contract events
 }
 
-// PoolCaller is an auto generated read-only Go binding around an Ethereum contract.
-type PoolCaller struct {
+// NodedaopoolCaller is an auto generated read-only Go binding around an Ethereum contract.
+type NodedaopoolCaller struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// PoolTransactor is an auto generated write-only Go binding around an Ethereum contract.
-type PoolTransactor struct {
+// NodedaopoolTransactor is an auto generated write-only Go binding around an Ethereum contract.
+type NodedaopoolTransactor struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// PoolFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
-type PoolFilterer struct {
+// NodedaopoolFilterer is an auto generated log filtering Go binding around an Ethereum contract events.
+type NodedaopoolFilterer struct {
 	contract *bind.BoundContract // Generic contract wrapper for the low level calls
 }
 
-// PoolSession is an auto generated Go binding around an Ethereum contract,
+// NodedaopoolSession is an auto generated Go binding around an Ethereum contract,
 // with pre-set call and transact options.
-type PoolSession struct {
-	Contract     *Pool             // Generic contract binding to set the session for
+type NodedaopoolSession struct {
+	Contract     *Nodedaopool      // Generic contract binding to set the session for
 	CallOpts     bind.CallOpts     // Call options to use throughout this session
 	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
 }
 
-// PoolCallerSession is an auto generated read-only Go binding around an Ethereum contract,
+// NodedaopoolCallerSession is an auto generated read-only Go binding around an Ethereum contract,
 // with pre-set call options.
-type PoolCallerSession struct {
-	Contract *PoolCaller   // Generic contract caller binding to set the session for
-	CallOpts bind.CallOpts // Call options to use throughout this session
+type NodedaopoolCallerSession struct {
+	Contract *NodedaopoolCaller // Generic contract caller binding to set the session for
+	CallOpts bind.CallOpts      // Call options to use throughout this session
 }
 
-// PoolTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
+// NodedaopoolTransactorSession is an auto generated write-only Go binding around an Ethereum contract,
 // with pre-set transact options.
-type PoolTransactorSession struct {
-	Contract     *PoolTransactor   // Generic contract transactor binding to set the session for
-	TransactOpts bind.TransactOpts // Transaction auth options to use throughout this session
+type NodedaopoolTransactorSession struct {
+	Contract     *NodedaopoolTransactor // Generic contract transactor binding to set the session for
+	TransactOpts bind.TransactOpts      // Transaction auth options to use throughout this session
 }
 
-// PoolRaw is an auto generated low-level Go binding around an Ethereum contract.
-type PoolRaw struct {
-	Contract *Pool // Generic contract binding to access the raw methods on
+// NodedaopoolRaw is an auto generated low-level Go binding around an Ethereum contract.
+type NodedaopoolRaw struct {
+	Contract *Nodedaopool // Generic contract binding to access the raw methods on
 }
 
-// PoolCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
-type PoolCallerRaw struct {
-	Contract *PoolCaller // Generic read-only contract binding to access the raw methods on
+// NodedaopoolCallerRaw is an auto generated low-level read-only Go binding around an Ethereum contract.
+type NodedaopoolCallerRaw struct {
+	Contract *NodedaopoolCaller // Generic read-only contract binding to access the raw methods on
 }
 
-// PoolTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
-type PoolTransactorRaw struct {
-	Contract *PoolTransactor // Generic write-only contract binding to access the raw methods on
+// NodedaopoolTransactorRaw is an auto generated low-level write-only Go binding around an Ethereum contract.
+type NodedaopoolTransactorRaw struct {
+	Contract *NodedaopoolTransactor // Generic write-only contract binding to access the raw methods on
 }
 
-// NewPool creates a new instance of Pool, bound to a specific deployed contract.
-func NewPool(address common.Address, backend bind.ContractBackend) (*Pool, error) {
-	contract, err := bindPool(address, backend, backend, backend)
+// NewNodedaopool creates a new instance of Nodedaopool, bound to a specific deployed contract.
+func NewNodedaopool(address common.Address, backend bind.ContractBackend) (*Nodedaopool, error) {
+	contract, err := bindNodedaopool(address, backend, backend, backend)
 	if err != nil {
 		return nil, err
 	}
-	return &Pool{PoolCaller: PoolCaller{contract: contract}, PoolTransactor: PoolTransactor{contract: contract}, PoolFilterer: PoolFilterer{contract: contract}}, nil
+	return &Nodedaopool{NodedaopoolCaller: NodedaopoolCaller{contract: contract}, NodedaopoolTransactor: NodedaopoolTransactor{contract: contract}, NodedaopoolFilterer: NodedaopoolFilterer{contract: contract}}, nil
 }
 
-// NewPoolCaller creates a new read-only instance of Pool, bound to a specific deployed contract.
-func NewPoolCaller(address common.Address, caller bind.ContractCaller) (*PoolCaller, error) {
-	contract, err := bindPool(address, caller, nil, nil)
+// NewNodedaopoolCaller creates a new read-only instance of Nodedaopool, bound to a specific deployed contract.
+func NewNodedaopoolCaller(address common.Address, caller bind.ContractCaller) (*NodedaopoolCaller, error) {
+	contract, err := bindNodedaopool(address, caller, nil, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &PoolCaller{contract: contract}, nil
+	return &NodedaopoolCaller{contract: contract}, nil
 }
 
-// NewPoolTransactor creates a new write-only instance of Pool, bound to a specific deployed contract.
-func NewPoolTransactor(address common.Address, transactor bind.ContractTransactor) (*PoolTransactor, error) {
-	contract, err := bindPool(address, nil, transactor, nil)
+// NewNodedaopoolTransactor creates a new write-only instance of Nodedaopool, bound to a specific deployed contract.
+func NewNodedaopoolTransactor(address common.Address, transactor bind.ContractTransactor) (*NodedaopoolTransactor, error) {
+	contract, err := bindNodedaopool(address, nil, transactor, nil)
 	if err != nil {
 		return nil, err
 	}
-	return &PoolTransactor{contract: contract}, nil
+	return &NodedaopoolTransactor{contract: contract}, nil
 }
 
-// NewPoolFilterer creates a new log filterer instance of Pool, bound to a specific deployed contract.
-func NewPoolFilterer(address common.Address, filterer bind.ContractFilterer) (*PoolFilterer, error) {
-	contract, err := bindPool(address, nil, nil, filterer)
+// NewNodedaopoolFilterer creates a new log filterer instance of Nodedaopool, bound to a specific deployed contract.
+func NewNodedaopoolFilterer(address common.Address, filterer bind.ContractFilterer) (*NodedaopoolFilterer, error) {
+	contract, err := bindNodedaopool(address, nil, nil, filterer)
 	if err != nil {
 		return nil, err
 	}
-	return &PoolFilterer{contract: contract}, nil
+	return &NodedaopoolFilterer{contract: contract}, nil
 }
 
-// bindPool binds a generic wrapper to an already deployed contract.
-func bindPool(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
-	parsed, err := abi.JSON(strings.NewReader(PoolABI))
+// bindNodedaopool binds a generic wrapper to an already deployed contract.
+func bindNodedaopool(address common.Address, caller bind.ContractCaller, transactor bind.ContractTransactor, filterer bind.ContractFilterer) (*bind.BoundContract, error) {
+	parsed, err := NodedaopoolMetaData.GetAbi()
 	if err != nil {
 		return nil, err
 	}
-	return bind.NewBoundContract(address, parsed, caller, transactor, filterer), nil
+	return bind.NewBoundContract(address, *parsed, caller, transactor, filterer), nil
 }
 
 // Call invokes the (constant) contract method with params as input values and
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Pool *PoolRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Pool.Contract.PoolCaller.contract.Call(opts, result, method, params...)
+func (_Nodedaopool *NodedaopoolRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _Nodedaopool.Contract.NodedaopoolCaller.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Pool *PoolRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pool.Contract.PoolTransactor.contract.Transfer(opts)
+func (_Nodedaopool *NodedaopoolRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.NodedaopoolTransactor.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Pool *PoolRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Pool.Contract.PoolTransactor.contract.Transact(opts, method, params...)
+func (_Nodedaopool *NodedaopoolRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.NodedaopoolTransactor.contract.Transact(opts, method, params...)
 }
 
 // Call invokes the (constant) contract method with params as input values and
 // sets the output to result. The result type might be a single field for simple
 // returns, a slice of interfaces for anonymous returns and a struct for named
 // returns.
-func (_Pool *PoolCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
-	return _Pool.Contract.contract.Call(opts, result, method, params...)
+func (_Nodedaopool *NodedaopoolCallerRaw) Call(opts *bind.CallOpts, result *[]interface{}, method string, params ...interface{}) error {
+	return _Nodedaopool.Contract.contract.Call(opts, result, method, params...)
 }
 
 // Transfer initiates a plain transaction to move funds to the contract, calling
 // its default method if one is available.
-func (_Pool *PoolTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pool.Contract.contract.Transfer(opts)
+func (_Nodedaopool *NodedaopoolTransactorRaw) Transfer(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.contract.Transfer(opts)
 }
 
 // Transact invokes the (paid) contract method with params as input values.
-func (_Pool *PoolTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
-	return _Pool.Contract.contract.Transact(opts, method, params...)
+func (_Nodedaopool *NodedaopoolTransactorRaw) Transact(opts *bind.TransactOpts, method string, params ...interface{}) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.contract.Transact(opts, method, params...)
 }
 
 // APRPERCENT is a free data retrieval call binding the contract method 0x99ca63bb.
 //
 // Solidity: function APR_PERCENT() view returns(uint256)
-func (_Pool *PoolCaller) APRPERCENT(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) APRPERCENT(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "APR_PERCENT")
+	err := _Nodedaopool.contract.Call(opts, &out, "APR_PERCENT")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -220,23 +222,23 @@ func (_Pool *PoolCaller) APRPERCENT(opts *bind.CallOpts) (*big.Int, error) {
 // APRPERCENT is a free data retrieval call binding the contract method 0x99ca63bb.
 //
 // Solidity: function APR_PERCENT() view returns(uint256)
-func (_Pool *PoolSession) APRPERCENT() (*big.Int, error) {
-	return _Pool.Contract.APRPERCENT(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) APRPERCENT() (*big.Int, error) {
+	return _Nodedaopool.Contract.APRPERCENT(&_Nodedaopool.CallOpts)
 }
 
 // APRPERCENT is a free data retrieval call binding the contract method 0x99ca63bb.
 //
 // Solidity: function APR_PERCENT() view returns(uint256)
-func (_Pool *PoolCallerSession) APRPERCENT() (*big.Int, error) {
-	return _Pool.Contract.APRPERCENT(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) APRPERCENT() (*big.Int, error) {
+	return _Nodedaopool.Contract.APRPERCENT(&_Nodedaopool.CallOpts)
 }
 
 // BLOCKNUMBERPERYEAR is a free data retrieval call binding the contract method 0xef213ddc.
 //
 // Solidity: function BLOCK_NUMBER_PER_YEAR() view returns(uint256)
-func (_Pool *PoolCaller) BLOCKNUMBERPERYEAR(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) BLOCKNUMBERPERYEAR(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "BLOCK_NUMBER_PER_YEAR")
+	err := _Nodedaopool.contract.Call(opts, &out, "BLOCK_NUMBER_PER_YEAR")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -251,23 +253,23 @@ func (_Pool *PoolCaller) BLOCKNUMBERPERYEAR(opts *bind.CallOpts) (*big.Int, erro
 // BLOCKNUMBERPERYEAR is a free data retrieval call binding the contract method 0xef213ddc.
 //
 // Solidity: function BLOCK_NUMBER_PER_YEAR() view returns(uint256)
-func (_Pool *PoolSession) BLOCKNUMBERPERYEAR() (*big.Int, error) {
-	return _Pool.Contract.BLOCKNUMBERPERYEAR(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) BLOCKNUMBERPERYEAR() (*big.Int, error) {
+	return _Nodedaopool.Contract.BLOCKNUMBERPERYEAR(&_Nodedaopool.CallOpts)
 }
 
 // BLOCKNUMBERPERYEAR is a free data retrieval call binding the contract method 0xef213ddc.
 //
 // Solidity: function BLOCK_NUMBER_PER_YEAR() view returns(uint256)
-func (_Pool *PoolCallerSession) BLOCKNUMBERPERYEAR() (*big.Int, error) {
-	return _Pool.Contract.BLOCKNUMBERPERYEAR(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) BLOCKNUMBERPERYEAR() (*big.Int, error) {
+	return _Nodedaopool.Contract.BLOCKNUMBERPERYEAR(&_Nodedaopool.CallOpts)
 }
 
 // MAXAPR is a free data retrieval call binding the contract method 0x86d8f78d.
 //
 // Solidity: function MAX_APR() view returns(uint256)
-func (_Pool *PoolCaller) MAXAPR(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) MAXAPR(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "MAX_APR")
+	err := _Nodedaopool.contract.Call(opts, &out, "MAX_APR")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -282,23 +284,23 @@ func (_Pool *PoolCaller) MAXAPR(opts *bind.CallOpts) (*big.Int, error) {
 // MAXAPR is a free data retrieval call binding the contract method 0x86d8f78d.
 //
 // Solidity: function MAX_APR() view returns(uint256)
-func (_Pool *PoolSession) MAXAPR() (*big.Int, error) {
-	return _Pool.Contract.MAXAPR(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) MAXAPR() (*big.Int, error) {
+	return _Nodedaopool.Contract.MAXAPR(&_Nodedaopool.CallOpts)
 }
 
 // MAXAPR is a free data retrieval call binding the contract method 0x86d8f78d.
 //
 // Solidity: function MAX_APR() view returns(uint256)
-func (_Pool *PoolCallerSession) MAXAPR() (*big.Int, error) {
-	return _Pool.Contract.MAXAPR(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) MAXAPR() (*big.Int, error) {
+	return _Nodedaopool.Contract.MAXAPR(&_Nodedaopool.CallOpts)
 }
 
 // MAXWITHDRAWALDELAYBLOCKS is a free data retrieval call binding the contract method 0xca661c04.
 //
 // Solidity: function MAX_WITHDRAWAL_DELAY_BLOCKS() view returns(uint256)
-func (_Pool *PoolCaller) MAXWITHDRAWALDELAYBLOCKS(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) MAXWITHDRAWALDELAYBLOCKS(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "MAX_WITHDRAWAL_DELAY_BLOCKS")
+	err := _Nodedaopool.contract.Call(opts, &out, "MAX_WITHDRAWAL_DELAY_BLOCKS")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -313,23 +315,23 @@ func (_Pool *PoolCaller) MAXWITHDRAWALDELAYBLOCKS(opts *bind.CallOpts) (*big.Int
 // MAXWITHDRAWALDELAYBLOCKS is a free data retrieval call binding the contract method 0xca661c04.
 //
 // Solidity: function MAX_WITHDRAWAL_DELAY_BLOCKS() view returns(uint256)
-func (_Pool *PoolSession) MAXWITHDRAWALDELAYBLOCKS() (*big.Int, error) {
-	return _Pool.Contract.MAXWITHDRAWALDELAYBLOCKS(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) MAXWITHDRAWALDELAYBLOCKS() (*big.Int, error) {
+	return _Nodedaopool.Contract.MAXWITHDRAWALDELAYBLOCKS(&_Nodedaopool.CallOpts)
 }
 
 // MAXWITHDRAWALDELAYBLOCKS is a free data retrieval call binding the contract method 0xca661c04.
 //
 // Solidity: function MAX_WITHDRAWAL_DELAY_BLOCKS() view returns(uint256)
-func (_Pool *PoolCallerSession) MAXWITHDRAWALDELAYBLOCKS() (*big.Int, error) {
-	return _Pool.Contract.MAXWITHDRAWALDELAYBLOCKS(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) MAXWITHDRAWALDELAYBLOCKS() (*big.Int, error) {
+	return _Nodedaopool.Contract.MAXWITHDRAWALDELAYBLOCKS(&_Nodedaopool.CallOpts)
 }
 
 // UPDATEBLOCKLIMIT is a free data retrieval call binding the contract method 0xb7e34b0c.
 //
 // Solidity: function UPDATE_BLOCK_LIMIT() view returns(uint256)
-func (_Pool *PoolCaller) UPDATEBLOCKLIMIT(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) UPDATEBLOCKLIMIT(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "UPDATE_BLOCK_LIMIT")
+	err := _Nodedaopool.contract.Call(opts, &out, "UPDATE_BLOCK_LIMIT")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -344,23 +346,23 @@ func (_Pool *PoolCaller) UPDATEBLOCKLIMIT(opts *bind.CallOpts) (*big.Int, error)
 // UPDATEBLOCKLIMIT is a free data retrieval call binding the contract method 0xb7e34b0c.
 //
 // Solidity: function UPDATE_BLOCK_LIMIT() view returns(uint256)
-func (_Pool *PoolSession) UPDATEBLOCKLIMIT() (*big.Int, error) {
-	return _Pool.Contract.UPDATEBLOCKLIMIT(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) UPDATEBLOCKLIMIT() (*big.Int, error) {
+	return _Nodedaopool.Contract.UPDATEBLOCKLIMIT(&_Nodedaopool.CallOpts)
 }
 
 // UPDATEBLOCKLIMIT is a free data retrieval call binding the contract method 0xb7e34b0c.
 //
 // Solidity: function UPDATE_BLOCK_LIMIT() view returns(uint256)
-func (_Pool *PoolCallerSession) UPDATEBLOCKLIMIT() (*big.Int, error) {
-	return _Pool.Contract.UPDATEBLOCKLIMIT(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) UPDATEBLOCKLIMIT() (*big.Int, error) {
+	return _Nodedaopool.Contract.UPDATEBLOCKLIMIT(&_Nodedaopool.CallOpts)
 }
 
 // CanClaimWithdrawal is a free data retrieval call binding the contract method 0x78865853.
 //
 // Solidity: function canClaimWithdrawal(address _receiver, uint256 _requestId) view returns(bool)
-func (_Pool *PoolCaller) CanClaimWithdrawal(opts *bind.CallOpts, _receiver common.Address, _requestId *big.Int) (bool, error) {
+func (_Nodedaopool *NodedaopoolCaller) CanClaimWithdrawal(opts *bind.CallOpts, _receiver common.Address, _requestId *big.Int) (bool, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "canClaimWithdrawal", _receiver, _requestId)
+	err := _Nodedaopool.contract.Call(opts, &out, "canClaimWithdrawal", _receiver, _requestId)
 
 	if err != nil {
 		return *new(bool), err
@@ -375,23 +377,23 @@ func (_Pool *PoolCaller) CanClaimWithdrawal(opts *bind.CallOpts, _receiver commo
 // CanClaimWithdrawal is a free data retrieval call binding the contract method 0x78865853.
 //
 // Solidity: function canClaimWithdrawal(address _receiver, uint256 _requestId) view returns(bool)
-func (_Pool *PoolSession) CanClaimWithdrawal(_receiver common.Address, _requestId *big.Int) (bool, error) {
-	return _Pool.Contract.CanClaimWithdrawal(&_Pool.CallOpts, _receiver, _requestId)
+func (_Nodedaopool *NodedaopoolSession) CanClaimWithdrawal(_receiver common.Address, _requestId *big.Int) (bool, error) {
+	return _Nodedaopool.Contract.CanClaimWithdrawal(&_Nodedaopool.CallOpts, _receiver, _requestId)
 }
 
 // CanClaimWithdrawal is a free data retrieval call binding the contract method 0x78865853.
 //
 // Solidity: function canClaimWithdrawal(address _receiver, uint256 _requestId) view returns(bool)
-func (_Pool *PoolCallerSession) CanClaimWithdrawal(_receiver common.Address, _requestId *big.Int) (bool, error) {
-	return _Pool.Contract.CanClaimWithdrawal(&_Pool.CallOpts, _receiver, _requestId)
+func (_Nodedaopool *NodedaopoolCallerSession) CanClaimWithdrawal(_receiver common.Address, _requestId *big.Int) (bool, error) {
+	return _Nodedaopool.Contract.CanClaimWithdrawal(&_Nodedaopool.CallOpts, _receiver, _requestId)
 }
 
 // ConvertToAssets is a free data retrieval call binding the contract method 0x07a2d13a.
 //
 // Solidity: function convertToAssets(uint256 _unstakeAmount) view returns(uint256)
-func (_Pool *PoolCaller) ConvertToAssets(opts *bind.CallOpts, _unstakeAmount *big.Int) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) ConvertToAssets(opts *bind.CallOpts, _unstakeAmount *big.Int) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "convertToAssets", _unstakeAmount)
+	err := _Nodedaopool.contract.Call(opts, &out, "convertToAssets", _unstakeAmount)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -406,23 +408,23 @@ func (_Pool *PoolCaller) ConvertToAssets(opts *bind.CallOpts, _unstakeAmount *bi
 // ConvertToAssets is a free data retrieval call binding the contract method 0x07a2d13a.
 //
 // Solidity: function convertToAssets(uint256 _unstakeAmount) view returns(uint256)
-func (_Pool *PoolSession) ConvertToAssets(_unstakeAmount *big.Int) (*big.Int, error) {
-	return _Pool.Contract.ConvertToAssets(&_Pool.CallOpts, _unstakeAmount)
+func (_Nodedaopool *NodedaopoolSession) ConvertToAssets(_unstakeAmount *big.Int) (*big.Int, error) {
+	return _Nodedaopool.Contract.ConvertToAssets(&_Nodedaopool.CallOpts, _unstakeAmount)
 }
 
 // ConvertToAssets is a free data retrieval call binding the contract method 0x07a2d13a.
 //
 // Solidity: function convertToAssets(uint256 _unstakeAmount) view returns(uint256)
-func (_Pool *PoolCallerSession) ConvertToAssets(_unstakeAmount *big.Int) (*big.Int, error) {
-	return _Pool.Contract.ConvertToAssets(&_Pool.CallOpts, _unstakeAmount)
+func (_Nodedaopool *NodedaopoolCallerSession) ConvertToAssets(_unstakeAmount *big.Int) (*big.Int, error) {
+	return _Nodedaopool.Contract.ConvertToAssets(&_Nodedaopool.CallOpts, _unstakeAmount)
 }
 
 // ConvertToShares is a free data retrieval call binding the contract method 0xc6e6f592.
 //
 // Solidity: function convertToShares(uint256 _stakeAmount) view returns(uint256)
-func (_Pool *PoolCaller) ConvertToShares(opts *bind.CallOpts, _stakeAmount *big.Int) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) ConvertToShares(opts *bind.CallOpts, _stakeAmount *big.Int) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "convertToShares", _stakeAmount)
+	err := _Nodedaopool.contract.Call(opts, &out, "convertToShares", _stakeAmount)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -437,23 +439,23 @@ func (_Pool *PoolCaller) ConvertToShares(opts *bind.CallOpts, _stakeAmount *big.
 // ConvertToShares is a free data retrieval call binding the contract method 0xc6e6f592.
 //
 // Solidity: function convertToShares(uint256 _stakeAmount) view returns(uint256)
-func (_Pool *PoolSession) ConvertToShares(_stakeAmount *big.Int) (*big.Int, error) {
-	return _Pool.Contract.ConvertToShares(&_Pool.CallOpts, _stakeAmount)
+func (_Nodedaopool *NodedaopoolSession) ConvertToShares(_stakeAmount *big.Int) (*big.Int, error) {
+	return _Nodedaopool.Contract.ConvertToShares(&_Nodedaopool.CallOpts, _stakeAmount)
 }
 
 // ConvertToShares is a free data retrieval call binding the contract method 0xc6e6f592.
 //
 // Solidity: function convertToShares(uint256 _stakeAmount) view returns(uint256)
-func (_Pool *PoolCallerSession) ConvertToShares(_stakeAmount *big.Int) (*big.Int, error) {
-	return _Pool.Contract.ConvertToShares(&_Pool.CallOpts, _stakeAmount)
+func (_Nodedaopool *NodedaopoolCallerSession) ConvertToShares(_stakeAmount *big.Int) (*big.Int, error) {
+	return _Nodedaopool.Contract.ConvertToShares(&_Nodedaopool.CallOpts, _stakeAmount)
 }
 
 // CurrentApr is a free data retrieval call binding the contract method 0x4f322ae8.
 //
 // Solidity: function currentApr() view returns(uint256)
-func (_Pool *PoolCaller) CurrentApr(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) CurrentApr(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "currentApr")
+	err := _Nodedaopool.contract.Call(opts, &out, "currentApr")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -468,23 +470,23 @@ func (_Pool *PoolCaller) CurrentApr(opts *bind.CallOpts) (*big.Int, error) {
 // CurrentApr is a free data retrieval call binding the contract method 0x4f322ae8.
 //
 // Solidity: function currentApr() view returns(uint256)
-func (_Pool *PoolSession) CurrentApr() (*big.Int, error) {
-	return _Pool.Contract.CurrentApr(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) CurrentApr() (*big.Int, error) {
+	return _Nodedaopool.Contract.CurrentApr(&_Nodedaopool.CallOpts)
 }
 
 // CurrentApr is a free data retrieval call binding the contract method 0x4f322ae8.
 //
 // Solidity: function currentApr() view returns(uint256)
-func (_Pool *PoolCallerSession) CurrentApr() (*big.Int, error) {
-	return _Pool.Contract.CurrentApr(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) CurrentApr() (*big.Int, error) {
+	return _Nodedaopool.Contract.CurrentApr(&_Nodedaopool.CallOpts)
 }
 
 // Dao is a free data retrieval call binding the contract method 0x4162169f.
 //
 // Solidity: function dao() view returns(address)
-func (_Pool *PoolCaller) Dao(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) Dao(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "dao")
+	err := _Nodedaopool.contract.Call(opts, &out, "dao")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -499,23 +501,23 @@ func (_Pool *PoolCaller) Dao(opts *bind.CallOpts) (common.Address, error) {
 // Dao is a free data retrieval call binding the contract method 0x4162169f.
 //
 // Solidity: function dao() view returns(address)
-func (_Pool *PoolSession) Dao() (common.Address, error) {
-	return _Pool.Contract.Dao(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) Dao() (common.Address, error) {
+	return _Nodedaopool.Contract.Dao(&_Nodedaopool.CallOpts)
 }
 
 // Dao is a free data retrieval call binding the contract method 0x4162169f.
 //
 // Solidity: function dao() view returns(address)
-func (_Pool *PoolCallerSession) Dao() (common.Address, error) {
-	return _Pool.Contract.Dao(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) Dao() (common.Address, error) {
+	return _Nodedaopool.Contract.Dao(&_Nodedaopool.CallOpts)
 }
 
 // DepositContract is a free data retrieval call binding the contract method 0xe94ad65b.
 //
 // Solidity: function depositContract() view returns(address)
-func (_Pool *PoolCaller) DepositContract(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) DepositContract(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "depositContract")
+	err := _Nodedaopool.contract.Call(opts, &out, "depositContract")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -530,23 +532,23 @@ func (_Pool *PoolCaller) DepositContract(opts *bind.CallOpts) (common.Address, e
 // DepositContract is a free data retrieval call binding the contract method 0xe94ad65b.
 //
 // Solidity: function depositContract() view returns(address)
-func (_Pool *PoolSession) DepositContract() (common.Address, error) {
-	return _Pool.Contract.DepositContract(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) DepositContract() (common.Address, error) {
+	return _Nodedaopool.Contract.DepositContract(&_Nodedaopool.CallOpts)
 }
 
 // DepositContract is a free data retrieval call binding the contract method 0xe94ad65b.
 //
 // Solidity: function depositContract() view returns(address)
-func (_Pool *PoolCallerSession) DepositContract() (common.Address, error) {
-	return _Pool.Contract.DepositContract(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) DepositContract() (common.Address, error) {
+	return _Nodedaopool.Contract.DepositContract(&_Nodedaopool.CallOpts)
 }
 
 // EigenLayerEigenPodManager is a free data retrieval call binding the contract method 0x2ffb004f.
 //
 // Solidity: function eigenLayerEigenPodManager() view returns(address)
-func (_Pool *PoolCaller) EigenLayerEigenPodManager(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) EigenLayerEigenPodManager(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "eigenLayerEigenPodManager")
+	err := _Nodedaopool.contract.Call(opts, &out, "eigenLayerEigenPodManager")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -561,23 +563,23 @@ func (_Pool *PoolCaller) EigenLayerEigenPodManager(opts *bind.CallOpts) (common.
 // EigenLayerEigenPodManager is a free data retrieval call binding the contract method 0x2ffb004f.
 //
 // Solidity: function eigenLayerEigenPodManager() view returns(address)
-func (_Pool *PoolSession) EigenLayerEigenPodManager() (common.Address, error) {
-	return _Pool.Contract.EigenLayerEigenPodManager(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) EigenLayerEigenPodManager() (common.Address, error) {
+	return _Nodedaopool.Contract.EigenLayerEigenPodManager(&_Nodedaopool.CallOpts)
 }
 
 // EigenLayerEigenPodManager is a free data retrieval call binding the contract method 0x2ffb004f.
 //
 // Solidity: function eigenLayerEigenPodManager() view returns(address)
-func (_Pool *PoolCallerSession) EigenLayerEigenPodManager() (common.Address, error) {
-	return _Pool.Contract.EigenLayerEigenPodManager(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) EigenLayerEigenPodManager() (common.Address, error) {
+	return _Nodedaopool.Contract.EigenLayerEigenPodManager(&_Nodedaopool.CallOpts)
 }
 
 // ElRewardsAddress is a free data retrieval call binding the contract method 0x215bd1b1.
 //
 // Solidity: function elRewardsAddress() view returns(address)
-func (_Pool *PoolCaller) ElRewardsAddress(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) ElRewardsAddress(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "elRewardsAddress")
+	err := _Nodedaopool.contract.Call(opts, &out, "elRewardsAddress")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -592,23 +594,23 @@ func (_Pool *PoolCaller) ElRewardsAddress(opts *bind.CallOpts) (common.Address, 
 // ElRewardsAddress is a free data retrieval call binding the contract method 0x215bd1b1.
 //
 // Solidity: function elRewardsAddress() view returns(address)
-func (_Pool *PoolSession) ElRewardsAddress() (common.Address, error) {
-	return _Pool.Contract.ElRewardsAddress(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) ElRewardsAddress() (common.Address, error) {
+	return _Nodedaopool.Contract.ElRewardsAddress(&_Nodedaopool.CallOpts)
 }
 
 // ElRewardsAddress is a free data retrieval call binding the contract method 0x215bd1b1.
 //
 // Solidity: function elRewardsAddress() view returns(address)
-func (_Pool *PoolCallerSession) ElRewardsAddress() (common.Address, error) {
-	return _Pool.Contract.ElRewardsAddress(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) ElRewardsAddress() (common.Address, error) {
+	return _Nodedaopool.Contract.ElRewardsAddress(&_Nodedaopool.CallOpts)
 }
 
 // ExchangeRate is a free data retrieval call binding the contract method 0x3ba0b9a9.
 //
 // Solidity: function exchangeRate() view returns(uint256)
-func (_Pool *PoolCaller) ExchangeRate(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) ExchangeRate(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "exchangeRate")
+	err := _Nodedaopool.contract.Call(opts, &out, "exchangeRate")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -623,23 +625,23 @@ func (_Pool *PoolCaller) ExchangeRate(opts *bind.CallOpts) (*big.Int, error) {
 // ExchangeRate is a free data retrieval call binding the contract method 0x3ba0b9a9.
 //
 // Solidity: function exchangeRate() view returns(uint256)
-func (_Pool *PoolSession) ExchangeRate() (*big.Int, error) {
-	return _Pool.Contract.ExchangeRate(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) ExchangeRate() (*big.Int, error) {
+	return _Nodedaopool.Contract.ExchangeRate(&_Nodedaopool.CallOpts)
 }
 
 // ExchangeRate is a free data retrieval call binding the contract method 0x3ba0b9a9.
 //
 // Solidity: function exchangeRate() view returns(uint256)
-func (_Pool *PoolCallerSession) ExchangeRate() (*big.Int, error) {
-	return _Pool.Contract.ExchangeRate(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) ExchangeRate() (*big.Int, error) {
+	return _Nodedaopool.Contract.ExchangeRate(&_Nodedaopool.CallOpts)
 }
 
 // GetCLVaultAmount is a free data retrieval call binding the contract method 0xf60b6fe6.
 //
 // Solidity: function getCLVaultAmount() view returns(uint256)
-func (_Pool *PoolCaller) GetCLVaultAmount(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) GetCLVaultAmount(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "getCLVaultAmount")
+	err := _Nodedaopool.contract.Call(opts, &out, "getCLVaultAmount")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -654,23 +656,23 @@ func (_Pool *PoolCaller) GetCLVaultAmount(opts *bind.CallOpts) (*big.Int, error)
 // GetCLVaultAmount is a free data retrieval call binding the contract method 0xf60b6fe6.
 //
 // Solidity: function getCLVaultAmount() view returns(uint256)
-func (_Pool *PoolSession) GetCLVaultAmount() (*big.Int, error) {
-	return _Pool.Contract.GetCLVaultAmount(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) GetCLVaultAmount() (*big.Int, error) {
+	return _Nodedaopool.Contract.GetCLVaultAmount(&_Nodedaopool.CallOpts)
 }
 
 // GetCLVaultAmount is a free data retrieval call binding the contract method 0xf60b6fe6.
 //
 // Solidity: function getCLVaultAmount() view returns(uint256)
-func (_Pool *PoolCallerSession) GetCLVaultAmount() (*big.Int, error) {
-	return _Pool.Contract.GetCLVaultAmount(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) GetCLVaultAmount() (*big.Int, error) {
+	return _Nodedaopool.Contract.GetCLVaultAmount(&_Nodedaopool.CallOpts)
 }
 
 // GetPoolAmount is a free data retrieval call binding the contract method 0x4ab4ba42.
 //
 // Solidity: function getPoolAmount() view returns(uint256)
-func (_Pool *PoolCaller) GetPoolAmount(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) GetPoolAmount(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "getPoolAmount")
+	err := _Nodedaopool.contract.Call(opts, &out, "getPoolAmount")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -685,23 +687,23 @@ func (_Pool *PoolCaller) GetPoolAmount(opts *bind.CallOpts) (*big.Int, error) {
 // GetPoolAmount is a free data retrieval call binding the contract method 0x4ab4ba42.
 //
 // Solidity: function getPoolAmount() view returns(uint256)
-func (_Pool *PoolSession) GetPoolAmount() (*big.Int, error) {
-	return _Pool.Contract.GetPoolAmount(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) GetPoolAmount() (*big.Int, error) {
+	return _Nodedaopool.Contract.GetPoolAmount(&_Nodedaopool.CallOpts)
 }
 
 // GetPoolAmount is a free data retrieval call binding the contract method 0x4ab4ba42.
 //
 // Solidity: function getPoolAmount() view returns(uint256)
-func (_Pool *PoolCallerSession) GetPoolAmount() (*big.Int, error) {
-	return _Pool.Contract.GetPoolAmount(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) GetPoolAmount() (*big.Int, error) {
+	return _Nodedaopool.Contract.GetPoolAmount(&_Nodedaopool.CallOpts)
 }
 
 // GetRestakingPods is a free data retrieval call binding the contract method 0x61e9ecf3.
 //
 // Solidity: function getRestakingPods() view returns(address[])
-func (_Pool *PoolCaller) GetRestakingPods(opts *bind.CallOpts) ([]common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) GetRestakingPods(opts *bind.CallOpts) ([]common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "getRestakingPods")
+	err := _Nodedaopool.contract.Call(opts, &out, "getRestakingPods")
 
 	if err != nil {
 		return *new([]common.Address), err
@@ -716,23 +718,23 @@ func (_Pool *PoolCaller) GetRestakingPods(opts *bind.CallOpts) ([]common.Address
 // GetRestakingPods is a free data retrieval call binding the contract method 0x61e9ecf3.
 //
 // Solidity: function getRestakingPods() view returns(address[])
-func (_Pool *PoolSession) GetRestakingPods() ([]common.Address, error) {
-	return _Pool.Contract.GetRestakingPods(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) GetRestakingPods() ([]common.Address, error) {
+	return _Nodedaopool.Contract.GetRestakingPods(&_Nodedaopool.CallOpts)
 }
 
 // GetRestakingPods is a free data retrieval call binding the contract method 0x61e9ecf3.
 //
 // Solidity: function getRestakingPods() view returns(address[])
-func (_Pool *PoolCallerSession) GetRestakingPods() ([]common.Address, error) {
-	return _Pool.Contract.GetRestakingPods(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) GetRestakingPods() ([]common.Address, error) {
+	return _Nodedaopool.Contract.GetRestakingPods(&_Nodedaopool.CallOpts)
 }
 
 // GetUserWithdrawals is a free data retrieval call binding the contract method 0xe502eb68.
 //
 // Solidity: function getUserWithdrawals(address _receiver) view returns((uint96,uint96,uint64,uint128,uint128)[])
-func (_Pool *PoolCaller) GetUserWithdrawals(opts *bind.CallOpts, _receiver common.Address) ([]WithdrawalRequestWithdrawalInfo, error) {
+func (_Nodedaopool *NodedaopoolCaller) GetUserWithdrawals(opts *bind.CallOpts, _receiver common.Address) ([]WithdrawalRequestWithdrawalInfo, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "getUserWithdrawals", _receiver)
+	err := _Nodedaopool.contract.Call(opts, &out, "getUserWithdrawals", _receiver)
 
 	if err != nil {
 		return *new([]WithdrawalRequestWithdrawalInfo), err
@@ -747,23 +749,23 @@ func (_Pool *PoolCaller) GetUserWithdrawals(opts *bind.CallOpts, _receiver commo
 // GetUserWithdrawals is a free data retrieval call binding the contract method 0xe502eb68.
 //
 // Solidity: function getUserWithdrawals(address _receiver) view returns((uint96,uint96,uint64,uint128,uint128)[])
-func (_Pool *PoolSession) GetUserWithdrawals(_receiver common.Address) ([]WithdrawalRequestWithdrawalInfo, error) {
-	return _Pool.Contract.GetUserWithdrawals(&_Pool.CallOpts, _receiver)
+func (_Nodedaopool *NodedaopoolSession) GetUserWithdrawals(_receiver common.Address) ([]WithdrawalRequestWithdrawalInfo, error) {
+	return _Nodedaopool.Contract.GetUserWithdrawals(&_Nodedaopool.CallOpts, _receiver)
 }
 
 // GetUserWithdrawals is a free data retrieval call binding the contract method 0xe502eb68.
 //
 // Solidity: function getUserWithdrawals(address _receiver) view returns((uint96,uint96,uint64,uint128,uint128)[])
-func (_Pool *PoolCallerSession) GetUserWithdrawals(_receiver common.Address) ([]WithdrawalRequestWithdrawalInfo, error) {
-	return _Pool.Contract.GetUserWithdrawals(&_Pool.CallOpts, _receiver)
+func (_Nodedaopool *NodedaopoolCallerSession) GetUserWithdrawals(_receiver common.Address) ([]WithdrawalRequestWithdrawalInfo, error) {
+	return _Nodedaopool.Contract.GetUserWithdrawals(&_Nodedaopool.CallOpts, _receiver)
 }
 
 // Implementation is a free data retrieval call binding the contract method 0x5c60da1b.
 //
 // Solidity: function implementation() view returns(address)
-func (_Pool *PoolCaller) Implementation(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) Implementation(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "implementation")
+	err := _Nodedaopool.contract.Call(opts, &out, "implementation")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -778,23 +780,23 @@ func (_Pool *PoolCaller) Implementation(opts *bind.CallOpts) (common.Address, er
 // Implementation is a free data retrieval call binding the contract method 0x5c60da1b.
 //
 // Solidity: function implementation() view returns(address)
-func (_Pool *PoolSession) Implementation() (common.Address, error) {
-	return _Pool.Contract.Implementation(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) Implementation() (common.Address, error) {
+	return _Nodedaopool.Contract.Implementation(&_Nodedaopool.CallOpts)
 }
 
 // Implementation is a free data retrieval call binding the contract method 0x5c60da1b.
 //
 // Solidity: function implementation() view returns(address)
-func (_Pool *PoolCallerSession) Implementation() (common.Address, error) {
-	return _Pool.Contract.Implementation(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) Implementation() (common.Address, error) {
+	return _Nodedaopool.Contract.Implementation(&_Nodedaopool.CallOpts)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Pool *PoolCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "owner")
+	err := _Nodedaopool.contract.Call(opts, &out, "owner")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -809,23 +811,23 @@ func (_Pool *PoolCaller) Owner(opts *bind.CallOpts) (common.Address, error) {
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Pool *PoolSession) Owner() (common.Address, error) {
-	return _Pool.Contract.Owner(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) Owner() (common.Address, error) {
+	return _Nodedaopool.Contract.Owner(&_Nodedaopool.CallOpts)
 }
 
 // Owner is a free data retrieval call binding the contract method 0x8da5cb5b.
 //
 // Solidity: function owner() view returns(address)
-func (_Pool *PoolCallerSession) Owner() (common.Address, error) {
-	return _Pool.Contract.Owner(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) Owner() (common.Address, error) {
+	return _Nodedaopool.Contract.Owner(&_Nodedaopool.CallOpts)
 }
 
 // Paused is a free data retrieval call binding the contract method 0x5c975abb.
 //
 // Solidity: function paused() view returns(bool)
-func (_Pool *PoolCaller) Paused(opts *bind.CallOpts) (bool, error) {
+func (_Nodedaopool *NodedaopoolCaller) Paused(opts *bind.CallOpts) (bool, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "paused")
+	err := _Nodedaopool.contract.Call(opts, &out, "paused")
 
 	if err != nil {
 		return *new(bool), err
@@ -840,23 +842,23 @@ func (_Pool *PoolCaller) Paused(opts *bind.CallOpts) (bool, error) {
 // Paused is a free data retrieval call binding the contract method 0x5c975abb.
 //
 // Solidity: function paused() view returns(bool)
-func (_Pool *PoolSession) Paused() (bool, error) {
-	return _Pool.Contract.Paused(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) Paused() (bool, error) {
+	return _Nodedaopool.Contract.Paused(&_Nodedaopool.CallOpts)
 }
 
 // Paused is a free data retrieval call binding the contract method 0x5c975abb.
 //
 // Solidity: function paused() view returns(bool)
-func (_Pool *PoolCallerSession) Paused() (bool, error) {
-	return _Pool.Contract.Paused(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) Paused() (bool, error) {
+	return _Nodedaopool.Contract.Paused(&_Nodedaopool.CallOpts)
 }
 
 // PoolToken is a free data retrieval call binding the contract method 0xcbdf382c.
 //
 // Solidity: function poolToken() view returns(address)
-func (_Pool *PoolCaller) PoolToken(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) PoolToken(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "poolToken")
+	err := _Nodedaopool.contract.Call(opts, &out, "poolToken")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -871,23 +873,23 @@ func (_Pool *PoolCaller) PoolToken(opts *bind.CallOpts) (common.Address, error) 
 // PoolToken is a free data retrieval call binding the contract method 0xcbdf382c.
 //
 // Solidity: function poolToken() view returns(address)
-func (_Pool *PoolSession) PoolToken() (common.Address, error) {
-	return _Pool.Contract.PoolToken(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) PoolToken() (common.Address, error) {
+	return _Nodedaopool.Contract.PoolToken(&_Nodedaopool.CallOpts)
 }
 
 // PoolToken is a free data retrieval call binding the contract method 0xcbdf382c.
 //
 // Solidity: function poolToken() view returns(address)
-func (_Pool *PoolCallerSession) PoolToken() (common.Address, error) {
-	return _Pool.Contract.PoolToken(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) PoolToken() (common.Address, error) {
+	return _Nodedaopool.Contract.PoolToken(&_Nodedaopool.CallOpts)
 }
 
 // ProxiableUUID is a free data retrieval call binding the contract method 0x52d1902d.
 //
 // Solidity: function proxiableUUID() view returns(bytes32)
-func (_Pool *PoolCaller) ProxiableUUID(opts *bind.CallOpts) ([32]byte, error) {
+func (_Nodedaopool *NodedaopoolCaller) ProxiableUUID(opts *bind.CallOpts) ([32]byte, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "proxiableUUID")
+	err := _Nodedaopool.contract.Call(opts, &out, "proxiableUUID")
 
 	if err != nil {
 		return *new([32]byte), err
@@ -902,23 +904,23 @@ func (_Pool *PoolCaller) ProxiableUUID(opts *bind.CallOpts) ([32]byte, error) {
 // ProxiableUUID is a free data retrieval call binding the contract method 0x52d1902d.
 //
 // Solidity: function proxiableUUID() view returns(bytes32)
-func (_Pool *PoolSession) ProxiableUUID() ([32]byte, error) {
-	return _Pool.Contract.ProxiableUUID(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) ProxiableUUID() ([32]byte, error) {
+	return _Nodedaopool.Contract.ProxiableUUID(&_Nodedaopool.CallOpts)
 }
 
 // ProxiableUUID is a free data retrieval call binding the contract method 0x52d1902d.
 //
 // Solidity: function proxiableUUID() view returns(bytes32)
-func (_Pool *PoolCallerSession) ProxiableUUID() ([32]byte, error) {
-	return _Pool.Contract.ProxiableUUID(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) ProxiableUUID() ([32]byte, error) {
+	return _Nodedaopool.Contract.ProxiableUUID(&_Nodedaopool.CallOpts)
 }
 
 // RateManager is a free data retrieval call binding the contract method 0x71c3cd88.
 //
 // Solidity: function rateManager() view returns(address)
-func (_Pool *PoolCaller) RateManager(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) RateManager(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "rateManager")
+	err := _Nodedaopool.contract.Call(opts, &out, "rateManager")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -933,23 +935,23 @@ func (_Pool *PoolCaller) RateManager(opts *bind.CallOpts) (common.Address, error
 // RateManager is a free data retrieval call binding the contract method 0x71c3cd88.
 //
 // Solidity: function rateManager() view returns(address)
-func (_Pool *PoolSession) RateManager() (common.Address, error) {
-	return _Pool.Contract.RateManager(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) RateManager() (common.Address, error) {
+	return _Nodedaopool.Contract.RateManager(&_Nodedaopool.CallOpts)
 }
 
 // RateManager is a free data retrieval call binding the contract method 0x71c3cd88.
 //
 // Solidity: function rateManager() view returns(address)
-func (_Pool *PoolCallerSession) RateManager() (common.Address, error) {
-	return _Pool.Contract.RateManager(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) RateManager() (common.Address, error) {
+	return _Nodedaopool.Contract.RateManager(&_Nodedaopool.CallOpts)
 }
 
 // RewardsUpdateBlock is a free data retrieval call binding the contract method 0x88f36cdd.
 //
 // Solidity: function rewardsUpdateBlock() view returns(uint256)
-func (_Pool *PoolCaller) RewardsUpdateBlock(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) RewardsUpdateBlock(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "rewardsUpdateBlock")
+	err := _Nodedaopool.contract.Call(opts, &out, "rewardsUpdateBlock")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -964,23 +966,85 @@ func (_Pool *PoolCaller) RewardsUpdateBlock(opts *bind.CallOpts) (*big.Int, erro
 // RewardsUpdateBlock is a free data retrieval call binding the contract method 0x88f36cdd.
 //
 // Solidity: function rewardsUpdateBlock() view returns(uint256)
-func (_Pool *PoolSession) RewardsUpdateBlock() (*big.Int, error) {
-	return _Pool.Contract.RewardsUpdateBlock(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) RewardsUpdateBlock() (*big.Int, error) {
+	return _Nodedaopool.Contract.RewardsUpdateBlock(&_Nodedaopool.CallOpts)
 }
 
 // RewardsUpdateBlock is a free data retrieval call binding the contract method 0x88f36cdd.
 //
 // Solidity: function rewardsUpdateBlock() view returns(uint256)
-func (_Pool *PoolCallerSession) RewardsUpdateBlock() (*big.Int, error) {
-	return _Pool.Contract.RewardsUpdateBlock(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) RewardsUpdateBlock() (*big.Int, error) {
+	return _Nodedaopool.Contract.RewardsUpdateBlock(&_Nodedaopool.CallOpts)
+}
+
+// StrategyAmount is a free data retrieval call binding the contract method 0x8dd7f293.
+//
+// Solidity: function strategyAmount() view returns(uint256)
+func (_Nodedaopool *NodedaopoolCaller) StrategyAmount(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _Nodedaopool.contract.Call(opts, &out, "strategyAmount")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// StrategyAmount is a free data retrieval call binding the contract method 0x8dd7f293.
+//
+// Solidity: function strategyAmount() view returns(uint256)
+func (_Nodedaopool *NodedaopoolSession) StrategyAmount() (*big.Int, error) {
+	return _Nodedaopool.Contract.StrategyAmount(&_Nodedaopool.CallOpts)
+}
+
+// StrategyAmount is a free data retrieval call binding the contract method 0x8dd7f293.
+//
+// Solidity: function strategyAmount() view returns(uint256)
+func (_Nodedaopool *NodedaopoolCallerSession) StrategyAmount() (*big.Int, error) {
+	return _Nodedaopool.Contract.StrategyAmount(&_Nodedaopool.CallOpts)
+}
+
+// StrategyVault is a free data retrieval call binding the contract method 0x40099098.
+//
+// Solidity: function strategyVault() view returns(address)
+func (_Nodedaopool *NodedaopoolCaller) StrategyVault(opts *bind.CallOpts) (common.Address, error) {
+	var out []interface{}
+	err := _Nodedaopool.contract.Call(opts, &out, "strategyVault")
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// StrategyVault is a free data retrieval call binding the contract method 0x40099098.
+//
+// Solidity: function strategyVault() view returns(address)
+func (_Nodedaopool *NodedaopoolSession) StrategyVault() (common.Address, error) {
+	return _Nodedaopool.Contract.StrategyVault(&_Nodedaopool.CallOpts)
+}
+
+// StrategyVault is a free data retrieval call binding the contract method 0x40099098.
+//
+// Solidity: function strategyVault() view returns(address)
+func (_Nodedaopool *NodedaopoolCallerSession) StrategyVault() (common.Address, error) {
+	return _Nodedaopool.Contract.StrategyVault(&_Nodedaopool.CallOpts)
 }
 
 // TotalAssets is a free data retrieval call binding the contract method 0x01e1d114.
 //
 // Solidity: function totalAssets() view returns(uint256)
-func (_Pool *PoolCaller) TotalAssets(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) TotalAssets(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "totalAssets")
+	err := _Nodedaopool.contract.Call(opts, &out, "totalAssets")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -995,23 +1059,23 @@ func (_Pool *PoolCaller) TotalAssets(opts *bind.CallOpts) (*big.Int, error) {
 // TotalAssets is a free data retrieval call binding the contract method 0x01e1d114.
 //
 // Solidity: function totalAssets() view returns(uint256)
-func (_Pool *PoolSession) TotalAssets() (*big.Int, error) {
-	return _Pool.Contract.TotalAssets(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) TotalAssets() (*big.Int, error) {
+	return _Nodedaopool.Contract.TotalAssets(&_Nodedaopool.CallOpts)
 }
 
 // TotalAssets is a free data retrieval call binding the contract method 0x01e1d114.
 //
 // Solidity: function totalAssets() view returns(uint256)
-func (_Pool *PoolCallerSession) TotalAssets() (*big.Int, error) {
-	return _Pool.Contract.TotalAssets(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) TotalAssets() (*big.Int, error) {
+	return _Nodedaopool.Contract.TotalAssets(&_Nodedaopool.CallOpts)
 }
 
 // TotalUnderlyingAsset is a free data retrieval call binding the contract method 0xddfa63ae.
 //
 // Solidity: function totalUnderlyingAsset() view returns(uint256)
-func (_Pool *PoolCaller) TotalUnderlyingAsset(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) TotalUnderlyingAsset(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "totalUnderlyingAsset")
+	err := _Nodedaopool.contract.Call(opts, &out, "totalUnderlyingAsset")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -1026,23 +1090,23 @@ func (_Pool *PoolCaller) TotalUnderlyingAsset(opts *bind.CallOpts) (*big.Int, er
 // TotalUnderlyingAsset is a free data retrieval call binding the contract method 0xddfa63ae.
 //
 // Solidity: function totalUnderlyingAsset() view returns(uint256)
-func (_Pool *PoolSession) TotalUnderlyingAsset() (*big.Int, error) {
-	return _Pool.Contract.TotalUnderlyingAsset(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) TotalUnderlyingAsset() (*big.Int, error) {
+	return _Nodedaopool.Contract.TotalUnderlyingAsset(&_Nodedaopool.CallOpts)
 }
 
 // TotalUnderlyingAsset is a free data retrieval call binding the contract method 0xddfa63ae.
 //
 // Solidity: function totalUnderlyingAsset() view returns(uint256)
-func (_Pool *PoolCallerSession) TotalUnderlyingAsset() (*big.Int, error) {
-	return _Pool.Contract.TotalUnderlyingAsset(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) TotalUnderlyingAsset() (*big.Int, error) {
+	return _Nodedaopool.Contract.TotalUnderlyingAsset(&_Nodedaopool.CallOpts)
 }
 
 // TotalWithdrawalAmount is a free data retrieval call binding the contract method 0xe23e0e08.
 //
 // Solidity: function totalWithdrawalAmount() view returns(uint256)
-func (_Pool *PoolCaller) TotalWithdrawalAmount(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) TotalWithdrawalAmount(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "totalWithdrawalAmount")
+	err := _Nodedaopool.contract.Call(opts, &out, "totalWithdrawalAmount")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -1057,23 +1121,23 @@ func (_Pool *PoolCaller) TotalWithdrawalAmount(opts *bind.CallOpts) (*big.Int, e
 // TotalWithdrawalAmount is a free data retrieval call binding the contract method 0xe23e0e08.
 //
 // Solidity: function totalWithdrawalAmount() view returns(uint256)
-func (_Pool *PoolSession) TotalWithdrawalAmount() (*big.Int, error) {
-	return _Pool.Contract.TotalWithdrawalAmount(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) TotalWithdrawalAmount() (*big.Int, error) {
+	return _Nodedaopool.Contract.TotalWithdrawalAmount(&_Nodedaopool.CallOpts)
 }
 
 // TotalWithdrawalAmount is a free data retrieval call binding the contract method 0xe23e0e08.
 //
 // Solidity: function totalWithdrawalAmount() view returns(uint256)
-func (_Pool *PoolCallerSession) TotalWithdrawalAmount() (*big.Int, error) {
-	return _Pool.Contract.TotalWithdrawalAmount(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) TotalWithdrawalAmount() (*big.Int, error) {
+	return _Nodedaopool.Contract.TotalWithdrawalAmount(&_Nodedaopool.CallOpts)
 }
 
 // TypeId is a free data retrieval call binding the contract method 0x8f940f63.
 //
 // Solidity: function typeId() pure returns(bytes32)
-func (_Pool *PoolCaller) TypeId(opts *bind.CallOpts) ([32]byte, error) {
+func (_Nodedaopool *NodedaopoolCaller) TypeId(opts *bind.CallOpts) ([32]byte, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "typeId")
+	err := _Nodedaopool.contract.Call(opts, &out, "typeId")
 
 	if err != nil {
 		return *new([32]byte), err
@@ -1088,23 +1152,23 @@ func (_Pool *PoolCaller) TypeId(opts *bind.CallOpts) ([32]byte, error) {
 // TypeId is a free data retrieval call binding the contract method 0x8f940f63.
 //
 // Solidity: function typeId() pure returns(bytes32)
-func (_Pool *PoolSession) TypeId() ([32]byte, error) {
-	return _Pool.Contract.TypeId(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) TypeId() ([32]byte, error) {
+	return _Nodedaopool.Contract.TypeId(&_Nodedaopool.CallOpts)
 }
 
 // TypeId is a free data retrieval call binding the contract method 0x8f940f63.
 //
 // Solidity: function typeId() pure returns(bytes32)
-func (_Pool *PoolCallerSession) TypeId() ([32]byte, error) {
-	return _Pool.Contract.TypeId(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) TypeId() ([32]byte, error) {
+	return _Nodedaopool.Contract.TypeId(&_Nodedaopool.CallOpts)
 }
 
 // UnstakeAllowed is a free data retrieval call binding the contract method 0xee018b6d.
 //
 // Solidity: function unstakeAllowed() view returns(bool)
-func (_Pool *PoolCaller) UnstakeAllowed(opts *bind.CallOpts) (bool, error) {
+func (_Nodedaopool *NodedaopoolCaller) UnstakeAllowed(opts *bind.CallOpts) (bool, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "unstakeAllowed")
+	err := _Nodedaopool.contract.Call(opts, &out, "unstakeAllowed")
 
 	if err != nil {
 		return *new(bool), err
@@ -1119,23 +1183,23 @@ func (_Pool *PoolCaller) UnstakeAllowed(opts *bind.CallOpts) (bool, error) {
 // UnstakeAllowed is a free data retrieval call binding the contract method 0xee018b6d.
 //
 // Solidity: function unstakeAllowed() view returns(bool)
-func (_Pool *PoolSession) UnstakeAllowed() (bool, error) {
-	return _Pool.Contract.UnstakeAllowed(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) UnstakeAllowed() (bool, error) {
+	return _Nodedaopool.Contract.UnstakeAllowed(&_Nodedaopool.CallOpts)
 }
 
 // UnstakeAllowed is a free data retrieval call binding the contract method 0xee018b6d.
 //
 // Solidity: function unstakeAllowed() view returns(bool)
-func (_Pool *PoolCallerSession) UnstakeAllowed() (bool, error) {
-	return _Pool.Contract.UnstakeAllowed(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) UnstakeAllowed() (bool, error) {
+	return _Nodedaopool.Contract.UnstakeAllowed(&_Nodedaopool.CallOpts)
 }
 
 // ValidatorManager is a free data retrieval call binding the contract method 0xfe55bde9.
 //
 // Solidity: function validatorManager() view returns(address)
-func (_Pool *PoolCaller) ValidatorManager(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) ValidatorManager(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "validatorManager")
+	err := _Nodedaopool.contract.Call(opts, &out, "validatorManager")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -1150,23 +1214,23 @@ func (_Pool *PoolCaller) ValidatorManager(opts *bind.CallOpts) (common.Address, 
 // ValidatorManager is a free data retrieval call binding the contract method 0xfe55bde9.
 //
 // Solidity: function validatorManager() view returns(address)
-func (_Pool *PoolSession) ValidatorManager() (common.Address, error) {
-	return _Pool.Contract.ValidatorManager(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) ValidatorManager() (common.Address, error) {
+	return _Nodedaopool.Contract.ValidatorManager(&_Nodedaopool.CallOpts)
 }
 
 // ValidatorManager is a free data retrieval call binding the contract method 0xfe55bde9.
 //
 // Solidity: function validatorManager() view returns(address)
-func (_Pool *PoolCallerSession) ValidatorManager() (common.Address, error) {
-	return _Pool.Contract.ValidatorManager(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) ValidatorManager() (common.Address, error) {
+	return _Nodedaopool.Contract.ValidatorManager(&_Nodedaopool.CallOpts)
 }
 
 // ValidatorRegistry is a free data retrieval call binding the contract method 0xf376ebbb.
 //
 // Solidity: function validatorRegistry() view returns(address)
-func (_Pool *PoolCaller) ValidatorRegistry(opts *bind.CallOpts) (common.Address, error) {
+func (_Nodedaopool *NodedaopoolCaller) ValidatorRegistry(opts *bind.CallOpts) (common.Address, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "validatorRegistry")
+	err := _Nodedaopool.contract.Call(opts, &out, "validatorRegistry")
 
 	if err != nil {
 		return *new(common.Address), err
@@ -1181,23 +1245,23 @@ func (_Pool *PoolCaller) ValidatorRegistry(opts *bind.CallOpts) (common.Address,
 // ValidatorRegistry is a free data retrieval call binding the contract method 0xf376ebbb.
 //
 // Solidity: function validatorRegistry() view returns(address)
-func (_Pool *PoolSession) ValidatorRegistry() (common.Address, error) {
-	return _Pool.Contract.ValidatorRegistry(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) ValidatorRegistry() (common.Address, error) {
+	return _Nodedaopool.Contract.ValidatorRegistry(&_Nodedaopool.CallOpts)
 }
 
 // ValidatorRegistry is a free data retrieval call binding the contract method 0xf376ebbb.
 //
 // Solidity: function validatorRegistry() view returns(address)
-func (_Pool *PoolCallerSession) ValidatorRegistry() (common.Address, error) {
-	return _Pool.Contract.ValidatorRegistry(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) ValidatorRegistry() (common.Address, error) {
+	return _Nodedaopool.Contract.ValidatorRegistry(&_Nodedaopool.CallOpts)
 }
 
 // Version is a free data retrieval call binding the contract method 0x54fd4d50.
 //
 // Solidity: function version() pure returns(uint8)
-func (_Pool *PoolCaller) Version(opts *bind.CallOpts) (uint8, error) {
+func (_Nodedaopool *NodedaopoolCaller) Version(opts *bind.CallOpts) (uint8, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "version")
+	err := _Nodedaopool.contract.Call(opts, &out, "version")
 
 	if err != nil {
 		return *new(uint8), err
@@ -1212,23 +1276,23 @@ func (_Pool *PoolCaller) Version(opts *bind.CallOpts) (uint8, error) {
 // Version is a free data retrieval call binding the contract method 0x54fd4d50.
 //
 // Solidity: function version() pure returns(uint8)
-func (_Pool *PoolSession) Version() (uint8, error) {
-	return _Pool.Contract.Version(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) Version() (uint8, error) {
+	return _Nodedaopool.Contract.Version(&_Nodedaopool.CallOpts)
 }
 
 // Version is a free data retrieval call binding the contract method 0x54fd4d50.
 //
 // Solidity: function version() pure returns(uint8)
-func (_Pool *PoolCallerSession) Version() (uint8, error) {
-	return _Pool.Contract.Version(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) Version() (uint8, error) {
+	return _Nodedaopool.Contract.Version(&_Nodedaopool.CallOpts)
 }
 
 // WithdrawCredentials is a free data retrieval call binding the contract method 0xb62be945.
 //
 // Solidity: function withdrawCredentials() view returns(bytes[])
-func (_Pool *PoolCaller) WithdrawCredentials(opts *bind.CallOpts) ([][]byte, error) {
+func (_Nodedaopool *NodedaopoolCaller) WithdrawCredentials(opts *bind.CallOpts) ([][]byte, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "withdrawCredentials")
+	err := _Nodedaopool.contract.Call(opts, &out, "withdrawCredentials")
 
 	if err != nil {
 		return *new([][]byte), err
@@ -1243,23 +1307,23 @@ func (_Pool *PoolCaller) WithdrawCredentials(opts *bind.CallOpts) ([][]byte, err
 // WithdrawCredentials is a free data retrieval call binding the contract method 0xb62be945.
 //
 // Solidity: function withdrawCredentials() view returns(bytes[])
-func (_Pool *PoolSession) WithdrawCredentials() ([][]byte, error) {
-	return _Pool.Contract.WithdrawCredentials(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) WithdrawCredentials() ([][]byte, error) {
+	return _Nodedaopool.Contract.WithdrawCredentials(&_Nodedaopool.CallOpts)
 }
 
 // WithdrawCredentials is a free data retrieval call binding the contract method 0xb62be945.
 //
 // Solidity: function withdrawCredentials() view returns(bytes[])
-func (_Pool *PoolCallerSession) WithdrawCredentials() ([][]byte, error) {
-	return _Pool.Contract.WithdrawCredentials(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) WithdrawCredentials() ([][]byte, error) {
+	return _Nodedaopool.Contract.WithdrawCredentials(&_Nodedaopool.CallOpts)
 }
 
 // WithdrawalDelayBlocks is a free data retrieval call binding the contract method 0x50f73e7c.
 //
 // Solidity: function withdrawalDelayBlocks() view returns(uint256)
-func (_Pool *PoolCaller) WithdrawalDelayBlocks(opts *bind.CallOpts) (*big.Int, error) {
+func (_Nodedaopool *NodedaopoolCaller) WithdrawalDelayBlocks(opts *bind.CallOpts) (*big.Int, error) {
 	var out []interface{}
-	err := _Pool.contract.Call(opts, &out, "withdrawalDelayBlocks")
+	err := _Nodedaopool.contract.Call(opts, &out, "withdrawalDelayBlocks")
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -1274,503 +1338,587 @@ func (_Pool *PoolCaller) WithdrawalDelayBlocks(opts *bind.CallOpts) (*big.Int, e
 // WithdrawalDelayBlocks is a free data retrieval call binding the contract method 0x50f73e7c.
 //
 // Solidity: function withdrawalDelayBlocks() view returns(uint256)
-func (_Pool *PoolSession) WithdrawalDelayBlocks() (*big.Int, error) {
-	return _Pool.Contract.WithdrawalDelayBlocks(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolSession) WithdrawalDelayBlocks() (*big.Int, error) {
+	return _Nodedaopool.Contract.WithdrawalDelayBlocks(&_Nodedaopool.CallOpts)
 }
 
 // WithdrawalDelayBlocks is a free data retrieval call binding the contract method 0x50f73e7c.
 //
 // Solidity: function withdrawalDelayBlocks() view returns(uint256)
-func (_Pool *PoolCallerSession) WithdrawalDelayBlocks() (*big.Int, error) {
-	return _Pool.Contract.WithdrawalDelayBlocks(&_Pool.CallOpts)
+func (_Nodedaopool *NodedaopoolCallerSession) WithdrawalDelayBlocks() (*big.Int, error) {
+	return _Nodedaopool.Contract.WithdrawalDelayBlocks(&_Nodedaopool.CallOpts)
 }
 
-// BasePoolInit is a paid mutator transaction binding the contract method 0xdb764e6b.
+// BasePoolInit is a paid mutator transaction binding the contract method 0x73c62d5d.
 //
-// Solidity: function __BasePool_init(uint256 _withdrawalDelayBlocks, uint256 _apr, uint256 _totalUnderlyingAsset, address _dao, address _poolToken, address _rateManager, address _validatorManager, address _validatorRegistry, address _depositContract) returns()
-func (_Pool *PoolTransactor) BasePoolInit(opts *bind.TransactOpts, _withdrawalDelayBlocks *big.Int, _apr *big.Int, _totalUnderlyingAsset *big.Int, _dao common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _validatorRegistry common.Address, _depositContract common.Address) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "__BasePool_init", _withdrawalDelayBlocks, _apr, _totalUnderlyingAsset, _dao, _poolToken, _rateManager, _validatorManager, _validatorRegistry, _depositContract)
+// Solidity: function __BasePool_init(address _ownerAddr, uint256 _withdrawalDelayBlocks, uint256 _apr, uint256 _totalUnderlyingAsset, address _dao, address _poolToken, address _rateManager, address _validatorManager, address _depositContract, bool _unstakeAllowed) returns()
+func (_Nodedaopool *NodedaopoolTransactor) BasePoolInit(opts *bind.TransactOpts, _ownerAddr common.Address, _withdrawalDelayBlocks *big.Int, _apr *big.Int, _totalUnderlyingAsset *big.Int, _dao common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _depositContract common.Address, _unstakeAllowed bool) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "__BasePool_init", _ownerAddr, _withdrawalDelayBlocks, _apr, _totalUnderlyingAsset, _dao, _poolToken, _rateManager, _validatorManager, _depositContract, _unstakeAllowed)
 }
 
-// BasePoolInit is a paid mutator transaction binding the contract method 0xdb764e6b.
+// BasePoolInit is a paid mutator transaction binding the contract method 0x73c62d5d.
 //
-// Solidity: function __BasePool_init(uint256 _withdrawalDelayBlocks, uint256 _apr, uint256 _totalUnderlyingAsset, address _dao, address _poolToken, address _rateManager, address _validatorManager, address _validatorRegistry, address _depositContract) returns()
-func (_Pool *PoolSession) BasePoolInit(_withdrawalDelayBlocks *big.Int, _apr *big.Int, _totalUnderlyingAsset *big.Int, _dao common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _validatorRegistry common.Address, _depositContract common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.BasePoolInit(&_Pool.TransactOpts, _withdrawalDelayBlocks, _apr, _totalUnderlyingAsset, _dao, _poolToken, _rateManager, _validatorManager, _validatorRegistry, _depositContract)
+// Solidity: function __BasePool_init(address _ownerAddr, uint256 _withdrawalDelayBlocks, uint256 _apr, uint256 _totalUnderlyingAsset, address _dao, address _poolToken, address _rateManager, address _validatorManager, address _depositContract, bool _unstakeAllowed) returns()
+func (_Nodedaopool *NodedaopoolSession) BasePoolInit(_ownerAddr common.Address, _withdrawalDelayBlocks *big.Int, _apr *big.Int, _totalUnderlyingAsset *big.Int, _dao common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _depositContract common.Address, _unstakeAllowed bool) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.BasePoolInit(&_Nodedaopool.TransactOpts, _ownerAddr, _withdrawalDelayBlocks, _apr, _totalUnderlyingAsset, _dao, _poolToken, _rateManager, _validatorManager, _depositContract, _unstakeAllowed)
 }
 
-// BasePoolInit is a paid mutator transaction binding the contract method 0xdb764e6b.
+// BasePoolInit is a paid mutator transaction binding the contract method 0x73c62d5d.
 //
-// Solidity: function __BasePool_init(uint256 _withdrawalDelayBlocks, uint256 _apr, uint256 _totalUnderlyingAsset, address _dao, address _poolToken, address _rateManager, address _validatorManager, address _validatorRegistry, address _depositContract) returns()
-func (_Pool *PoolTransactorSession) BasePoolInit(_withdrawalDelayBlocks *big.Int, _apr *big.Int, _totalUnderlyingAsset *big.Int, _dao common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _validatorRegistry common.Address, _depositContract common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.BasePoolInit(&_Pool.TransactOpts, _withdrawalDelayBlocks, _apr, _totalUnderlyingAsset, _dao, _poolToken, _rateManager, _validatorManager, _validatorRegistry, _depositContract)
-}
-
-// AddRestakingPod is a paid mutator transaction binding the contract method 0xebeac515.
-//
-// Solidity: function addRestakingPod(address _restakingPod) returns()
-func (_Pool *PoolTransactor) AddRestakingPod(opts *bind.TransactOpts, _restakingPod common.Address) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "addRestakingPod", _restakingPod)
+// Solidity: function __BasePool_init(address _ownerAddr, uint256 _withdrawalDelayBlocks, uint256 _apr, uint256 _totalUnderlyingAsset, address _dao, address _poolToken, address _rateManager, address _validatorManager, address _depositContract, bool _unstakeAllowed) returns()
+func (_Nodedaopool *NodedaopoolTransactorSession) BasePoolInit(_ownerAddr common.Address, _withdrawalDelayBlocks *big.Int, _apr *big.Int, _totalUnderlyingAsset *big.Int, _dao common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _depositContract common.Address, _unstakeAllowed bool) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.BasePoolInit(&_Nodedaopool.TransactOpts, _ownerAddr, _withdrawalDelayBlocks, _apr, _totalUnderlyingAsset, _dao, _poolToken, _rateManager, _validatorManager, _depositContract, _unstakeAllowed)
 }
 
 // AddRestakingPod is a paid mutator transaction binding the contract method 0xebeac515.
 //
 // Solidity: function addRestakingPod(address _restakingPod) returns()
-func (_Pool *PoolSession) AddRestakingPod(_restakingPod common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.AddRestakingPod(&_Pool.TransactOpts, _restakingPod)
+func (_Nodedaopool *NodedaopoolTransactor) AddRestakingPod(opts *bind.TransactOpts, _restakingPod common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "addRestakingPod", _restakingPod)
 }
 
 // AddRestakingPod is a paid mutator transaction binding the contract method 0xebeac515.
 //
 // Solidity: function addRestakingPod(address _restakingPod) returns()
-func (_Pool *PoolTransactorSession) AddRestakingPod(_restakingPod common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.AddRestakingPod(&_Pool.TransactOpts, _restakingPod)
+func (_Nodedaopool *NodedaopoolSession) AddRestakingPod(_restakingPod common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.AddRestakingPod(&_Nodedaopool.TransactOpts, _restakingPod)
+}
+
+// AddRestakingPod is a paid mutator transaction binding the contract method 0xebeac515.
+//
+// Solidity: function addRestakingPod(address _restakingPod) returns()
+func (_Nodedaopool *NodedaopoolTransactorSession) AddRestakingPod(_restakingPod common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.AddRestakingPod(&_Nodedaopool.TransactOpts, _restakingPod)
 }
 
 // ClaimDelayedWithdrawals is a paid mutator transaction binding the contract method 0x28837c07.
 //
 // Solidity: function claimDelayedWithdrawals() returns()
-func (_Pool *PoolTransactor) ClaimDelayedWithdrawals(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "claimDelayedWithdrawals")
+func (_Nodedaopool *NodedaopoolTransactor) ClaimDelayedWithdrawals(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "claimDelayedWithdrawals")
 }
 
 // ClaimDelayedWithdrawals is a paid mutator transaction binding the contract method 0x28837c07.
 //
 // Solidity: function claimDelayedWithdrawals() returns()
-func (_Pool *PoolSession) ClaimDelayedWithdrawals() (*types.Transaction, error) {
-	return _Pool.Contract.ClaimDelayedWithdrawals(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolSession) ClaimDelayedWithdrawals() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.ClaimDelayedWithdrawals(&_Nodedaopool.TransactOpts)
 }
 
 // ClaimDelayedWithdrawals is a paid mutator transaction binding the contract method 0x28837c07.
 //
 // Solidity: function claimDelayedWithdrawals() returns()
-func (_Pool *PoolTransactorSession) ClaimDelayedWithdrawals() (*types.Transaction, error) {
-	return _Pool.Contract.ClaimDelayedWithdrawals(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolTransactorSession) ClaimDelayedWithdrawals() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.ClaimDelayedWithdrawals(&_Nodedaopool.TransactOpts)
 }
 
 // ClaimWithdrawals is a paid mutator transaction binding the contract method 0x7139053e.
 //
 // Solidity: function claimWithdrawals(address _receiver, uint256[] _requestIds) returns()
-func (_Pool *PoolTransactor) ClaimWithdrawals(opts *bind.TransactOpts, _receiver common.Address, _requestIds []*big.Int) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "claimWithdrawals", _receiver, _requestIds)
+func (_Nodedaopool *NodedaopoolTransactor) ClaimWithdrawals(opts *bind.TransactOpts, _receiver common.Address, _requestIds []*big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "claimWithdrawals", _receiver, _requestIds)
 }
 
 // ClaimWithdrawals is a paid mutator transaction binding the contract method 0x7139053e.
 //
 // Solidity: function claimWithdrawals(address _receiver, uint256[] _requestIds) returns()
-func (_Pool *PoolSession) ClaimWithdrawals(_receiver common.Address, _requestIds []*big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.ClaimWithdrawals(&_Pool.TransactOpts, _receiver, _requestIds)
+func (_Nodedaopool *NodedaopoolSession) ClaimWithdrawals(_receiver common.Address, _requestIds []*big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.ClaimWithdrawals(&_Nodedaopool.TransactOpts, _receiver, _requestIds)
 }
 
 // ClaimWithdrawals is a paid mutator transaction binding the contract method 0x7139053e.
 //
 // Solidity: function claimWithdrawals(address _receiver, uint256[] _requestIds) returns()
-func (_Pool *PoolTransactorSession) ClaimWithdrawals(_receiver common.Address, _requestIds []*big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.ClaimWithdrawals(&_Pool.TransactOpts, _receiver, _requestIds)
+func (_Nodedaopool *NodedaopoolTransactorSession) ClaimWithdrawals(_receiver common.Address, _requestIds []*big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.ClaimWithdrawals(&_Nodedaopool.TransactOpts, _receiver, _requestIds)
 }
 
-// Initialize is a paid mutator transaction binding the contract method 0x23df75e6.
+// Initialize is a paid mutator transaction binding the contract method 0x983e87bc.
 //
-// Solidity: function initialize(uint256 _apr, address _dao, address _elRewardsAddress, address _poolToken, address _rateManager, address _validatorManager, address _validatorRegistry, address _depositContract, address _eigenLayerEigenPodManager, address[] _restakingPods) returns()
-func (_Pool *PoolTransactor) Initialize(opts *bind.TransactOpts, _apr *big.Int, _dao common.Address, _elRewardsAddress common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _validatorRegistry common.Address, _depositContract common.Address, _eigenLayerEigenPodManager common.Address, _restakingPods []common.Address) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "initialize", _apr, _dao, _elRewardsAddress, _poolToken, _rateManager, _validatorManager, _validatorRegistry, _depositContract, _eigenLayerEigenPodManager, _restakingPods)
+// Solidity: function initialize(address _ownerAddr, uint256 _apr, address _dao, address _elRewardsAddress, address _poolToken, address _rateManager, address _validatorManager, address _depositContract, address _eigenLayerEigenPodManager, address[] _restakingPods) returns()
+func (_Nodedaopool *NodedaopoolTransactor) Initialize(opts *bind.TransactOpts, _ownerAddr common.Address, _apr *big.Int, _dao common.Address, _elRewardsAddress common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _depositContract common.Address, _eigenLayerEigenPodManager common.Address, _restakingPods []common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "initialize", _ownerAddr, _apr, _dao, _elRewardsAddress, _poolToken, _rateManager, _validatorManager, _depositContract, _eigenLayerEigenPodManager, _restakingPods)
 }
 
-// Initialize is a paid mutator transaction binding the contract method 0x23df75e6.
+// Initialize is a paid mutator transaction binding the contract method 0x983e87bc.
 //
-// Solidity: function initialize(uint256 _apr, address _dao, address _elRewardsAddress, address _poolToken, address _rateManager, address _validatorManager, address _validatorRegistry, address _depositContract, address _eigenLayerEigenPodManager, address[] _restakingPods) returns()
-func (_Pool *PoolSession) Initialize(_apr *big.Int, _dao common.Address, _elRewardsAddress common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _validatorRegistry common.Address, _depositContract common.Address, _eigenLayerEigenPodManager common.Address, _restakingPods []common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.Initialize(&_Pool.TransactOpts, _apr, _dao, _elRewardsAddress, _poolToken, _rateManager, _validatorManager, _validatorRegistry, _depositContract, _eigenLayerEigenPodManager, _restakingPods)
+// Solidity: function initialize(address _ownerAddr, uint256 _apr, address _dao, address _elRewardsAddress, address _poolToken, address _rateManager, address _validatorManager, address _depositContract, address _eigenLayerEigenPodManager, address[] _restakingPods) returns()
+func (_Nodedaopool *NodedaopoolSession) Initialize(_ownerAddr common.Address, _apr *big.Int, _dao common.Address, _elRewardsAddress common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _depositContract common.Address, _eigenLayerEigenPodManager common.Address, _restakingPods []common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.Initialize(&_Nodedaopool.TransactOpts, _ownerAddr, _apr, _dao, _elRewardsAddress, _poolToken, _rateManager, _validatorManager, _depositContract, _eigenLayerEigenPodManager, _restakingPods)
 }
 
-// Initialize is a paid mutator transaction binding the contract method 0x23df75e6.
+// Initialize is a paid mutator transaction binding the contract method 0x983e87bc.
 //
-// Solidity: function initialize(uint256 _apr, address _dao, address _elRewardsAddress, address _poolToken, address _rateManager, address _validatorManager, address _validatorRegistry, address _depositContract, address _eigenLayerEigenPodManager, address[] _restakingPods) returns()
-func (_Pool *PoolTransactorSession) Initialize(_apr *big.Int, _dao common.Address, _elRewardsAddress common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _validatorRegistry common.Address, _depositContract common.Address, _eigenLayerEigenPodManager common.Address, _restakingPods []common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.Initialize(&_Pool.TransactOpts, _apr, _dao, _elRewardsAddress, _poolToken, _rateManager, _validatorManager, _validatorRegistry, _depositContract, _eigenLayerEigenPodManager, _restakingPods)
+// Solidity: function initialize(address _ownerAddr, uint256 _apr, address _dao, address _elRewardsAddress, address _poolToken, address _rateManager, address _validatorManager, address _depositContract, address _eigenLayerEigenPodManager, address[] _restakingPods) returns()
+func (_Nodedaopool *NodedaopoolTransactorSession) Initialize(_ownerAddr common.Address, _apr *big.Int, _dao common.Address, _elRewardsAddress common.Address, _poolToken common.Address, _rateManager common.Address, _validatorManager common.Address, _depositContract common.Address, _eigenLayerEigenPodManager common.Address, _restakingPods []common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.Initialize(&_Nodedaopool.TransactOpts, _ownerAddr, _apr, _dao, _elRewardsAddress, _poolToken, _rateManager, _validatorManager, _depositContract, _eigenLayerEigenPodManager, _restakingPods)
 }
 
 // Pause is a paid mutator transaction binding the contract method 0x8456cb59.
 //
 // Solidity: function pause() returns()
-func (_Pool *PoolTransactor) Pause(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "pause")
+func (_Nodedaopool *NodedaopoolTransactor) Pause(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "pause")
 }
 
 // Pause is a paid mutator transaction binding the contract method 0x8456cb59.
 //
 // Solidity: function pause() returns()
-func (_Pool *PoolSession) Pause() (*types.Transaction, error) {
-	return _Pool.Contract.Pause(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolSession) Pause() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.Pause(&_Nodedaopool.TransactOpts)
 }
 
 // Pause is a paid mutator transaction binding the contract method 0x8456cb59.
 //
 // Solidity: function pause() returns()
-func (_Pool *PoolTransactorSession) Pause() (*types.Transaction, error) {
-	return _Pool.Contract.Pause(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolTransactorSession) Pause() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.Pause(&_Nodedaopool.TransactOpts)
 }
 
 // ReceiveRewards is a paid mutator transaction binding the contract method 0xd77868da.
 //
 // Solidity: function receiveRewards(uint256 ) payable returns()
-func (_Pool *PoolTransactor) ReceiveRewards(opts *bind.TransactOpts, arg0 *big.Int) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "receiveRewards", arg0)
+func (_Nodedaopool *NodedaopoolTransactor) ReceiveRewards(opts *bind.TransactOpts, arg0 *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "receiveRewards", arg0)
 }
 
 // ReceiveRewards is a paid mutator transaction binding the contract method 0xd77868da.
 //
 // Solidity: function receiveRewards(uint256 ) payable returns()
-func (_Pool *PoolSession) ReceiveRewards(arg0 *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.ReceiveRewards(&_Pool.TransactOpts, arg0)
+func (_Nodedaopool *NodedaopoolSession) ReceiveRewards(arg0 *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.ReceiveRewards(&_Nodedaopool.TransactOpts, arg0)
 }
 
 // ReceiveRewards is a paid mutator transaction binding the contract method 0xd77868da.
 //
 // Solidity: function receiveRewards(uint256 ) payable returns()
-func (_Pool *PoolTransactorSession) ReceiveRewards(arg0 *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.ReceiveRewards(&_Pool.TransactOpts, arg0)
+func (_Nodedaopool *NodedaopoolTransactorSession) ReceiveRewards(arg0 *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.ReceiveRewards(&_Nodedaopool.TransactOpts, arg0)
 }
 
 // RegisterValidator is a paid mutator transaction binding the contract method 0xe0b05b61.
 //
 // Solidity: function registerValidator(bytes32 _depositContractRoot, address _restakingPod, bytes[] _pubkeys, bytes[] _signatures, bytes32[] _depositDataRoots) returns()
-func (_Pool *PoolTransactor) RegisterValidator(opts *bind.TransactOpts, _depositContractRoot [32]byte, _restakingPod common.Address, _pubkeys [][]byte, _signatures [][]byte, _depositDataRoots [][32]byte) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "registerValidator", _depositContractRoot, _restakingPod, _pubkeys, _signatures, _depositDataRoots)
+func (_Nodedaopool *NodedaopoolTransactor) RegisterValidator(opts *bind.TransactOpts, _depositContractRoot [32]byte, _restakingPod common.Address, _pubkeys [][]byte, _signatures [][]byte, _depositDataRoots [][32]byte) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "registerValidator", _depositContractRoot, _restakingPod, _pubkeys, _signatures, _depositDataRoots)
 }
 
 // RegisterValidator is a paid mutator transaction binding the contract method 0xe0b05b61.
 //
 // Solidity: function registerValidator(bytes32 _depositContractRoot, address _restakingPod, bytes[] _pubkeys, bytes[] _signatures, bytes32[] _depositDataRoots) returns()
-func (_Pool *PoolSession) RegisterValidator(_depositContractRoot [32]byte, _restakingPod common.Address, _pubkeys [][]byte, _signatures [][]byte, _depositDataRoots [][32]byte) (*types.Transaction, error) {
-	return _Pool.Contract.RegisterValidator(&_Pool.TransactOpts, _depositContractRoot, _restakingPod, _pubkeys, _signatures, _depositDataRoots)
+func (_Nodedaopool *NodedaopoolSession) RegisterValidator(_depositContractRoot [32]byte, _restakingPod common.Address, _pubkeys [][]byte, _signatures [][]byte, _depositDataRoots [][32]byte) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.RegisterValidator(&_Nodedaopool.TransactOpts, _depositContractRoot, _restakingPod, _pubkeys, _signatures, _depositDataRoots)
 }
 
 // RegisterValidator is a paid mutator transaction binding the contract method 0xe0b05b61.
 //
 // Solidity: function registerValidator(bytes32 _depositContractRoot, address _restakingPod, bytes[] _pubkeys, bytes[] _signatures, bytes32[] _depositDataRoots) returns()
-func (_Pool *PoolTransactorSession) RegisterValidator(_depositContractRoot [32]byte, _restakingPod common.Address, _pubkeys [][]byte, _signatures [][]byte, _depositDataRoots [][32]byte) (*types.Transaction, error) {
-	return _Pool.Contract.RegisterValidator(&_Pool.TransactOpts, _depositContractRoot, _restakingPod, _pubkeys, _signatures, _depositDataRoots)
+func (_Nodedaopool *NodedaopoolTransactorSession) RegisterValidator(_depositContractRoot [32]byte, _restakingPod common.Address, _pubkeys [][]byte, _signatures [][]byte, _depositDataRoots [][32]byte) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.RegisterValidator(&_Nodedaopool.TransactOpts, _depositContractRoot, _restakingPod, _pubkeys, _signatures, _depositDataRoots)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
 //
 // Solidity: function renounceOwnership() returns()
-func (_Pool *PoolTransactor) RenounceOwnership(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "renounceOwnership")
+func (_Nodedaopool *NodedaopoolTransactor) RenounceOwnership(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "renounceOwnership")
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
 //
 // Solidity: function renounceOwnership() returns()
-func (_Pool *PoolSession) RenounceOwnership() (*types.Transaction, error) {
-	return _Pool.Contract.RenounceOwnership(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolSession) RenounceOwnership() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.RenounceOwnership(&_Nodedaopool.TransactOpts)
 }
 
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x715018a6.
 //
 // Solidity: function renounceOwnership() returns()
-func (_Pool *PoolTransactorSession) RenounceOwnership() (*types.Transaction, error) {
-	return _Pool.Contract.RenounceOwnership(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolTransactorSession) RenounceOwnership() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.RenounceOwnership(&_Nodedaopool.TransactOpts)
 }
 
 // RequestWithdrawals is a paid mutator transaction binding the contract method 0x2963a287.
 //
 // Solidity: function requestWithdrawals(uint256 _unstakeAmount) returns()
-func (_Pool *PoolTransactor) RequestWithdrawals(opts *bind.TransactOpts, _unstakeAmount *big.Int) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "requestWithdrawals", _unstakeAmount)
+func (_Nodedaopool *NodedaopoolTransactor) RequestWithdrawals(opts *bind.TransactOpts, _unstakeAmount *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "requestWithdrawals", _unstakeAmount)
 }
 
 // RequestWithdrawals is a paid mutator transaction binding the contract method 0x2963a287.
 //
 // Solidity: function requestWithdrawals(uint256 _unstakeAmount) returns()
-func (_Pool *PoolSession) RequestWithdrawals(_unstakeAmount *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.RequestWithdrawals(&_Pool.TransactOpts, _unstakeAmount)
+func (_Nodedaopool *NodedaopoolSession) RequestWithdrawals(_unstakeAmount *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.RequestWithdrawals(&_Nodedaopool.TransactOpts, _unstakeAmount)
 }
 
 // RequestWithdrawals is a paid mutator transaction binding the contract method 0x2963a287.
 //
 // Solidity: function requestWithdrawals(uint256 _unstakeAmount) returns()
-func (_Pool *PoolTransactorSession) RequestWithdrawals(_unstakeAmount *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.RequestWithdrawals(&_Pool.TransactOpts, _unstakeAmount)
+func (_Nodedaopool *NodedaopoolTransactorSession) RequestWithdrawals(_unstakeAmount *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.RequestWithdrawals(&_Nodedaopool.TransactOpts, _unstakeAmount)
+}
+
+// SetDao is a paid mutator transaction binding the contract method 0x6637b882.
+//
+// Solidity: function setDao(address _dao) returns()
+func (_Nodedaopool *NodedaopoolTransactor) SetDao(opts *bind.TransactOpts, _dao common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "setDao", _dao)
+}
+
+// SetDao is a paid mutator transaction binding the contract method 0x6637b882.
+//
+// Solidity: function setDao(address _dao) returns()
+func (_Nodedaopool *NodedaopoolSession) SetDao(_dao common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetDao(&_Nodedaopool.TransactOpts, _dao)
+}
+
+// SetDao is a paid mutator transaction binding the contract method 0x6637b882.
+//
+// Solidity: function setDao(address _dao) returns()
+func (_Nodedaopool *NodedaopoolTransactorSession) SetDao(_dao common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetDao(&_Nodedaopool.TransactOpts, _dao)
 }
 
 // SetRateManager is a paid mutator transaction binding the contract method 0xc49db0cd.
 //
 // Solidity: function setRateManager(address _rateManager) returns()
-func (_Pool *PoolTransactor) SetRateManager(opts *bind.TransactOpts, _rateManager common.Address) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "setRateManager", _rateManager)
+func (_Nodedaopool *NodedaopoolTransactor) SetRateManager(opts *bind.TransactOpts, _rateManager common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "setRateManager", _rateManager)
 }
 
 // SetRateManager is a paid mutator transaction binding the contract method 0xc49db0cd.
 //
 // Solidity: function setRateManager(address _rateManager) returns()
-func (_Pool *PoolSession) SetRateManager(_rateManager common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.SetRateManager(&_Pool.TransactOpts, _rateManager)
+func (_Nodedaopool *NodedaopoolSession) SetRateManager(_rateManager common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetRateManager(&_Nodedaopool.TransactOpts, _rateManager)
 }
 
 // SetRateManager is a paid mutator transaction binding the contract method 0xc49db0cd.
 //
 // Solidity: function setRateManager(address _rateManager) returns()
-func (_Pool *PoolTransactorSession) SetRateManager(_rateManager common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.SetRateManager(&_Pool.TransactOpts, _rateManager)
+func (_Nodedaopool *NodedaopoolTransactorSession) SetRateManager(_rateManager common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetRateManager(&_Nodedaopool.TransactOpts, _rateManager)
+}
+
+// SetStrategyVault is a paid mutator transaction binding the contract method 0xe606768a.
+//
+// Solidity: function setStrategyVault(address _strategyVault) returns()
+func (_Nodedaopool *NodedaopoolTransactor) SetStrategyVault(opts *bind.TransactOpts, _strategyVault common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "setStrategyVault", _strategyVault)
+}
+
+// SetStrategyVault is a paid mutator transaction binding the contract method 0xe606768a.
+//
+// Solidity: function setStrategyVault(address _strategyVault) returns()
+func (_Nodedaopool *NodedaopoolSession) SetStrategyVault(_strategyVault common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetStrategyVault(&_Nodedaopool.TransactOpts, _strategyVault)
+}
+
+// SetStrategyVault is a paid mutator transaction binding the contract method 0xe606768a.
+//
+// Solidity: function setStrategyVault(address _strategyVault) returns()
+func (_Nodedaopool *NodedaopoolTransactorSession) SetStrategyVault(_strategyVault common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetStrategyVault(&_Nodedaopool.TransactOpts, _strategyVault)
 }
 
 // SetUnstakeAllowed is a paid mutator transaction binding the contract method 0xbba59090.
 //
 // Solidity: function setUnstakeAllowed(bool _unstakeAllowed) returns()
-func (_Pool *PoolTransactor) SetUnstakeAllowed(opts *bind.TransactOpts, _unstakeAllowed bool) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "setUnstakeAllowed", _unstakeAllowed)
+func (_Nodedaopool *NodedaopoolTransactor) SetUnstakeAllowed(opts *bind.TransactOpts, _unstakeAllowed bool) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "setUnstakeAllowed", _unstakeAllowed)
 }
 
 // SetUnstakeAllowed is a paid mutator transaction binding the contract method 0xbba59090.
 //
 // Solidity: function setUnstakeAllowed(bool _unstakeAllowed) returns()
-func (_Pool *PoolSession) SetUnstakeAllowed(_unstakeAllowed bool) (*types.Transaction, error) {
-	return _Pool.Contract.SetUnstakeAllowed(&_Pool.TransactOpts, _unstakeAllowed)
+func (_Nodedaopool *NodedaopoolSession) SetUnstakeAllowed(_unstakeAllowed bool) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetUnstakeAllowed(&_Nodedaopool.TransactOpts, _unstakeAllowed)
 }
 
 // SetUnstakeAllowed is a paid mutator transaction binding the contract method 0xbba59090.
 //
 // Solidity: function setUnstakeAllowed(bool _unstakeAllowed) returns()
-func (_Pool *PoolTransactorSession) SetUnstakeAllowed(_unstakeAllowed bool) (*types.Transaction, error) {
-	return _Pool.Contract.SetUnstakeAllowed(&_Pool.TransactOpts, _unstakeAllowed)
+func (_Nodedaopool *NodedaopoolTransactorSession) SetUnstakeAllowed(_unstakeAllowed bool) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetUnstakeAllowed(&_Nodedaopool.TransactOpts, _unstakeAllowed)
 }
 
 // SetValidatorManager is a paid mutator transaction binding the contract method 0x45f34e92.
 //
 // Solidity: function setValidatorManager(address _validatorManager) returns()
-func (_Pool *PoolTransactor) SetValidatorManager(opts *bind.TransactOpts, _validatorManager common.Address) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "setValidatorManager", _validatorManager)
+func (_Nodedaopool *NodedaopoolTransactor) SetValidatorManager(opts *bind.TransactOpts, _validatorManager common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "setValidatorManager", _validatorManager)
 }
 
 // SetValidatorManager is a paid mutator transaction binding the contract method 0x45f34e92.
 //
 // Solidity: function setValidatorManager(address _validatorManager) returns()
-func (_Pool *PoolSession) SetValidatorManager(_validatorManager common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.SetValidatorManager(&_Pool.TransactOpts, _validatorManager)
+func (_Nodedaopool *NodedaopoolSession) SetValidatorManager(_validatorManager common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetValidatorManager(&_Nodedaopool.TransactOpts, _validatorManager)
 }
 
 // SetValidatorManager is a paid mutator transaction binding the contract method 0x45f34e92.
 //
 // Solidity: function setValidatorManager(address _validatorManager) returns()
-func (_Pool *PoolTransactorSession) SetValidatorManager(_validatorManager common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.SetValidatorManager(&_Pool.TransactOpts, _validatorManager)
+func (_Nodedaopool *NodedaopoolTransactorSession) SetValidatorManager(_validatorManager common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetValidatorManager(&_Nodedaopool.TransactOpts, _validatorManager)
 }
 
 // SetValidatorRegistry is a paid mutator transaction binding the contract method 0x49773050.
 //
 // Solidity: function setValidatorRegistry(address _validatorRegistry) returns()
-func (_Pool *PoolTransactor) SetValidatorRegistry(opts *bind.TransactOpts, _validatorRegistry common.Address) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "setValidatorRegistry", _validatorRegistry)
+func (_Nodedaopool *NodedaopoolTransactor) SetValidatorRegistry(opts *bind.TransactOpts, _validatorRegistry common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "setValidatorRegistry", _validatorRegistry)
 }
 
 // SetValidatorRegistry is a paid mutator transaction binding the contract method 0x49773050.
 //
 // Solidity: function setValidatorRegistry(address _validatorRegistry) returns()
-func (_Pool *PoolSession) SetValidatorRegistry(_validatorRegistry common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.SetValidatorRegistry(&_Pool.TransactOpts, _validatorRegistry)
+func (_Nodedaopool *NodedaopoolSession) SetValidatorRegistry(_validatorRegistry common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetValidatorRegistry(&_Nodedaopool.TransactOpts, _validatorRegistry)
 }
 
 // SetValidatorRegistry is a paid mutator transaction binding the contract method 0x49773050.
 //
 // Solidity: function setValidatorRegistry(address _validatorRegistry) returns()
-func (_Pool *PoolTransactorSession) SetValidatorRegistry(_validatorRegistry common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.SetValidatorRegistry(&_Pool.TransactOpts, _validatorRegistry)
+func (_Nodedaopool *NodedaopoolTransactorSession) SetValidatorRegistry(_validatorRegistry common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetValidatorRegistry(&_Nodedaopool.TransactOpts, _validatorRegistry)
 }
 
 // SetWithdrawalDelayBlocks is a paid mutator transaction binding the contract method 0x4d50f9a4.
 //
 // Solidity: function setWithdrawalDelayBlocks(uint256 _withdrawalDelayBlocks) returns()
-func (_Pool *PoolTransactor) SetWithdrawalDelayBlocks(opts *bind.TransactOpts, _withdrawalDelayBlocks *big.Int) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "setWithdrawalDelayBlocks", _withdrawalDelayBlocks)
+func (_Nodedaopool *NodedaopoolTransactor) SetWithdrawalDelayBlocks(opts *bind.TransactOpts, _withdrawalDelayBlocks *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "setWithdrawalDelayBlocks", _withdrawalDelayBlocks)
 }
 
 // SetWithdrawalDelayBlocks is a paid mutator transaction binding the contract method 0x4d50f9a4.
 //
 // Solidity: function setWithdrawalDelayBlocks(uint256 _withdrawalDelayBlocks) returns()
-func (_Pool *PoolSession) SetWithdrawalDelayBlocks(_withdrawalDelayBlocks *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.SetWithdrawalDelayBlocks(&_Pool.TransactOpts, _withdrawalDelayBlocks)
+func (_Nodedaopool *NodedaopoolSession) SetWithdrawalDelayBlocks(_withdrawalDelayBlocks *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetWithdrawalDelayBlocks(&_Nodedaopool.TransactOpts, _withdrawalDelayBlocks)
 }
 
 // SetWithdrawalDelayBlocks is a paid mutator transaction binding the contract method 0x4d50f9a4.
 //
 // Solidity: function setWithdrawalDelayBlocks(uint256 _withdrawalDelayBlocks) returns()
-func (_Pool *PoolTransactorSession) SetWithdrawalDelayBlocks(_withdrawalDelayBlocks *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.SetWithdrawalDelayBlocks(&_Pool.TransactOpts, _withdrawalDelayBlocks)
+func (_Nodedaopool *NodedaopoolTransactorSession) SetWithdrawalDelayBlocks(_withdrawalDelayBlocks *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.SetWithdrawalDelayBlocks(&_Nodedaopool.TransactOpts, _withdrawalDelayBlocks)
 }
 
 // StakeETH is a paid mutator transaction binding the contract method 0xdceb986d.
 //
 // Solidity: function stakeETH() payable returns()
-func (_Pool *PoolTransactor) StakeETH(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "stakeETH")
+func (_Nodedaopool *NodedaopoolTransactor) StakeETH(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "stakeETH")
 }
 
 // StakeETH is a paid mutator transaction binding the contract method 0xdceb986d.
 //
 // Solidity: function stakeETH() payable returns()
-func (_Pool *PoolSession) StakeETH() (*types.Transaction, error) {
-	return _Pool.Contract.StakeETH(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolSession) StakeETH() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.StakeETH(&_Nodedaopool.TransactOpts)
 }
 
 // StakeETH is a paid mutator transaction binding the contract method 0xdceb986d.
 //
 // Solidity: function stakeETH() payable returns()
-func (_Pool *PoolTransactorSession) StakeETH() (*types.Transaction, error) {
-	return _Pool.Contract.StakeETH(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolTransactorSession) StakeETH() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.StakeETH(&_Nodedaopool.TransactOpts)
+}
+
+// StrategyDeposit is a paid mutator transaction binding the contract method 0xdce590d5.
+//
+// Solidity: function strategyDeposit(uint256 _amount) returns()
+func (_Nodedaopool *NodedaopoolTransactor) StrategyDeposit(opts *bind.TransactOpts, _amount *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "strategyDeposit", _amount)
+}
+
+// StrategyDeposit is a paid mutator transaction binding the contract method 0xdce590d5.
+//
+// Solidity: function strategyDeposit(uint256 _amount) returns()
+func (_Nodedaopool *NodedaopoolSession) StrategyDeposit(_amount *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.StrategyDeposit(&_Nodedaopool.TransactOpts, _amount)
+}
+
+// StrategyDeposit is a paid mutator transaction binding the contract method 0xdce590d5.
+//
+// Solidity: function strategyDeposit(uint256 _amount) returns()
+func (_Nodedaopool *NodedaopoolTransactorSession) StrategyDeposit(_amount *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.StrategyDeposit(&_Nodedaopool.TransactOpts, _amount)
+}
+
+// StrategyReturn is a paid mutator transaction binding the contract method 0x553ffcbe.
+//
+// Solidity: function strategyReturn() payable returns()
+func (_Nodedaopool *NodedaopoolTransactor) StrategyReturn(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "strategyReturn")
+}
+
+// StrategyReturn is a paid mutator transaction binding the contract method 0x553ffcbe.
+//
+// Solidity: function strategyReturn() payable returns()
+func (_Nodedaopool *NodedaopoolSession) StrategyReturn() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.StrategyReturn(&_Nodedaopool.TransactOpts)
+}
+
+// StrategyReturn is a paid mutator transaction binding the contract method 0x553ffcbe.
+//
+// Solidity: function strategyReturn() payable returns()
+func (_Nodedaopool *NodedaopoolTransactorSession) StrategyReturn() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.StrategyReturn(&_Nodedaopool.TransactOpts)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(address newOwner) returns()
-func (_Pool *PoolTransactor) TransferOwnership(opts *bind.TransactOpts, newOwner common.Address) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "transferOwnership", newOwner)
+func (_Nodedaopool *NodedaopoolTransactor) TransferOwnership(opts *bind.TransactOpts, newOwner common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "transferOwnership", newOwner)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(address newOwner) returns()
-func (_Pool *PoolSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.TransferOwnership(&_Pool.TransactOpts, newOwner)
+func (_Nodedaopool *NodedaopoolSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.TransferOwnership(&_Nodedaopool.TransactOpts, newOwner)
 }
 
 // TransferOwnership is a paid mutator transaction binding the contract method 0xf2fde38b.
 //
 // Solidity: function transferOwnership(address newOwner) returns()
-func (_Pool *PoolTransactorSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.TransferOwnership(&_Pool.TransactOpts, newOwner)
+func (_Nodedaopool *NodedaopoolTransactorSession) TransferOwnership(newOwner common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.TransferOwnership(&_Nodedaopool.TransactOpts, newOwner)
 }
 
 // Unpause is a paid mutator transaction binding the contract method 0x3f4ba83a.
 //
 // Solidity: function unpause() returns()
-func (_Pool *PoolTransactor) Unpause(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "unpause")
+func (_Nodedaopool *NodedaopoolTransactor) Unpause(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "unpause")
 }
 
 // Unpause is a paid mutator transaction binding the contract method 0x3f4ba83a.
 //
 // Solidity: function unpause() returns()
-func (_Pool *PoolSession) Unpause() (*types.Transaction, error) {
-	return _Pool.Contract.Unpause(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolSession) Unpause() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.Unpause(&_Nodedaopool.TransactOpts)
 }
 
 // Unpause is a paid mutator transaction binding the contract method 0x3f4ba83a.
 //
 // Solidity: function unpause() returns()
-func (_Pool *PoolTransactorSession) Unpause() (*types.Transaction, error) {
-	return _Pool.Contract.Unpause(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolTransactorSession) Unpause() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.Unpause(&_Nodedaopool.TransactOpts)
 }
 
 // UnstakeETH is a paid mutator transaction binding the contract method 0x62d53403.
 //
 // Solidity: function unstakeETH(uint256 _unstakeAmount) returns()
-func (_Pool *PoolTransactor) UnstakeETH(opts *bind.TransactOpts, _unstakeAmount *big.Int) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "unstakeETH", _unstakeAmount)
+func (_Nodedaopool *NodedaopoolTransactor) UnstakeETH(opts *bind.TransactOpts, _unstakeAmount *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "unstakeETH", _unstakeAmount)
 }
 
 // UnstakeETH is a paid mutator transaction binding the contract method 0x62d53403.
 //
 // Solidity: function unstakeETH(uint256 _unstakeAmount) returns()
-func (_Pool *PoolSession) UnstakeETH(_unstakeAmount *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.UnstakeETH(&_Pool.TransactOpts, _unstakeAmount)
+func (_Nodedaopool *NodedaopoolSession) UnstakeETH(_unstakeAmount *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.UnstakeETH(&_Nodedaopool.TransactOpts, _unstakeAmount)
 }
 
 // UnstakeETH is a paid mutator transaction binding the contract method 0x62d53403.
 //
 // Solidity: function unstakeETH(uint256 _unstakeAmount) returns()
-func (_Pool *PoolTransactorSession) UnstakeETH(_unstakeAmount *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.UnstakeETH(&_Pool.TransactOpts, _unstakeAmount)
+func (_Nodedaopool *NodedaopoolTransactorSession) UnstakeETH(_unstakeAmount *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.UnstakeETH(&_Nodedaopool.TransactOpts, _unstakeAmount)
 }
 
 // UpdateApr is a paid mutator transaction binding the contract method 0x8552bf90.
 //
 // Solidity: function updateApr(uint256 _apr) returns()
-func (_Pool *PoolTransactor) UpdateApr(opts *bind.TransactOpts, _apr *big.Int) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "updateApr", _apr)
+func (_Nodedaopool *NodedaopoolTransactor) UpdateApr(opts *bind.TransactOpts, _apr *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "updateApr", _apr)
 }
 
 // UpdateApr is a paid mutator transaction binding the contract method 0x8552bf90.
 //
 // Solidity: function updateApr(uint256 _apr) returns()
-func (_Pool *PoolSession) UpdateApr(_apr *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.UpdateApr(&_Pool.TransactOpts, _apr)
+func (_Nodedaopool *NodedaopoolSession) UpdateApr(_apr *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.UpdateApr(&_Nodedaopool.TransactOpts, _apr)
 }
 
 // UpdateApr is a paid mutator transaction binding the contract method 0x8552bf90.
 //
 // Solidity: function updateApr(uint256 _apr) returns()
-func (_Pool *PoolTransactorSession) UpdateApr(_apr *big.Int) (*types.Transaction, error) {
-	return _Pool.Contract.UpdateApr(&_Pool.TransactOpts, _apr)
+func (_Nodedaopool *NodedaopoolTransactorSession) UpdateApr(_apr *big.Int) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.UpdateApr(&_Nodedaopool.TransactOpts, _apr)
 }
 
 // UpgradeTo is a paid mutator transaction binding the contract method 0x3659cfe6.
 //
 // Solidity: function upgradeTo(address newImplementation) returns()
-func (_Pool *PoolTransactor) UpgradeTo(opts *bind.TransactOpts, newImplementation common.Address) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "upgradeTo", newImplementation)
+func (_Nodedaopool *NodedaopoolTransactor) UpgradeTo(opts *bind.TransactOpts, newImplementation common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "upgradeTo", newImplementation)
 }
 
 // UpgradeTo is a paid mutator transaction binding the contract method 0x3659cfe6.
 //
 // Solidity: function upgradeTo(address newImplementation) returns()
-func (_Pool *PoolSession) UpgradeTo(newImplementation common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.UpgradeTo(&_Pool.TransactOpts, newImplementation)
+func (_Nodedaopool *NodedaopoolSession) UpgradeTo(newImplementation common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.UpgradeTo(&_Nodedaopool.TransactOpts, newImplementation)
 }
 
 // UpgradeTo is a paid mutator transaction binding the contract method 0x3659cfe6.
 //
 // Solidity: function upgradeTo(address newImplementation) returns()
-func (_Pool *PoolTransactorSession) UpgradeTo(newImplementation common.Address) (*types.Transaction, error) {
-	return _Pool.Contract.UpgradeTo(&_Pool.TransactOpts, newImplementation)
+func (_Nodedaopool *NodedaopoolTransactorSession) UpgradeTo(newImplementation common.Address) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.UpgradeTo(&_Nodedaopool.TransactOpts, newImplementation)
 }
 
 // UpgradeToAndCall is a paid mutator transaction binding the contract method 0x4f1ef286.
 //
 // Solidity: function upgradeToAndCall(address newImplementation, bytes data) payable returns()
-func (_Pool *PoolTransactor) UpgradeToAndCall(opts *bind.TransactOpts, newImplementation common.Address, data []byte) (*types.Transaction, error) {
-	return _Pool.contract.Transact(opts, "upgradeToAndCall", newImplementation, data)
+func (_Nodedaopool *NodedaopoolTransactor) UpgradeToAndCall(opts *bind.TransactOpts, newImplementation common.Address, data []byte) (*types.Transaction, error) {
+	return _Nodedaopool.contract.Transact(opts, "upgradeToAndCall", newImplementation, data)
 }
 
 // UpgradeToAndCall is a paid mutator transaction binding the contract method 0x4f1ef286.
 //
 // Solidity: function upgradeToAndCall(address newImplementation, bytes data) payable returns()
-func (_Pool *PoolSession) UpgradeToAndCall(newImplementation common.Address, data []byte) (*types.Transaction, error) {
-	return _Pool.Contract.UpgradeToAndCall(&_Pool.TransactOpts, newImplementation, data)
+func (_Nodedaopool *NodedaopoolSession) UpgradeToAndCall(newImplementation common.Address, data []byte) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.UpgradeToAndCall(&_Nodedaopool.TransactOpts, newImplementation, data)
 }
 
 // UpgradeToAndCall is a paid mutator transaction binding the contract method 0x4f1ef286.
 //
 // Solidity: function upgradeToAndCall(address newImplementation, bytes data) payable returns()
-func (_Pool *PoolTransactorSession) UpgradeToAndCall(newImplementation common.Address, data []byte) (*types.Transaction, error) {
-	return _Pool.Contract.UpgradeToAndCall(&_Pool.TransactOpts, newImplementation, data)
+func (_Nodedaopool *NodedaopoolTransactorSession) UpgradeToAndCall(newImplementation common.Address, data []byte) (*types.Transaction, error) {
+	return _Nodedaopool.Contract.UpgradeToAndCall(&_Nodedaopool.TransactOpts, newImplementation, data)
 }
 
 // Receive is a paid mutator transaction binding the contract receive function.
 //
 // Solidity: receive() payable returns()
-func (_Pool *PoolTransactor) Receive(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _Pool.contract.RawTransact(opts, nil) // calldata is disallowed for receive function
+func (_Nodedaopool *NodedaopoolTransactor) Receive(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _Nodedaopool.contract.RawTransact(opts, nil) // calldata is disallowed for receive function
 }
 
 // Receive is a paid mutator transaction binding the contract receive function.
 //
 // Solidity: receive() payable returns()
-func (_Pool *PoolSession) Receive() (*types.Transaction, error) {
-	return _Pool.Contract.Receive(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolSession) Receive() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.Receive(&_Nodedaopool.TransactOpts)
 }
 
 // Receive is a paid mutator transaction binding the contract receive function.
 //
 // Solidity: receive() payable returns()
-func (_Pool *PoolTransactorSession) Receive() (*types.Transaction, error) {
-	return _Pool.Contract.Receive(&_Pool.TransactOpts)
+func (_Nodedaopool *NodedaopoolTransactorSession) Receive() (*types.Transaction, error) {
+	return _Nodedaopool.Contract.Receive(&_Nodedaopool.TransactOpts)
 }
 
-// PoolAdminChangedIterator is returned from FilterAdminChanged and is used to iterate over the raw logs and unpacked data for AdminChanged events raised by the Pool contract.
-type PoolAdminChangedIterator struct {
-	Event *PoolAdminChanged // Event containing the contract specifics and raw log
+// NodedaopoolAdminChangedIterator is returned from FilterAdminChanged and is used to iterate over the raw logs and unpacked data for AdminChanged events raised by the Nodedaopool contract.
+type NodedaopoolAdminChangedIterator struct {
+	Event *NodedaopoolAdminChanged // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -1784,7 +1932,7 @@ type PoolAdminChangedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolAdminChangedIterator) Next() bool {
+func (it *NodedaopoolAdminChangedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -1793,7 +1941,7 @@ func (it *PoolAdminChangedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolAdminChanged)
+			it.Event = new(NodedaopoolAdminChanged)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -1808,7 +1956,7 @@ func (it *PoolAdminChangedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolAdminChanged)
+		it.Event = new(NodedaopoolAdminChanged)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -1824,19 +1972,19 @@ func (it *PoolAdminChangedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolAdminChangedIterator) Error() error {
+func (it *NodedaopoolAdminChangedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolAdminChangedIterator) Close() error {
+func (it *NodedaopoolAdminChangedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolAdminChanged represents a AdminChanged event raised by the Pool contract.
-type PoolAdminChanged struct {
+// NodedaopoolAdminChanged represents a AdminChanged event raised by the Nodedaopool contract.
+type NodedaopoolAdminChanged struct {
 	PreviousAdmin common.Address
 	NewAdmin      common.Address
 	Raw           types.Log // Blockchain specific contextual infos
@@ -1845,21 +1993,21 @@ type PoolAdminChanged struct {
 // FilterAdminChanged is a free log retrieval operation binding the contract event 0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f.
 //
 // Solidity: event AdminChanged(address previousAdmin, address newAdmin)
-func (_Pool *PoolFilterer) FilterAdminChanged(opts *bind.FilterOpts) (*PoolAdminChangedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterAdminChanged(opts *bind.FilterOpts) (*NodedaopoolAdminChangedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "AdminChanged")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "AdminChanged")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolAdminChangedIterator{contract: _Pool.contract, event: "AdminChanged", logs: logs, sub: sub}, nil
+	return &NodedaopoolAdminChangedIterator{contract: _Nodedaopool.contract, event: "AdminChanged", logs: logs, sub: sub}, nil
 }
 
 // WatchAdminChanged is a free log subscription operation binding the contract event 0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f.
 //
 // Solidity: event AdminChanged(address previousAdmin, address newAdmin)
-func (_Pool *PoolFilterer) WatchAdminChanged(opts *bind.WatchOpts, sink chan<- *PoolAdminChanged) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchAdminChanged(opts *bind.WatchOpts, sink chan<- *NodedaopoolAdminChanged) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "AdminChanged")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "AdminChanged")
 	if err != nil {
 		return nil, err
 	}
@@ -1869,8 +2017,8 @@ func (_Pool *PoolFilterer) WatchAdminChanged(opts *bind.WatchOpts, sink chan<- *
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolAdminChanged)
-				if err := _Pool.contract.UnpackLog(event, "AdminChanged", log); err != nil {
+				event := new(NodedaopoolAdminChanged)
+				if err := _Nodedaopool.contract.UnpackLog(event, "AdminChanged", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -1894,18 +2042,18 @@ func (_Pool *PoolFilterer) WatchAdminChanged(opts *bind.WatchOpts, sink chan<- *
 // ParseAdminChanged is a log parse operation binding the contract event 0x7e644d79422f17c01e4894b5f4f588d331ebfa28653d42ae832dc59e38c9798f.
 //
 // Solidity: event AdminChanged(address previousAdmin, address newAdmin)
-func (_Pool *PoolFilterer) ParseAdminChanged(log types.Log) (*PoolAdminChanged, error) {
-	event := new(PoolAdminChanged)
-	if err := _Pool.contract.UnpackLog(event, "AdminChanged", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseAdminChanged(log types.Log) (*NodedaopoolAdminChanged, error) {
+	event := new(NodedaopoolAdminChanged)
+	if err := _Nodedaopool.contract.UnpackLog(event, "AdminChanged", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolAprUpdatedIterator is returned from FilterAprUpdated and is used to iterate over the raw logs and unpacked data for AprUpdated events raised by the Pool contract.
-type PoolAprUpdatedIterator struct {
-	Event *PoolAprUpdated // Event containing the contract specifics and raw log
+// NodedaopoolAprUpdatedIterator is returned from FilterAprUpdated and is used to iterate over the raw logs and unpacked data for AprUpdated events raised by the Nodedaopool contract.
+type NodedaopoolAprUpdatedIterator struct {
+	Event *NodedaopoolAprUpdated // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -1919,7 +2067,7 @@ type PoolAprUpdatedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolAprUpdatedIterator) Next() bool {
+func (it *NodedaopoolAprUpdatedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -1928,7 +2076,7 @@ func (it *PoolAprUpdatedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolAprUpdated)
+			it.Event = new(NodedaopoolAprUpdated)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -1943,7 +2091,7 @@ func (it *PoolAprUpdatedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolAprUpdated)
+		it.Event = new(NodedaopoolAprUpdated)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -1959,19 +2107,19 @@ func (it *PoolAprUpdatedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolAprUpdatedIterator) Error() error {
+func (it *NodedaopoolAprUpdatedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolAprUpdatedIterator) Close() error {
+func (it *NodedaopoolAprUpdatedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolAprUpdated represents a AprUpdated event raised by the Pool contract.
-type PoolAprUpdated struct {
+// NodedaopoolAprUpdated represents a AprUpdated event raised by the Nodedaopool contract.
+type NodedaopoolAprUpdated struct {
 	OldApr *big.Int
 	Apr    *big.Int
 	Raw    types.Log // Blockchain specific contextual infos
@@ -1980,21 +2128,21 @@ type PoolAprUpdated struct {
 // FilterAprUpdated is a free log retrieval operation binding the contract event 0x782f84f1274a11befd10700001e41dfdbf825313fb93311d474b857dfd8f1c2b.
 //
 // Solidity: event AprUpdated(uint256 _oldApr, uint256 _apr)
-func (_Pool *PoolFilterer) FilterAprUpdated(opts *bind.FilterOpts) (*PoolAprUpdatedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterAprUpdated(opts *bind.FilterOpts) (*NodedaopoolAprUpdatedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "AprUpdated")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "AprUpdated")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolAprUpdatedIterator{contract: _Pool.contract, event: "AprUpdated", logs: logs, sub: sub}, nil
+	return &NodedaopoolAprUpdatedIterator{contract: _Nodedaopool.contract, event: "AprUpdated", logs: logs, sub: sub}, nil
 }
 
 // WatchAprUpdated is a free log subscription operation binding the contract event 0x782f84f1274a11befd10700001e41dfdbf825313fb93311d474b857dfd8f1c2b.
 //
 // Solidity: event AprUpdated(uint256 _oldApr, uint256 _apr)
-func (_Pool *PoolFilterer) WatchAprUpdated(opts *bind.WatchOpts, sink chan<- *PoolAprUpdated) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchAprUpdated(opts *bind.WatchOpts, sink chan<- *NodedaopoolAprUpdated) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "AprUpdated")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "AprUpdated")
 	if err != nil {
 		return nil, err
 	}
@@ -2004,8 +2152,8 @@ func (_Pool *PoolFilterer) WatchAprUpdated(opts *bind.WatchOpts, sink chan<- *Po
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolAprUpdated)
-				if err := _Pool.contract.UnpackLog(event, "AprUpdated", log); err != nil {
+				event := new(NodedaopoolAprUpdated)
+				if err := _Nodedaopool.contract.UnpackLog(event, "AprUpdated", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -2029,18 +2177,18 @@ func (_Pool *PoolFilterer) WatchAprUpdated(opts *bind.WatchOpts, sink chan<- *Po
 // ParseAprUpdated is a log parse operation binding the contract event 0x782f84f1274a11befd10700001e41dfdbf825313fb93311d474b857dfd8f1c2b.
 //
 // Solidity: event AprUpdated(uint256 _oldApr, uint256 _apr)
-func (_Pool *PoolFilterer) ParseAprUpdated(log types.Log) (*PoolAprUpdated, error) {
-	event := new(PoolAprUpdated)
-	if err := _Pool.contract.UnpackLog(event, "AprUpdated", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseAprUpdated(log types.Log) (*NodedaopoolAprUpdated, error) {
+	event := new(NodedaopoolAprUpdated)
+	if err := _Nodedaopool.contract.UnpackLog(event, "AprUpdated", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolAssetsUpdatedIterator is returned from FilterAssetsUpdated and is used to iterate over the raw logs and unpacked data for AssetsUpdated events raised by the Pool contract.
-type PoolAssetsUpdatedIterator struct {
-	Event *PoolAssetsUpdated // Event containing the contract specifics and raw log
+// NodedaopoolAssetsUpdatedIterator is returned from FilterAssetsUpdated and is used to iterate over the raw logs and unpacked data for AssetsUpdated events raised by the Nodedaopool contract.
+type NodedaopoolAssetsUpdatedIterator struct {
+	Event *NodedaopoolAssetsUpdated // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -2054,7 +2202,7 @@ type PoolAssetsUpdatedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolAssetsUpdatedIterator) Next() bool {
+func (it *NodedaopoolAssetsUpdatedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -2063,7 +2211,7 @@ func (it *PoolAssetsUpdatedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolAssetsUpdated)
+			it.Event = new(NodedaopoolAssetsUpdated)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -2078,7 +2226,7 @@ func (it *PoolAssetsUpdatedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolAssetsUpdated)
+		it.Event = new(NodedaopoolAssetsUpdated)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -2094,19 +2242,19 @@ func (it *PoolAssetsUpdatedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolAssetsUpdatedIterator) Error() error {
+func (it *NodedaopoolAssetsUpdatedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolAssetsUpdatedIterator) Close() error {
+func (it *NodedaopoolAssetsUpdatedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolAssetsUpdated represents a AssetsUpdated event raised by the Pool contract.
-type PoolAssetsUpdated struct {
+// NodedaopoolAssetsUpdated represents a AssetsUpdated event raised by the Nodedaopool contract.
+type NodedaopoolAssetsUpdated struct {
 	TotalUnderlyingAsset *big.Int
 	EstimatedRewards     *big.Int
 	BlockNumber          *big.Int
@@ -2116,21 +2264,21 @@ type PoolAssetsUpdated struct {
 // FilterAssetsUpdated is a free log retrieval operation binding the contract event 0x35a901c4413e585f9121eb5cf07e67760bd4ac498dd031249e5cd2cd225f74e4.
 //
 // Solidity: event AssetsUpdated(uint256 _totalUnderlyingAsset, uint256 _estimatedRewards, uint256 _blockNumber)
-func (_Pool *PoolFilterer) FilterAssetsUpdated(opts *bind.FilterOpts) (*PoolAssetsUpdatedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterAssetsUpdated(opts *bind.FilterOpts) (*NodedaopoolAssetsUpdatedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "AssetsUpdated")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "AssetsUpdated")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolAssetsUpdatedIterator{contract: _Pool.contract, event: "AssetsUpdated", logs: logs, sub: sub}, nil
+	return &NodedaopoolAssetsUpdatedIterator{contract: _Nodedaopool.contract, event: "AssetsUpdated", logs: logs, sub: sub}, nil
 }
 
 // WatchAssetsUpdated is a free log subscription operation binding the contract event 0x35a901c4413e585f9121eb5cf07e67760bd4ac498dd031249e5cd2cd225f74e4.
 //
 // Solidity: event AssetsUpdated(uint256 _totalUnderlyingAsset, uint256 _estimatedRewards, uint256 _blockNumber)
-func (_Pool *PoolFilterer) WatchAssetsUpdated(opts *bind.WatchOpts, sink chan<- *PoolAssetsUpdated) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchAssetsUpdated(opts *bind.WatchOpts, sink chan<- *NodedaopoolAssetsUpdated) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "AssetsUpdated")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "AssetsUpdated")
 	if err != nil {
 		return nil, err
 	}
@@ -2140,8 +2288,8 @@ func (_Pool *PoolFilterer) WatchAssetsUpdated(opts *bind.WatchOpts, sink chan<- 
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolAssetsUpdated)
-				if err := _Pool.contract.UnpackLog(event, "AssetsUpdated", log); err != nil {
+				event := new(NodedaopoolAssetsUpdated)
+				if err := _Nodedaopool.contract.UnpackLog(event, "AssetsUpdated", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -2165,18 +2313,18 @@ func (_Pool *PoolFilterer) WatchAssetsUpdated(opts *bind.WatchOpts, sink chan<- 
 // ParseAssetsUpdated is a log parse operation binding the contract event 0x35a901c4413e585f9121eb5cf07e67760bd4ac498dd031249e5cd2cd225f74e4.
 //
 // Solidity: event AssetsUpdated(uint256 _totalUnderlyingAsset, uint256 _estimatedRewards, uint256 _blockNumber)
-func (_Pool *PoolFilterer) ParseAssetsUpdated(log types.Log) (*PoolAssetsUpdated, error) {
-	event := new(PoolAssetsUpdated)
-	if err := _Pool.contract.UnpackLog(event, "AssetsUpdated", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseAssetsUpdated(log types.Log) (*NodedaopoolAssetsUpdated, error) {
+	event := new(NodedaopoolAssetsUpdated)
+	if err := _Nodedaopool.contract.UnpackLog(event, "AssetsUpdated", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolBeaconUpgradedIterator is returned from FilterBeaconUpgraded and is used to iterate over the raw logs and unpacked data for BeaconUpgraded events raised by the Pool contract.
-type PoolBeaconUpgradedIterator struct {
-	Event *PoolBeaconUpgraded // Event containing the contract specifics and raw log
+// NodedaopoolBeaconUpgradedIterator is returned from FilterBeaconUpgraded and is used to iterate over the raw logs and unpacked data for BeaconUpgraded events raised by the Nodedaopool contract.
+type NodedaopoolBeaconUpgradedIterator struct {
+	Event *NodedaopoolBeaconUpgraded // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -2190,7 +2338,7 @@ type PoolBeaconUpgradedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolBeaconUpgradedIterator) Next() bool {
+func (it *NodedaopoolBeaconUpgradedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -2199,7 +2347,7 @@ func (it *PoolBeaconUpgradedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolBeaconUpgraded)
+			it.Event = new(NodedaopoolBeaconUpgraded)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -2214,7 +2362,7 @@ func (it *PoolBeaconUpgradedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolBeaconUpgraded)
+		it.Event = new(NodedaopoolBeaconUpgraded)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -2230,19 +2378,19 @@ func (it *PoolBeaconUpgradedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolBeaconUpgradedIterator) Error() error {
+func (it *NodedaopoolBeaconUpgradedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolBeaconUpgradedIterator) Close() error {
+func (it *NodedaopoolBeaconUpgradedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolBeaconUpgraded represents a BeaconUpgraded event raised by the Pool contract.
-type PoolBeaconUpgraded struct {
+// NodedaopoolBeaconUpgraded represents a BeaconUpgraded event raised by the Nodedaopool contract.
+type NodedaopoolBeaconUpgraded struct {
 	Beacon common.Address
 	Raw    types.Log // Blockchain specific contextual infos
 }
@@ -2250,31 +2398,31 @@ type PoolBeaconUpgraded struct {
 // FilterBeaconUpgraded is a free log retrieval operation binding the contract event 0x1cf3b03a6cf19fa2baba4df148e9dcabedea7f8a5c07840e207e5c089be95d3e.
 //
 // Solidity: event BeaconUpgraded(address indexed beacon)
-func (_Pool *PoolFilterer) FilterBeaconUpgraded(opts *bind.FilterOpts, beacon []common.Address) (*PoolBeaconUpgradedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterBeaconUpgraded(opts *bind.FilterOpts, beacon []common.Address) (*NodedaopoolBeaconUpgradedIterator, error) {
 
 	var beaconRule []interface{}
 	for _, beaconItem := range beacon {
 		beaconRule = append(beaconRule, beaconItem)
 	}
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "BeaconUpgraded", beaconRule)
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "BeaconUpgraded", beaconRule)
 	if err != nil {
 		return nil, err
 	}
-	return &PoolBeaconUpgradedIterator{contract: _Pool.contract, event: "BeaconUpgraded", logs: logs, sub: sub}, nil
+	return &NodedaopoolBeaconUpgradedIterator{contract: _Nodedaopool.contract, event: "BeaconUpgraded", logs: logs, sub: sub}, nil
 }
 
 // WatchBeaconUpgraded is a free log subscription operation binding the contract event 0x1cf3b03a6cf19fa2baba4df148e9dcabedea7f8a5c07840e207e5c089be95d3e.
 //
 // Solidity: event BeaconUpgraded(address indexed beacon)
-func (_Pool *PoolFilterer) WatchBeaconUpgraded(opts *bind.WatchOpts, sink chan<- *PoolBeaconUpgraded, beacon []common.Address) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchBeaconUpgraded(opts *bind.WatchOpts, sink chan<- *NodedaopoolBeaconUpgraded, beacon []common.Address) (event.Subscription, error) {
 
 	var beaconRule []interface{}
 	for _, beaconItem := range beacon {
 		beaconRule = append(beaconRule, beaconItem)
 	}
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "BeaconUpgraded", beaconRule)
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "BeaconUpgraded", beaconRule)
 	if err != nil {
 		return nil, err
 	}
@@ -2284,8 +2432,8 @@ func (_Pool *PoolFilterer) WatchBeaconUpgraded(opts *bind.WatchOpts, sink chan<-
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolBeaconUpgraded)
-				if err := _Pool.contract.UnpackLog(event, "BeaconUpgraded", log); err != nil {
+				event := new(NodedaopoolBeaconUpgraded)
+				if err := _Nodedaopool.contract.UnpackLog(event, "BeaconUpgraded", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -2309,18 +2457,18 @@ func (_Pool *PoolFilterer) WatchBeaconUpgraded(opts *bind.WatchOpts, sink chan<-
 // ParseBeaconUpgraded is a log parse operation binding the contract event 0x1cf3b03a6cf19fa2baba4df148e9dcabedea7f8a5c07840e207e5c089be95d3e.
 //
 // Solidity: event BeaconUpgraded(address indexed beacon)
-func (_Pool *PoolFilterer) ParseBeaconUpgraded(log types.Log) (*PoolBeaconUpgraded, error) {
-	event := new(PoolBeaconUpgraded)
-	if err := _Pool.contract.UnpackLog(event, "BeaconUpgraded", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseBeaconUpgraded(log types.Log) (*NodedaopoolBeaconUpgraded, error) {
+	event := new(NodedaopoolBeaconUpgraded)
+	if err := _Nodedaopool.contract.UnpackLog(event, "BeaconUpgraded", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolDaoChangedIterator is returned from FilterDaoChanged and is used to iterate over the raw logs and unpacked data for DaoChanged events raised by the Pool contract.
-type PoolDaoChangedIterator struct {
-	Event *PoolDaoChanged // Event containing the contract specifics and raw log
+// NodedaopoolDaoChangedIterator is returned from FilterDaoChanged and is used to iterate over the raw logs and unpacked data for DaoChanged events raised by the Nodedaopool contract.
+type NodedaopoolDaoChangedIterator struct {
+	Event *NodedaopoolDaoChanged // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -2334,7 +2482,7 @@ type PoolDaoChangedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolDaoChangedIterator) Next() bool {
+func (it *NodedaopoolDaoChangedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -2343,7 +2491,7 @@ func (it *PoolDaoChangedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolDaoChanged)
+			it.Event = new(NodedaopoolDaoChanged)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -2358,7 +2506,7 @@ func (it *PoolDaoChangedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolDaoChanged)
+		it.Event = new(NodedaopoolDaoChanged)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -2374,19 +2522,19 @@ func (it *PoolDaoChangedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolDaoChangedIterator) Error() error {
+func (it *NodedaopoolDaoChangedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolDaoChangedIterator) Close() error {
+func (it *NodedaopoolDaoChangedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolDaoChanged represents a DaoChanged event raised by the Pool contract.
-type PoolDaoChanged struct {
+// NodedaopoolDaoChanged represents a DaoChanged event raised by the Nodedaopool contract.
+type NodedaopoolDaoChanged struct {
 	OldDao common.Address
 	Dao    common.Address
 	Raw    types.Log // Blockchain specific contextual infos
@@ -2395,21 +2543,21 @@ type PoolDaoChanged struct {
 // FilterDaoChanged is a free log retrieval operation binding the contract event 0xfcde6c827a52b0870bc44ed9b10212272e18c9ea1725b772e9b493750afd8da4.
 //
 // Solidity: event DaoChanged(address _oldDao, address _dao)
-func (_Pool *PoolFilterer) FilterDaoChanged(opts *bind.FilterOpts) (*PoolDaoChangedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterDaoChanged(opts *bind.FilterOpts) (*NodedaopoolDaoChangedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "DaoChanged")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "DaoChanged")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolDaoChangedIterator{contract: _Pool.contract, event: "DaoChanged", logs: logs, sub: sub}, nil
+	return &NodedaopoolDaoChangedIterator{contract: _Nodedaopool.contract, event: "DaoChanged", logs: logs, sub: sub}, nil
 }
 
 // WatchDaoChanged is a free log subscription operation binding the contract event 0xfcde6c827a52b0870bc44ed9b10212272e18c9ea1725b772e9b493750afd8da4.
 //
 // Solidity: event DaoChanged(address _oldDao, address _dao)
-func (_Pool *PoolFilterer) WatchDaoChanged(opts *bind.WatchOpts, sink chan<- *PoolDaoChanged) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchDaoChanged(opts *bind.WatchOpts, sink chan<- *NodedaopoolDaoChanged) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "DaoChanged")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "DaoChanged")
 	if err != nil {
 		return nil, err
 	}
@@ -2419,8 +2567,8 @@ func (_Pool *PoolFilterer) WatchDaoChanged(opts *bind.WatchOpts, sink chan<- *Po
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolDaoChanged)
-				if err := _Pool.contract.UnpackLog(event, "DaoChanged", log); err != nil {
+				event := new(NodedaopoolDaoChanged)
+				if err := _Nodedaopool.contract.UnpackLog(event, "DaoChanged", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -2444,18 +2592,18 @@ func (_Pool *PoolFilterer) WatchDaoChanged(opts *bind.WatchOpts, sink chan<- *Po
 // ParseDaoChanged is a log parse operation binding the contract event 0xfcde6c827a52b0870bc44ed9b10212272e18c9ea1725b772e9b493750afd8da4.
 //
 // Solidity: event DaoChanged(address _oldDao, address _dao)
-func (_Pool *PoolFilterer) ParseDaoChanged(log types.Log) (*PoolDaoChanged, error) {
-	event := new(PoolDaoChanged)
-	if err := _Pool.contract.UnpackLog(event, "DaoChanged", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseDaoChanged(log types.Log) (*NodedaopoolDaoChanged, error) {
+	event := new(NodedaopoolDaoChanged)
+	if err := _Nodedaopool.contract.UnpackLog(event, "DaoChanged", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolEthStakeIterator is returned from FilterEthStake and is used to iterate over the raw logs and unpacked data for EthStake events raised by the Pool contract.
-type PoolEthStakeIterator struct {
-	Event *PoolEthStake // Event containing the contract specifics and raw log
+// NodedaopoolEthStakeIterator is returned from FilterEthStake and is used to iterate over the raw logs and unpacked data for EthStake events raised by the Nodedaopool contract.
+type NodedaopoolEthStakeIterator struct {
+	Event *NodedaopoolEthStake // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -2469,7 +2617,7 @@ type PoolEthStakeIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolEthStakeIterator) Next() bool {
+func (it *NodedaopoolEthStakeIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -2478,7 +2626,7 @@ func (it *PoolEthStakeIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolEthStake)
+			it.Event = new(NodedaopoolEthStake)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -2493,7 +2641,7 @@ func (it *PoolEthStakeIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolEthStake)
+		it.Event = new(NodedaopoolEthStake)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -2509,19 +2657,19 @@ func (it *PoolEthStakeIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolEthStakeIterator) Error() error {
+func (it *NodedaopoolEthStakeIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolEthStakeIterator) Close() error {
+func (it *NodedaopoolEthStakeIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolEthStake represents a EthStake event raised by the Pool contract.
-type PoolEthStake struct {
+// NodedaopoolEthStake represents a EthStake event raised by the Nodedaopool contract.
+type NodedaopoolEthStake struct {
 	Staker      common.Address
 	StakeAmount *big.Int
 	MintAmount  *big.Int
@@ -2531,21 +2679,21 @@ type PoolEthStake struct {
 // FilterEthStake is a free log retrieval operation binding the contract event 0x838d17987e57e587c458220b9b38723c41fbc3f397550b506712960a73ef19f9.
 //
 // Solidity: event EthStake(address _staker, uint256 _stakeAmount, uint256 _mintAmount)
-func (_Pool *PoolFilterer) FilterEthStake(opts *bind.FilterOpts) (*PoolEthStakeIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterEthStake(opts *bind.FilterOpts) (*NodedaopoolEthStakeIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "EthStake")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "EthStake")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolEthStakeIterator{contract: _Pool.contract, event: "EthStake", logs: logs, sub: sub}, nil
+	return &NodedaopoolEthStakeIterator{contract: _Nodedaopool.contract, event: "EthStake", logs: logs, sub: sub}, nil
 }
 
 // WatchEthStake is a free log subscription operation binding the contract event 0x838d17987e57e587c458220b9b38723c41fbc3f397550b506712960a73ef19f9.
 //
 // Solidity: event EthStake(address _staker, uint256 _stakeAmount, uint256 _mintAmount)
-func (_Pool *PoolFilterer) WatchEthStake(opts *bind.WatchOpts, sink chan<- *PoolEthStake) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchEthStake(opts *bind.WatchOpts, sink chan<- *NodedaopoolEthStake) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "EthStake")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "EthStake")
 	if err != nil {
 		return nil, err
 	}
@@ -2555,8 +2703,8 @@ func (_Pool *PoolFilterer) WatchEthStake(opts *bind.WatchOpts, sink chan<- *Pool
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolEthStake)
-				if err := _Pool.contract.UnpackLog(event, "EthStake", log); err != nil {
+				event := new(NodedaopoolEthStake)
+				if err := _Nodedaopool.contract.UnpackLog(event, "EthStake", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -2580,18 +2728,18 @@ func (_Pool *PoolFilterer) WatchEthStake(opts *bind.WatchOpts, sink chan<- *Pool
 // ParseEthStake is a log parse operation binding the contract event 0x838d17987e57e587c458220b9b38723c41fbc3f397550b506712960a73ef19f9.
 //
 // Solidity: event EthStake(address _staker, uint256 _stakeAmount, uint256 _mintAmount)
-func (_Pool *PoolFilterer) ParseEthStake(log types.Log) (*PoolEthStake, error) {
-	event := new(PoolEthStake)
-	if err := _Pool.contract.UnpackLog(event, "EthStake", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseEthStake(log types.Log) (*NodedaopoolEthStake, error) {
+	event := new(NodedaopoolEthStake)
+	if err := _Nodedaopool.contract.UnpackLog(event, "EthStake", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolEthUnstakeIterator is returned from FilterEthUnstake and is used to iterate over the raw logs and unpacked data for EthUnstake events raised by the Pool contract.
-type PoolEthUnstakeIterator struct {
-	Event *PoolEthUnstake // Event containing the contract specifics and raw log
+// NodedaopoolEthUnstakeIterator is returned from FilterEthUnstake and is used to iterate over the raw logs and unpacked data for EthUnstake events raised by the Nodedaopool contract.
+type NodedaopoolEthUnstakeIterator struct {
+	Event *NodedaopoolEthUnstake // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -2605,7 +2753,7 @@ type PoolEthUnstakeIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolEthUnstakeIterator) Next() bool {
+func (it *NodedaopoolEthUnstakeIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -2614,7 +2762,7 @@ func (it *PoolEthUnstakeIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolEthUnstake)
+			it.Event = new(NodedaopoolEthUnstake)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -2629,7 +2777,7 @@ func (it *PoolEthUnstakeIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolEthUnstake)
+		it.Event = new(NodedaopoolEthUnstake)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -2645,19 +2793,19 @@ func (it *PoolEthUnstakeIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolEthUnstakeIterator) Error() error {
+func (it *NodedaopoolEthUnstakeIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolEthUnstakeIterator) Close() error {
+func (it *NodedaopoolEthUnstakeIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolEthUnstake represents a EthUnstake event raised by the Pool contract.
-type PoolEthUnstake struct {
+// NodedaopoolEthUnstake represents a EthUnstake event raised by the Nodedaopool contract.
+type NodedaopoolEthUnstake struct {
 	Sender        common.Address
 	UnstakeAmount *big.Int
 	EthAmount     *big.Int
@@ -2667,21 +2815,21 @@ type PoolEthUnstake struct {
 // FilterEthUnstake is a free log retrieval operation binding the contract event 0xdef4a00a06705bb4b80fd0c912337f4f4e01fb81d39a572514be68d328599abf.
 //
 // Solidity: event EthUnstake(address _sender, uint256 _unstakeAmount, uint256 _ethAmount)
-func (_Pool *PoolFilterer) FilterEthUnstake(opts *bind.FilterOpts) (*PoolEthUnstakeIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterEthUnstake(opts *bind.FilterOpts) (*NodedaopoolEthUnstakeIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "EthUnstake")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "EthUnstake")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolEthUnstakeIterator{contract: _Pool.contract, event: "EthUnstake", logs: logs, sub: sub}, nil
+	return &NodedaopoolEthUnstakeIterator{contract: _Nodedaopool.contract, event: "EthUnstake", logs: logs, sub: sub}, nil
 }
 
 // WatchEthUnstake is a free log subscription operation binding the contract event 0xdef4a00a06705bb4b80fd0c912337f4f4e01fb81d39a572514be68d328599abf.
 //
 // Solidity: event EthUnstake(address _sender, uint256 _unstakeAmount, uint256 _ethAmount)
-func (_Pool *PoolFilterer) WatchEthUnstake(opts *bind.WatchOpts, sink chan<- *PoolEthUnstake) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchEthUnstake(opts *bind.WatchOpts, sink chan<- *NodedaopoolEthUnstake) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "EthUnstake")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "EthUnstake")
 	if err != nil {
 		return nil, err
 	}
@@ -2691,8 +2839,8 @@ func (_Pool *PoolFilterer) WatchEthUnstake(opts *bind.WatchOpts, sink chan<- *Po
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolEthUnstake)
-				if err := _Pool.contract.UnpackLog(event, "EthUnstake", log); err != nil {
+				event := new(NodedaopoolEthUnstake)
+				if err := _Nodedaopool.contract.UnpackLog(event, "EthUnstake", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -2716,18 +2864,18 @@ func (_Pool *PoolFilterer) WatchEthUnstake(opts *bind.WatchOpts, sink chan<- *Po
 // ParseEthUnstake is a log parse operation binding the contract event 0xdef4a00a06705bb4b80fd0c912337f4f4e01fb81d39a572514be68d328599abf.
 //
 // Solidity: event EthUnstake(address _sender, uint256 _unstakeAmount, uint256 _ethAmount)
-func (_Pool *PoolFilterer) ParseEthUnstake(log types.Log) (*PoolEthUnstake, error) {
-	event := new(PoolEthUnstake)
-	if err := _Pool.contract.UnpackLog(event, "EthUnstake", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseEthUnstake(log types.Log) (*NodedaopoolEthUnstake, error) {
+	event := new(NodedaopoolEthUnstake)
+	if err := _Nodedaopool.contract.UnpackLog(event, "EthUnstake", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolInitializedIterator is returned from FilterInitialized and is used to iterate over the raw logs and unpacked data for Initialized events raised by the Pool contract.
-type PoolInitializedIterator struct {
-	Event *PoolInitialized // Event containing the contract specifics and raw log
+// NodedaopoolInitializedIterator is returned from FilterInitialized and is used to iterate over the raw logs and unpacked data for Initialized events raised by the Nodedaopool contract.
+type NodedaopoolInitializedIterator struct {
+	Event *NodedaopoolInitialized // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -2741,7 +2889,7 @@ type PoolInitializedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolInitializedIterator) Next() bool {
+func (it *NodedaopoolInitializedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -2750,7 +2898,7 @@ func (it *PoolInitializedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolInitialized)
+			it.Event = new(NodedaopoolInitialized)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -2765,7 +2913,7 @@ func (it *PoolInitializedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolInitialized)
+		it.Event = new(NodedaopoolInitialized)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -2781,19 +2929,19 @@ func (it *PoolInitializedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolInitializedIterator) Error() error {
+func (it *NodedaopoolInitializedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolInitializedIterator) Close() error {
+func (it *NodedaopoolInitializedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolInitialized represents a Initialized event raised by the Pool contract.
-type PoolInitialized struct {
+// NodedaopoolInitialized represents a Initialized event raised by the Nodedaopool contract.
+type NodedaopoolInitialized struct {
 	Version uint8
 	Raw     types.Log // Blockchain specific contextual infos
 }
@@ -2801,21 +2949,21 @@ type PoolInitialized struct {
 // FilterInitialized is a free log retrieval operation binding the contract event 0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498.
 //
 // Solidity: event Initialized(uint8 version)
-func (_Pool *PoolFilterer) FilterInitialized(opts *bind.FilterOpts) (*PoolInitializedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterInitialized(opts *bind.FilterOpts) (*NodedaopoolInitializedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "Initialized")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "Initialized")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolInitializedIterator{contract: _Pool.contract, event: "Initialized", logs: logs, sub: sub}, nil
+	return &NodedaopoolInitializedIterator{contract: _Nodedaopool.contract, event: "Initialized", logs: logs, sub: sub}, nil
 }
 
 // WatchInitialized is a free log subscription operation binding the contract event 0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498.
 //
 // Solidity: event Initialized(uint8 version)
-func (_Pool *PoolFilterer) WatchInitialized(opts *bind.WatchOpts, sink chan<- *PoolInitialized) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchInitialized(opts *bind.WatchOpts, sink chan<- *NodedaopoolInitialized) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "Initialized")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "Initialized")
 	if err != nil {
 		return nil, err
 	}
@@ -2825,8 +2973,8 @@ func (_Pool *PoolFilterer) WatchInitialized(opts *bind.WatchOpts, sink chan<- *P
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolInitialized)
-				if err := _Pool.contract.UnpackLog(event, "Initialized", log); err != nil {
+				event := new(NodedaopoolInitialized)
+				if err := _Nodedaopool.contract.UnpackLog(event, "Initialized", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -2850,18 +2998,18 @@ func (_Pool *PoolFilterer) WatchInitialized(opts *bind.WatchOpts, sink chan<- *P
 // ParseInitialized is a log parse operation binding the contract event 0x7f26b83ff96e1f2b6a682f133852f6798a09c465da95921460cefb3847402498.
 //
 // Solidity: event Initialized(uint8 version)
-func (_Pool *PoolFilterer) ParseInitialized(log types.Log) (*PoolInitialized, error) {
-	event := new(PoolInitialized)
-	if err := _Pool.contract.UnpackLog(event, "Initialized", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseInitialized(log types.Log) (*NodedaopoolInitialized, error) {
+	event := new(NodedaopoolInitialized)
+	if err := _Nodedaopool.contract.UnpackLog(event, "Initialized", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolOwnershipTransferredIterator is returned from FilterOwnershipTransferred and is used to iterate over the raw logs and unpacked data for OwnershipTransferred events raised by the Pool contract.
-type PoolOwnershipTransferredIterator struct {
-	Event *PoolOwnershipTransferred // Event containing the contract specifics and raw log
+// NodedaopoolOwnershipTransferredIterator is returned from FilterOwnershipTransferred and is used to iterate over the raw logs and unpacked data for OwnershipTransferred events raised by the Nodedaopool contract.
+type NodedaopoolOwnershipTransferredIterator struct {
+	Event *NodedaopoolOwnershipTransferred // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -2875,7 +3023,7 @@ type PoolOwnershipTransferredIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolOwnershipTransferredIterator) Next() bool {
+func (it *NodedaopoolOwnershipTransferredIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -2884,7 +3032,7 @@ func (it *PoolOwnershipTransferredIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolOwnershipTransferred)
+			it.Event = new(NodedaopoolOwnershipTransferred)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -2899,7 +3047,7 @@ func (it *PoolOwnershipTransferredIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolOwnershipTransferred)
+		it.Event = new(NodedaopoolOwnershipTransferred)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -2915,19 +3063,19 @@ func (it *PoolOwnershipTransferredIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolOwnershipTransferredIterator) Error() error {
+func (it *NodedaopoolOwnershipTransferredIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolOwnershipTransferredIterator) Close() error {
+func (it *NodedaopoolOwnershipTransferredIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolOwnershipTransferred represents a OwnershipTransferred event raised by the Pool contract.
-type PoolOwnershipTransferred struct {
+// NodedaopoolOwnershipTransferred represents a OwnershipTransferred event raised by the Nodedaopool contract.
+type NodedaopoolOwnershipTransferred struct {
 	PreviousOwner common.Address
 	NewOwner      common.Address
 	Raw           types.Log // Blockchain specific contextual infos
@@ -2936,7 +3084,7 @@ type PoolOwnershipTransferred struct {
 // FilterOwnershipTransferred is a free log retrieval operation binding the contract event 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0.
 //
 // Solidity: event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-func (_Pool *PoolFilterer) FilterOwnershipTransferred(opts *bind.FilterOpts, previousOwner []common.Address, newOwner []common.Address) (*PoolOwnershipTransferredIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterOwnershipTransferred(opts *bind.FilterOpts, previousOwner []common.Address, newOwner []common.Address) (*NodedaopoolOwnershipTransferredIterator, error) {
 
 	var previousOwnerRule []interface{}
 	for _, previousOwnerItem := range previousOwner {
@@ -2947,17 +3095,17 @@ func (_Pool *PoolFilterer) FilterOwnershipTransferred(opts *bind.FilterOpts, pre
 		newOwnerRule = append(newOwnerRule, newOwnerItem)
 	}
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
 	if err != nil {
 		return nil, err
 	}
-	return &PoolOwnershipTransferredIterator{contract: _Pool.contract, event: "OwnershipTransferred", logs: logs, sub: sub}, nil
+	return &NodedaopoolOwnershipTransferredIterator{contract: _Nodedaopool.contract, event: "OwnershipTransferred", logs: logs, sub: sub}, nil
 }
 
 // WatchOwnershipTransferred is a free log subscription operation binding the contract event 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0.
 //
 // Solidity: event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-func (_Pool *PoolFilterer) WatchOwnershipTransferred(opts *bind.WatchOpts, sink chan<- *PoolOwnershipTransferred, previousOwner []common.Address, newOwner []common.Address) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchOwnershipTransferred(opts *bind.WatchOpts, sink chan<- *NodedaopoolOwnershipTransferred, previousOwner []common.Address, newOwner []common.Address) (event.Subscription, error) {
 
 	var previousOwnerRule []interface{}
 	for _, previousOwnerItem := range previousOwner {
@@ -2968,7 +3116,7 @@ func (_Pool *PoolFilterer) WatchOwnershipTransferred(opts *bind.WatchOpts, sink 
 		newOwnerRule = append(newOwnerRule, newOwnerItem)
 	}
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "OwnershipTransferred", previousOwnerRule, newOwnerRule)
 	if err != nil {
 		return nil, err
 	}
@@ -2978,8 +3126,8 @@ func (_Pool *PoolFilterer) WatchOwnershipTransferred(opts *bind.WatchOpts, sink 
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolOwnershipTransferred)
-				if err := _Pool.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
+				event := new(NodedaopoolOwnershipTransferred)
+				if err := _Nodedaopool.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -3003,18 +3151,18 @@ func (_Pool *PoolFilterer) WatchOwnershipTransferred(opts *bind.WatchOpts, sink 
 // ParseOwnershipTransferred is a log parse operation binding the contract event 0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0.
 //
 // Solidity: event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
-func (_Pool *PoolFilterer) ParseOwnershipTransferred(log types.Log) (*PoolOwnershipTransferred, error) {
-	event := new(PoolOwnershipTransferred)
-	if err := _Pool.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseOwnershipTransferred(log types.Log) (*NodedaopoolOwnershipTransferred, error) {
+	event := new(NodedaopoolOwnershipTransferred)
+	if err := _Nodedaopool.contract.UnpackLog(event, "OwnershipTransferred", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolPausedIterator is returned from FilterPaused and is used to iterate over the raw logs and unpacked data for Paused events raised by the Pool contract.
-type PoolPausedIterator struct {
-	Event *PoolPaused // Event containing the contract specifics and raw log
+// NodedaopoolPausedIterator is returned from FilterPaused and is used to iterate over the raw logs and unpacked data for Paused events raised by the Nodedaopool contract.
+type NodedaopoolPausedIterator struct {
+	Event *NodedaopoolPaused // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -3028,7 +3176,7 @@ type PoolPausedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolPausedIterator) Next() bool {
+func (it *NodedaopoolPausedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -3037,7 +3185,7 @@ func (it *PoolPausedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolPaused)
+			it.Event = new(NodedaopoolPaused)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -3052,7 +3200,7 @@ func (it *PoolPausedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolPaused)
+		it.Event = new(NodedaopoolPaused)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -3068,19 +3216,19 @@ func (it *PoolPausedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolPausedIterator) Error() error {
+func (it *NodedaopoolPausedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolPausedIterator) Close() error {
+func (it *NodedaopoolPausedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolPaused represents a Paused event raised by the Pool contract.
-type PoolPaused struct {
+// NodedaopoolPaused represents a Paused event raised by the Nodedaopool contract.
+type NodedaopoolPaused struct {
 	Account common.Address
 	Raw     types.Log // Blockchain specific contextual infos
 }
@@ -3088,21 +3236,21 @@ type PoolPaused struct {
 // FilterPaused is a free log retrieval operation binding the contract event 0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258.
 //
 // Solidity: event Paused(address account)
-func (_Pool *PoolFilterer) FilterPaused(opts *bind.FilterOpts) (*PoolPausedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterPaused(opts *bind.FilterOpts) (*NodedaopoolPausedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "Paused")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "Paused")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolPausedIterator{contract: _Pool.contract, event: "Paused", logs: logs, sub: sub}, nil
+	return &NodedaopoolPausedIterator{contract: _Nodedaopool.contract, event: "Paused", logs: logs, sub: sub}, nil
 }
 
 // WatchPaused is a free log subscription operation binding the contract event 0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258.
 //
 // Solidity: event Paused(address account)
-func (_Pool *PoolFilterer) WatchPaused(opts *bind.WatchOpts, sink chan<- *PoolPaused) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchPaused(opts *bind.WatchOpts, sink chan<- *NodedaopoolPaused) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "Paused")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "Paused")
 	if err != nil {
 		return nil, err
 	}
@@ -3112,8 +3260,8 @@ func (_Pool *PoolFilterer) WatchPaused(opts *bind.WatchOpts, sink chan<- *PoolPa
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolPaused)
-				if err := _Pool.contract.UnpackLog(event, "Paused", log); err != nil {
+				event := new(NodedaopoolPaused)
+				if err := _Nodedaopool.contract.UnpackLog(event, "Paused", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -3137,18 +3285,18 @@ func (_Pool *PoolFilterer) WatchPaused(opts *bind.WatchOpts, sink chan<- *PoolPa
 // ParsePaused is a log parse operation binding the contract event 0x62e78cea01bee320cd4e420270b5ea74000d11b0c9f74754ebdbfc544b05a258.
 //
 // Solidity: event Paused(address account)
-func (_Pool *PoolFilterer) ParsePaused(log types.Log) (*PoolPaused, error) {
-	event := new(PoolPaused)
-	if err := _Pool.contract.UnpackLog(event, "Paused", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParsePaused(log types.Log) (*NodedaopoolPaused, error) {
+	event := new(NodedaopoolPaused)
+	if err := _Nodedaopool.contract.UnpackLog(event, "Paused", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolRateManagerChangedIterator is returned from FilterRateManagerChanged and is used to iterate over the raw logs and unpacked data for RateManagerChanged events raised by the Pool contract.
-type PoolRateManagerChangedIterator struct {
-	Event *PoolRateManagerChanged // Event containing the contract specifics and raw log
+// NodedaopoolRateManagerChangedIterator is returned from FilterRateManagerChanged and is used to iterate over the raw logs and unpacked data for RateManagerChanged events raised by the Nodedaopool contract.
+type NodedaopoolRateManagerChangedIterator struct {
+	Event *NodedaopoolRateManagerChanged // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -3162,7 +3310,7 @@ type PoolRateManagerChangedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolRateManagerChangedIterator) Next() bool {
+func (it *NodedaopoolRateManagerChangedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -3171,7 +3319,7 @@ func (it *PoolRateManagerChangedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolRateManagerChanged)
+			it.Event = new(NodedaopoolRateManagerChanged)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -3186,7 +3334,7 @@ func (it *PoolRateManagerChangedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolRateManagerChanged)
+		it.Event = new(NodedaopoolRateManagerChanged)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -3202,19 +3350,19 @@ func (it *PoolRateManagerChangedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolRateManagerChangedIterator) Error() error {
+func (it *NodedaopoolRateManagerChangedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolRateManagerChangedIterator) Close() error {
+func (it *NodedaopoolRateManagerChangedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolRateManagerChanged represents a RateManagerChanged event raised by the Pool contract.
-type PoolRateManagerChanged struct {
+// NodedaopoolRateManagerChanged represents a RateManagerChanged event raised by the Nodedaopool contract.
+type NodedaopoolRateManagerChanged struct {
 	OldAprManager common.Address
 	AprManager    common.Address
 	Raw           types.Log // Blockchain specific contextual infos
@@ -3223,21 +3371,21 @@ type PoolRateManagerChanged struct {
 // FilterRateManagerChanged is a free log retrieval operation binding the contract event 0x6b8a1f2fd09d355f8419738a3593f646cbd0e7be553ffcce23694ce968cc6425.
 //
 // Solidity: event RateManagerChanged(address _oldAprManager, address _aprManager)
-func (_Pool *PoolFilterer) FilterRateManagerChanged(opts *bind.FilterOpts) (*PoolRateManagerChangedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterRateManagerChanged(opts *bind.FilterOpts) (*NodedaopoolRateManagerChangedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "RateManagerChanged")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "RateManagerChanged")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolRateManagerChangedIterator{contract: _Pool.contract, event: "RateManagerChanged", logs: logs, sub: sub}, nil
+	return &NodedaopoolRateManagerChangedIterator{contract: _Nodedaopool.contract, event: "RateManagerChanged", logs: logs, sub: sub}, nil
 }
 
 // WatchRateManagerChanged is a free log subscription operation binding the contract event 0x6b8a1f2fd09d355f8419738a3593f646cbd0e7be553ffcce23694ce968cc6425.
 //
 // Solidity: event RateManagerChanged(address _oldAprManager, address _aprManager)
-func (_Pool *PoolFilterer) WatchRateManagerChanged(opts *bind.WatchOpts, sink chan<- *PoolRateManagerChanged) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchRateManagerChanged(opts *bind.WatchOpts, sink chan<- *NodedaopoolRateManagerChanged) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "RateManagerChanged")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "RateManagerChanged")
 	if err != nil {
 		return nil, err
 	}
@@ -3247,8 +3395,8 @@ func (_Pool *PoolFilterer) WatchRateManagerChanged(opts *bind.WatchOpts, sink ch
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolRateManagerChanged)
-				if err := _Pool.contract.UnpackLog(event, "RateManagerChanged", log); err != nil {
+				event := new(NodedaopoolRateManagerChanged)
+				if err := _Nodedaopool.contract.UnpackLog(event, "RateManagerChanged", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -3272,18 +3420,18 @@ func (_Pool *PoolFilterer) WatchRateManagerChanged(opts *bind.WatchOpts, sink ch
 // ParseRateManagerChanged is a log parse operation binding the contract event 0x6b8a1f2fd09d355f8419738a3593f646cbd0e7be553ffcce23694ce968cc6425.
 //
 // Solidity: event RateManagerChanged(address _oldAprManager, address _aprManager)
-func (_Pool *PoolFilterer) ParseRateManagerChanged(log types.Log) (*PoolRateManagerChanged, error) {
-	event := new(PoolRateManagerChanged)
-	if err := _Pool.contract.UnpackLog(event, "RateManagerChanged", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseRateManagerChanged(log types.Log) (*NodedaopoolRateManagerChanged, error) {
+	event := new(NodedaopoolRateManagerChanged)
+	if err := _Nodedaopool.contract.UnpackLog(event, "RateManagerChanged", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolReceivedIterator is returned from FilterReceived and is used to iterate over the raw logs and unpacked data for Received events raised by the Pool contract.
-type PoolReceivedIterator struct {
-	Event *PoolReceived // Event containing the contract specifics and raw log
+// NodedaopoolReceivedIterator is returned from FilterReceived and is used to iterate over the raw logs and unpacked data for Received events raised by the Nodedaopool contract.
+type NodedaopoolReceivedIterator struct {
+	Event *NodedaopoolReceived // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -3297,7 +3445,7 @@ type PoolReceivedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolReceivedIterator) Next() bool {
+func (it *NodedaopoolReceivedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -3306,7 +3454,7 @@ func (it *PoolReceivedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolReceived)
+			it.Event = new(NodedaopoolReceived)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -3321,7 +3469,7 @@ func (it *PoolReceivedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolReceived)
+		it.Event = new(NodedaopoolReceived)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -3337,19 +3485,19 @@ func (it *PoolReceivedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolReceivedIterator) Error() error {
+func (it *NodedaopoolReceivedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolReceivedIterator) Close() error {
+func (it *NodedaopoolReceivedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolReceived represents a Received event raised by the Pool contract.
-type PoolReceived struct {
+// NodedaopoolReceived represents a Received event raised by the Nodedaopool contract.
+type NodedaopoolReceived struct {
 	Sender common.Address
 	Amount *big.Int
 	Raw    types.Log // Blockchain specific contextual infos
@@ -3358,21 +3506,21 @@ type PoolReceived struct {
 // FilterReceived is a free log retrieval operation binding the contract event 0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874.
 //
 // Solidity: event Received(address _sender, uint256 _amount)
-func (_Pool *PoolFilterer) FilterReceived(opts *bind.FilterOpts) (*PoolReceivedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterReceived(opts *bind.FilterOpts) (*NodedaopoolReceivedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "Received")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "Received")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolReceivedIterator{contract: _Pool.contract, event: "Received", logs: logs, sub: sub}, nil
+	return &NodedaopoolReceivedIterator{contract: _Nodedaopool.contract, event: "Received", logs: logs, sub: sub}, nil
 }
 
 // WatchReceived is a free log subscription operation binding the contract event 0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874.
 //
 // Solidity: event Received(address _sender, uint256 _amount)
-func (_Pool *PoolFilterer) WatchReceived(opts *bind.WatchOpts, sink chan<- *PoolReceived) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchReceived(opts *bind.WatchOpts, sink chan<- *NodedaopoolReceived) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "Received")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "Received")
 	if err != nil {
 		return nil, err
 	}
@@ -3382,8 +3530,8 @@ func (_Pool *PoolFilterer) WatchReceived(opts *bind.WatchOpts, sink chan<- *Pool
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolReceived)
-				if err := _Pool.contract.UnpackLog(event, "Received", log); err != nil {
+				event := new(NodedaopoolReceived)
+				if err := _Nodedaopool.contract.UnpackLog(event, "Received", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -3407,18 +3555,18 @@ func (_Pool *PoolFilterer) WatchReceived(opts *bind.WatchOpts, sink chan<- *Pool
 // ParseReceived is a log parse operation binding the contract event 0x88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874.
 //
 // Solidity: event Received(address _sender, uint256 _amount)
-func (_Pool *PoolFilterer) ParseReceived(log types.Log) (*PoolReceived, error) {
-	event := new(PoolReceived)
-	if err := _Pool.contract.UnpackLog(event, "Received", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseReceived(log types.Log) (*NodedaopoolReceived, error) {
+	event := new(NodedaopoolReceived)
+	if err := _Nodedaopool.contract.UnpackLog(event, "Received", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolRestakingPodAddedIterator is returned from FilterRestakingPodAdded and is used to iterate over the raw logs and unpacked data for RestakingPodAdded events raised by the Pool contract.
-type PoolRestakingPodAddedIterator struct {
-	Event *PoolRestakingPodAdded // Event containing the contract specifics and raw log
+// NodedaopoolRestakingPodAddedIterator is returned from FilterRestakingPodAdded and is used to iterate over the raw logs and unpacked data for RestakingPodAdded events raised by the Nodedaopool contract.
+type NodedaopoolRestakingPodAddedIterator struct {
+	Event *NodedaopoolRestakingPodAdded // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -3432,7 +3580,7 @@ type PoolRestakingPodAddedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolRestakingPodAddedIterator) Next() bool {
+func (it *NodedaopoolRestakingPodAddedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -3441,7 +3589,7 @@ func (it *PoolRestakingPodAddedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolRestakingPodAdded)
+			it.Event = new(NodedaopoolRestakingPodAdded)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -3456,7 +3604,7 @@ func (it *PoolRestakingPodAddedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolRestakingPodAdded)
+		it.Event = new(NodedaopoolRestakingPodAdded)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -3472,19 +3620,19 @@ func (it *PoolRestakingPodAddedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolRestakingPodAddedIterator) Error() error {
+func (it *NodedaopoolRestakingPodAddedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolRestakingPodAddedIterator) Close() error {
+func (it *NodedaopoolRestakingPodAddedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolRestakingPodAdded represents a RestakingPodAdded event raised by the Pool contract.
-type PoolRestakingPodAdded struct {
+// NodedaopoolRestakingPodAdded represents a RestakingPodAdded event raised by the Nodedaopool contract.
+type NodedaopoolRestakingPodAdded struct {
 	RestakingPod common.Address
 	Raw          types.Log // Blockchain specific contextual infos
 }
@@ -3492,21 +3640,21 @@ type PoolRestakingPodAdded struct {
 // FilterRestakingPodAdded is a free log retrieval operation binding the contract event 0x84cf405f0a1827114df681d11bd5006d56d6414d63c57e4cf6569fabd9a8e7ff.
 //
 // Solidity: event RestakingPodAdded(address _restakingPod)
-func (_Pool *PoolFilterer) FilterRestakingPodAdded(opts *bind.FilterOpts) (*PoolRestakingPodAddedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterRestakingPodAdded(opts *bind.FilterOpts) (*NodedaopoolRestakingPodAddedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "RestakingPodAdded")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "RestakingPodAdded")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolRestakingPodAddedIterator{contract: _Pool.contract, event: "RestakingPodAdded", logs: logs, sub: sub}, nil
+	return &NodedaopoolRestakingPodAddedIterator{contract: _Nodedaopool.contract, event: "RestakingPodAdded", logs: logs, sub: sub}, nil
 }
 
 // WatchRestakingPodAdded is a free log subscription operation binding the contract event 0x84cf405f0a1827114df681d11bd5006d56d6414d63c57e4cf6569fabd9a8e7ff.
 //
 // Solidity: event RestakingPodAdded(address _restakingPod)
-func (_Pool *PoolFilterer) WatchRestakingPodAdded(opts *bind.WatchOpts, sink chan<- *PoolRestakingPodAdded) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchRestakingPodAdded(opts *bind.WatchOpts, sink chan<- *NodedaopoolRestakingPodAdded) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "RestakingPodAdded")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "RestakingPodAdded")
 	if err != nil {
 		return nil, err
 	}
@@ -3516,8 +3664,8 @@ func (_Pool *PoolFilterer) WatchRestakingPodAdded(opts *bind.WatchOpts, sink cha
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolRestakingPodAdded)
-				if err := _Pool.contract.UnpackLog(event, "RestakingPodAdded", log); err != nil {
+				event := new(NodedaopoolRestakingPodAdded)
+				if err := _Nodedaopool.contract.UnpackLog(event, "RestakingPodAdded", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -3541,18 +3689,18 @@ func (_Pool *PoolFilterer) WatchRestakingPodAdded(opts *bind.WatchOpts, sink cha
 // ParseRestakingPodAdded is a log parse operation binding the contract event 0x84cf405f0a1827114df681d11bd5006d56d6414d63c57e4cf6569fabd9a8e7ff.
 //
 // Solidity: event RestakingPodAdded(address _restakingPod)
-func (_Pool *PoolFilterer) ParseRestakingPodAdded(log types.Log) (*PoolRestakingPodAdded, error) {
-	event := new(PoolRestakingPodAdded)
-	if err := _Pool.contract.UnpackLog(event, "RestakingPodAdded", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseRestakingPodAdded(log types.Log) (*NodedaopoolRestakingPodAdded, error) {
+	event := new(NodedaopoolRestakingPodAdded)
+	if err := _Nodedaopool.contract.UnpackLog(event, "RestakingPodAdded", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolUnpausedIterator is returned from FilterUnpaused and is used to iterate over the raw logs and unpacked data for Unpaused events raised by the Pool contract.
-type PoolUnpausedIterator struct {
-	Event *PoolUnpaused // Event containing the contract specifics and raw log
+// NodedaopoolStrategyDepositedIterator is returned from FilterStrategyDeposited and is used to iterate over the raw logs and unpacked data for StrategyDeposited events raised by the Nodedaopool contract.
+type NodedaopoolStrategyDepositedIterator struct {
+	Event *NodedaopoolStrategyDeposited // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -3566,7 +3714,7 @@ type PoolUnpausedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolUnpausedIterator) Next() bool {
+func (it *NodedaopoolStrategyDepositedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -3575,7 +3723,7 @@ func (it *PoolUnpausedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolUnpaused)
+			it.Event = new(NodedaopoolStrategyDeposited)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -3590,7 +3738,7 @@ func (it *PoolUnpausedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolUnpaused)
+		it.Event = new(NodedaopoolStrategyDeposited)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -3606,41 +3754,42 @@ func (it *PoolUnpausedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolUnpausedIterator) Error() error {
+func (it *NodedaopoolStrategyDepositedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolUnpausedIterator) Close() error {
+func (it *NodedaopoolStrategyDepositedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolUnpaused represents a Unpaused event raised by the Pool contract.
-type PoolUnpaused struct {
-	Account common.Address
-	Raw     types.Log // Blockchain specific contextual infos
+// NodedaopoolStrategyDeposited represents a StrategyDeposited event raised by the Nodedaopool contract.
+type NodedaopoolStrategyDeposited struct {
+	Amount         *big.Int
+	StrategyAmount *big.Int
+	Raw            types.Log // Blockchain specific contextual infos
 }
 
-// FilterUnpaused is a free log retrieval operation binding the contract event 0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa.
+// FilterStrategyDeposited is a free log retrieval operation binding the contract event 0xf58adcbb0e084c416406ed1246914693d1bebcc911fa80eb933774c868034361.
 //
-// Solidity: event Unpaused(address account)
-func (_Pool *PoolFilterer) FilterUnpaused(opts *bind.FilterOpts) (*PoolUnpausedIterator, error) {
+// Solidity: event StrategyDeposited(uint256 _amount, uint256 _strategyAmount)
+func (_Nodedaopool *NodedaopoolFilterer) FilterStrategyDeposited(opts *bind.FilterOpts) (*NodedaopoolStrategyDepositedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "Unpaused")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "StrategyDeposited")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolUnpausedIterator{contract: _Pool.contract, event: "Unpaused", logs: logs, sub: sub}, nil
+	return &NodedaopoolStrategyDepositedIterator{contract: _Nodedaopool.contract, event: "StrategyDeposited", logs: logs, sub: sub}, nil
 }
 
-// WatchUnpaused is a free log subscription operation binding the contract event 0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa.
+// WatchStrategyDeposited is a free log subscription operation binding the contract event 0xf58adcbb0e084c416406ed1246914693d1bebcc911fa80eb933774c868034361.
 //
-// Solidity: event Unpaused(address account)
-func (_Pool *PoolFilterer) WatchUnpaused(opts *bind.WatchOpts, sink chan<- *PoolUnpaused) (event.Subscription, error) {
+// Solidity: event StrategyDeposited(uint256 _amount, uint256 _strategyAmount)
+func (_Nodedaopool *NodedaopoolFilterer) WatchStrategyDeposited(opts *bind.WatchOpts, sink chan<- *NodedaopoolStrategyDeposited) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "Unpaused")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "StrategyDeposited")
 	if err != nil {
 		return nil, err
 	}
@@ -3650,8 +3799,411 @@ func (_Pool *PoolFilterer) WatchUnpaused(opts *bind.WatchOpts, sink chan<- *Pool
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolUnpaused)
-				if err := _Pool.contract.UnpackLog(event, "Unpaused", log); err != nil {
+				event := new(NodedaopoolStrategyDeposited)
+				if err := _Nodedaopool.contract.UnpackLog(event, "StrategyDeposited", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStrategyDeposited is a log parse operation binding the contract event 0xf58adcbb0e084c416406ed1246914693d1bebcc911fa80eb933774c868034361.
+//
+// Solidity: event StrategyDeposited(uint256 _amount, uint256 _strategyAmount)
+func (_Nodedaopool *NodedaopoolFilterer) ParseStrategyDeposited(log types.Log) (*NodedaopoolStrategyDeposited, error) {
+	event := new(NodedaopoolStrategyDeposited)
+	if err := _Nodedaopool.contract.UnpackLog(event, "StrategyDeposited", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// NodedaopoolStrategyReturnIterator is returned from FilterStrategyReturn and is used to iterate over the raw logs and unpacked data for StrategyReturn events raised by the Nodedaopool contract.
+type NodedaopoolStrategyReturnIterator struct {
+	Event *NodedaopoolStrategyReturn // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *NodedaopoolStrategyReturnIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(NodedaopoolStrategyReturn)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(NodedaopoolStrategyReturn)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *NodedaopoolStrategyReturnIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *NodedaopoolStrategyReturnIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// NodedaopoolStrategyReturn represents a StrategyReturn event raised by the Nodedaopool contract.
+type NodedaopoolStrategyReturn struct {
+	Amount *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterStrategyReturn is a free log retrieval operation binding the contract event 0x4fb0171001dc0ba5f8ca0996eb5a413cf67c611e3d6d1d6ae9ea1df128383410.
+//
+// Solidity: event StrategyReturn(uint256 _amount)
+func (_Nodedaopool *NodedaopoolFilterer) FilterStrategyReturn(opts *bind.FilterOpts) (*NodedaopoolStrategyReturnIterator, error) {
+
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "StrategyReturn")
+	if err != nil {
+		return nil, err
+	}
+	return &NodedaopoolStrategyReturnIterator{contract: _Nodedaopool.contract, event: "StrategyReturn", logs: logs, sub: sub}, nil
+}
+
+// WatchStrategyReturn is a free log subscription operation binding the contract event 0x4fb0171001dc0ba5f8ca0996eb5a413cf67c611e3d6d1d6ae9ea1df128383410.
+//
+// Solidity: event StrategyReturn(uint256 _amount)
+func (_Nodedaopool *NodedaopoolFilterer) WatchStrategyReturn(opts *bind.WatchOpts, sink chan<- *NodedaopoolStrategyReturn) (event.Subscription, error) {
+
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "StrategyReturn")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(NodedaopoolStrategyReturn)
+				if err := _Nodedaopool.contract.UnpackLog(event, "StrategyReturn", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStrategyReturn is a log parse operation binding the contract event 0x4fb0171001dc0ba5f8ca0996eb5a413cf67c611e3d6d1d6ae9ea1df128383410.
+//
+// Solidity: event StrategyReturn(uint256 _amount)
+func (_Nodedaopool *NodedaopoolFilterer) ParseStrategyReturn(log types.Log) (*NodedaopoolStrategyReturn, error) {
+	event := new(NodedaopoolStrategyReturn)
+	if err := _Nodedaopool.contract.UnpackLog(event, "StrategyReturn", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// NodedaopoolStrategyVaultChangedIterator is returned from FilterStrategyVaultChanged and is used to iterate over the raw logs and unpacked data for StrategyVaultChanged events raised by the Nodedaopool contract.
+type NodedaopoolStrategyVaultChangedIterator struct {
+	Event *NodedaopoolStrategyVaultChanged // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *NodedaopoolStrategyVaultChangedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(NodedaopoolStrategyVaultChanged)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(NodedaopoolStrategyVaultChanged)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *NodedaopoolStrategyVaultChangedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *NodedaopoolStrategyVaultChangedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// NodedaopoolStrategyVaultChanged represents a StrategyVaultChanged event raised by the Nodedaopool contract.
+type NodedaopoolStrategyVaultChanged struct {
+	OldStrategyVault common.Address
+	StrategyVault    common.Address
+	Raw              types.Log // Blockchain specific contextual infos
+}
+
+// FilterStrategyVaultChanged is a free log retrieval operation binding the contract event 0x4ec60652ba5660c71f5d158ba76777060e4df45955126c42ffe26c0c447a781e.
+//
+// Solidity: event StrategyVaultChanged(address _oldStrategyVault, address _strategyVault)
+func (_Nodedaopool *NodedaopoolFilterer) FilterStrategyVaultChanged(opts *bind.FilterOpts) (*NodedaopoolStrategyVaultChangedIterator, error) {
+
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "StrategyVaultChanged")
+	if err != nil {
+		return nil, err
+	}
+	return &NodedaopoolStrategyVaultChangedIterator{contract: _Nodedaopool.contract, event: "StrategyVaultChanged", logs: logs, sub: sub}, nil
+}
+
+// WatchStrategyVaultChanged is a free log subscription operation binding the contract event 0x4ec60652ba5660c71f5d158ba76777060e4df45955126c42ffe26c0c447a781e.
+//
+// Solidity: event StrategyVaultChanged(address _oldStrategyVault, address _strategyVault)
+func (_Nodedaopool *NodedaopoolFilterer) WatchStrategyVaultChanged(opts *bind.WatchOpts, sink chan<- *NodedaopoolStrategyVaultChanged) (event.Subscription, error) {
+
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "StrategyVaultChanged")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(NodedaopoolStrategyVaultChanged)
+				if err := _Nodedaopool.contract.UnpackLog(event, "StrategyVaultChanged", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseStrategyVaultChanged is a log parse operation binding the contract event 0x4ec60652ba5660c71f5d158ba76777060e4df45955126c42ffe26c0c447a781e.
+//
+// Solidity: event StrategyVaultChanged(address _oldStrategyVault, address _strategyVault)
+func (_Nodedaopool *NodedaopoolFilterer) ParseStrategyVaultChanged(log types.Log) (*NodedaopoolStrategyVaultChanged, error) {
+	event := new(NodedaopoolStrategyVaultChanged)
+	if err := _Nodedaopool.contract.UnpackLog(event, "StrategyVaultChanged", log); err != nil {
+		return nil, err
+	}
+	event.Raw = log
+	return event, nil
+}
+
+// NodedaopoolUnpausedIterator is returned from FilterUnpaused and is used to iterate over the raw logs and unpacked data for Unpaused events raised by the Nodedaopool contract.
+type NodedaopoolUnpausedIterator struct {
+	Event *NodedaopoolUnpaused // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *NodedaopoolUnpausedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(NodedaopoolUnpaused)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(NodedaopoolUnpaused)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *NodedaopoolUnpausedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *NodedaopoolUnpausedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// NodedaopoolUnpaused represents a Unpaused event raised by the Nodedaopool contract.
+type NodedaopoolUnpaused struct {
+	Account common.Address
+	Raw     types.Log // Blockchain specific contextual infos
+}
+
+// FilterUnpaused is a free log retrieval operation binding the contract event 0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa.
+//
+// Solidity: event Unpaused(address account)
+func (_Nodedaopool *NodedaopoolFilterer) FilterUnpaused(opts *bind.FilterOpts) (*NodedaopoolUnpausedIterator, error) {
+
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "Unpaused")
+	if err != nil {
+		return nil, err
+	}
+	return &NodedaopoolUnpausedIterator{contract: _Nodedaopool.contract, event: "Unpaused", logs: logs, sub: sub}, nil
+}
+
+// WatchUnpaused is a free log subscription operation binding the contract event 0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa.
+//
+// Solidity: event Unpaused(address account)
+func (_Nodedaopool *NodedaopoolFilterer) WatchUnpaused(opts *bind.WatchOpts, sink chan<- *NodedaopoolUnpaused) (event.Subscription, error) {
+
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "Unpaused")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(NodedaopoolUnpaused)
+				if err := _Nodedaopool.contract.UnpackLog(event, "Unpaused", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -3675,18 +4227,18 @@ func (_Pool *PoolFilterer) WatchUnpaused(opts *bind.WatchOpts, sink chan<- *Pool
 // ParseUnpaused is a log parse operation binding the contract event 0x5db9ee0a495bf2e6ff9c91a7834c1ba4fdd244a5e8aa4e537bd38aeae4b073aa.
 //
 // Solidity: event Unpaused(address account)
-func (_Pool *PoolFilterer) ParseUnpaused(log types.Log) (*PoolUnpaused, error) {
-	event := new(PoolUnpaused)
-	if err := _Pool.contract.UnpackLog(event, "Unpaused", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseUnpaused(log types.Log) (*NodedaopoolUnpaused, error) {
+	event := new(NodedaopoolUnpaused)
+	if err := _Nodedaopool.contract.UnpackLog(event, "Unpaused", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolUnstakeAllowedUpdatedIterator is returned from FilterUnstakeAllowedUpdated and is used to iterate over the raw logs and unpacked data for UnstakeAllowedUpdated events raised by the Pool contract.
-type PoolUnstakeAllowedUpdatedIterator struct {
-	Event *PoolUnstakeAllowedUpdated // Event containing the contract specifics and raw log
+// NodedaopoolUnstakeAllowedUpdatedIterator is returned from FilterUnstakeAllowedUpdated and is used to iterate over the raw logs and unpacked data for UnstakeAllowedUpdated events raised by the Nodedaopool contract.
+type NodedaopoolUnstakeAllowedUpdatedIterator struct {
+	Event *NodedaopoolUnstakeAllowedUpdated // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -3700,7 +4252,7 @@ type PoolUnstakeAllowedUpdatedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolUnstakeAllowedUpdatedIterator) Next() bool {
+func (it *NodedaopoolUnstakeAllowedUpdatedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -3709,7 +4261,7 @@ func (it *PoolUnstakeAllowedUpdatedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolUnstakeAllowedUpdated)
+			it.Event = new(NodedaopoolUnstakeAllowedUpdated)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -3724,7 +4276,7 @@ func (it *PoolUnstakeAllowedUpdatedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolUnstakeAllowedUpdated)
+		it.Event = new(NodedaopoolUnstakeAllowedUpdated)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -3740,19 +4292,19 @@ func (it *PoolUnstakeAllowedUpdatedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolUnstakeAllowedUpdatedIterator) Error() error {
+func (it *NodedaopoolUnstakeAllowedUpdatedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolUnstakeAllowedUpdatedIterator) Close() error {
+func (it *NodedaopoolUnstakeAllowedUpdatedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolUnstakeAllowedUpdated represents a UnstakeAllowedUpdated event raised by the Pool contract.
-type PoolUnstakeAllowedUpdated struct {
+// NodedaopoolUnstakeAllowedUpdated represents a UnstakeAllowedUpdated event raised by the Nodedaopool contract.
+type NodedaopoolUnstakeAllowedUpdated struct {
 	OldUnstakeAllowed bool
 	UnstakeAllowed    bool
 	Raw               types.Log // Blockchain specific contextual infos
@@ -3761,21 +4313,21 @@ type PoolUnstakeAllowedUpdated struct {
 // FilterUnstakeAllowedUpdated is a free log retrieval operation binding the contract event 0xf0700b7cce37d0ddc289445e07408f3709033f9785391e5e05b908cb9705748b.
 //
 // Solidity: event UnstakeAllowedUpdated(bool _oldUnstakeAllowed, bool _unstakeAllowed)
-func (_Pool *PoolFilterer) FilterUnstakeAllowedUpdated(opts *bind.FilterOpts) (*PoolUnstakeAllowedUpdatedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterUnstakeAllowedUpdated(opts *bind.FilterOpts) (*NodedaopoolUnstakeAllowedUpdatedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "UnstakeAllowedUpdated")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "UnstakeAllowedUpdated")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolUnstakeAllowedUpdatedIterator{contract: _Pool.contract, event: "UnstakeAllowedUpdated", logs: logs, sub: sub}, nil
+	return &NodedaopoolUnstakeAllowedUpdatedIterator{contract: _Nodedaopool.contract, event: "UnstakeAllowedUpdated", logs: logs, sub: sub}, nil
 }
 
 // WatchUnstakeAllowedUpdated is a free log subscription operation binding the contract event 0xf0700b7cce37d0ddc289445e07408f3709033f9785391e5e05b908cb9705748b.
 //
 // Solidity: event UnstakeAllowedUpdated(bool _oldUnstakeAllowed, bool _unstakeAllowed)
-func (_Pool *PoolFilterer) WatchUnstakeAllowedUpdated(opts *bind.WatchOpts, sink chan<- *PoolUnstakeAllowedUpdated) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchUnstakeAllowedUpdated(opts *bind.WatchOpts, sink chan<- *NodedaopoolUnstakeAllowedUpdated) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "UnstakeAllowedUpdated")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "UnstakeAllowedUpdated")
 	if err != nil {
 		return nil, err
 	}
@@ -3785,8 +4337,8 @@ func (_Pool *PoolFilterer) WatchUnstakeAllowedUpdated(opts *bind.WatchOpts, sink
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolUnstakeAllowedUpdated)
-				if err := _Pool.contract.UnpackLog(event, "UnstakeAllowedUpdated", log); err != nil {
+				event := new(NodedaopoolUnstakeAllowedUpdated)
+				if err := _Nodedaopool.contract.UnpackLog(event, "UnstakeAllowedUpdated", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -3810,18 +4362,18 @@ func (_Pool *PoolFilterer) WatchUnstakeAllowedUpdated(opts *bind.WatchOpts, sink
 // ParseUnstakeAllowedUpdated is a log parse operation binding the contract event 0xf0700b7cce37d0ddc289445e07408f3709033f9785391e5e05b908cb9705748b.
 //
 // Solidity: event UnstakeAllowedUpdated(bool _oldUnstakeAllowed, bool _unstakeAllowed)
-func (_Pool *PoolFilterer) ParseUnstakeAllowedUpdated(log types.Log) (*PoolUnstakeAllowedUpdated, error) {
-	event := new(PoolUnstakeAllowedUpdated)
-	if err := _Pool.contract.UnpackLog(event, "UnstakeAllowedUpdated", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseUnstakeAllowedUpdated(log types.Log) (*NodedaopoolUnstakeAllowedUpdated, error) {
+	event := new(NodedaopoolUnstakeAllowedUpdated)
+	if err := _Nodedaopool.contract.UnpackLog(event, "UnstakeAllowedUpdated", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolUpgradedIterator is returned from FilterUpgraded and is used to iterate over the raw logs and unpacked data for Upgraded events raised by the Pool contract.
-type PoolUpgradedIterator struct {
-	Event *PoolUpgraded // Event containing the contract specifics and raw log
+// NodedaopoolUpgradedIterator is returned from FilterUpgraded and is used to iterate over the raw logs and unpacked data for Upgraded events raised by the Nodedaopool contract.
+type NodedaopoolUpgradedIterator struct {
+	Event *NodedaopoolUpgraded // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -3835,7 +4387,7 @@ type PoolUpgradedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolUpgradedIterator) Next() bool {
+func (it *NodedaopoolUpgradedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -3844,7 +4396,7 @@ func (it *PoolUpgradedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolUpgraded)
+			it.Event = new(NodedaopoolUpgraded)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -3859,7 +4411,7 @@ func (it *PoolUpgradedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolUpgraded)
+		it.Event = new(NodedaopoolUpgraded)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -3875,19 +4427,19 @@ func (it *PoolUpgradedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolUpgradedIterator) Error() error {
+func (it *NodedaopoolUpgradedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolUpgradedIterator) Close() error {
+func (it *NodedaopoolUpgradedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolUpgraded represents a Upgraded event raised by the Pool contract.
-type PoolUpgraded struct {
+// NodedaopoolUpgraded represents a Upgraded event raised by the Nodedaopool contract.
+type NodedaopoolUpgraded struct {
 	Implementation common.Address
 	Raw            types.Log // Blockchain specific contextual infos
 }
@@ -3895,31 +4447,31 @@ type PoolUpgraded struct {
 // FilterUpgraded is a free log retrieval operation binding the contract event 0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b.
 //
 // Solidity: event Upgraded(address indexed implementation)
-func (_Pool *PoolFilterer) FilterUpgraded(opts *bind.FilterOpts, implementation []common.Address) (*PoolUpgradedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterUpgraded(opts *bind.FilterOpts, implementation []common.Address) (*NodedaopoolUpgradedIterator, error) {
 
 	var implementationRule []interface{}
 	for _, implementationItem := range implementation {
 		implementationRule = append(implementationRule, implementationItem)
 	}
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "Upgraded", implementationRule)
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "Upgraded", implementationRule)
 	if err != nil {
 		return nil, err
 	}
-	return &PoolUpgradedIterator{contract: _Pool.contract, event: "Upgraded", logs: logs, sub: sub}, nil
+	return &NodedaopoolUpgradedIterator{contract: _Nodedaopool.contract, event: "Upgraded", logs: logs, sub: sub}, nil
 }
 
 // WatchUpgraded is a free log subscription operation binding the contract event 0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b.
 //
 // Solidity: event Upgraded(address indexed implementation)
-func (_Pool *PoolFilterer) WatchUpgraded(opts *bind.WatchOpts, sink chan<- *PoolUpgraded, implementation []common.Address) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchUpgraded(opts *bind.WatchOpts, sink chan<- *NodedaopoolUpgraded, implementation []common.Address) (event.Subscription, error) {
 
 	var implementationRule []interface{}
 	for _, implementationItem := range implementation {
 		implementationRule = append(implementationRule, implementationItem)
 	}
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "Upgraded", implementationRule)
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "Upgraded", implementationRule)
 	if err != nil {
 		return nil, err
 	}
@@ -3929,8 +4481,8 @@ func (_Pool *PoolFilterer) WatchUpgraded(opts *bind.WatchOpts, sink chan<- *Pool
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolUpgraded)
-				if err := _Pool.contract.UnpackLog(event, "Upgraded", log); err != nil {
+				event := new(NodedaopoolUpgraded)
+				if err := _Nodedaopool.contract.UnpackLog(event, "Upgraded", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -3954,18 +4506,18 @@ func (_Pool *PoolFilterer) WatchUpgraded(opts *bind.WatchOpts, sink chan<- *Pool
 // ParseUpgraded is a log parse operation binding the contract event 0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b.
 //
 // Solidity: event Upgraded(address indexed implementation)
-func (_Pool *PoolFilterer) ParseUpgraded(log types.Log) (*PoolUpgraded, error) {
-	event := new(PoolUpgraded)
-	if err := _Pool.contract.UnpackLog(event, "Upgraded", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseUpgraded(log types.Log) (*NodedaopoolUpgraded, error) {
+	event := new(NodedaopoolUpgraded)
+	if err := _Nodedaopool.contract.UnpackLog(event, "Upgraded", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolValidatorManagerChangedIterator is returned from FilterValidatorManagerChanged and is used to iterate over the raw logs and unpacked data for ValidatorManagerChanged events raised by the Pool contract.
-type PoolValidatorManagerChangedIterator struct {
-	Event *PoolValidatorManagerChanged // Event containing the contract specifics and raw log
+// NodedaopoolValidatorManagerChangedIterator is returned from FilterValidatorManagerChanged and is used to iterate over the raw logs and unpacked data for ValidatorManagerChanged events raised by the Nodedaopool contract.
+type NodedaopoolValidatorManagerChangedIterator struct {
+	Event *NodedaopoolValidatorManagerChanged // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -3979,7 +4531,7 @@ type PoolValidatorManagerChangedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolValidatorManagerChangedIterator) Next() bool {
+func (it *NodedaopoolValidatorManagerChangedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -3988,7 +4540,7 @@ func (it *PoolValidatorManagerChangedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolValidatorManagerChanged)
+			it.Event = new(NodedaopoolValidatorManagerChanged)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -4003,7 +4555,7 @@ func (it *PoolValidatorManagerChangedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolValidatorManagerChanged)
+		it.Event = new(NodedaopoolValidatorManagerChanged)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -4019,19 +4571,19 @@ func (it *PoolValidatorManagerChangedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolValidatorManagerChangedIterator) Error() error {
+func (it *NodedaopoolValidatorManagerChangedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolValidatorManagerChangedIterator) Close() error {
+func (it *NodedaopoolValidatorManagerChangedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolValidatorManagerChanged represents a ValidatorManagerChanged event raised by the Pool contract.
-type PoolValidatorManagerChanged struct {
+// NodedaopoolValidatorManagerChanged represents a ValidatorManagerChanged event raised by the Nodedaopool contract.
+type NodedaopoolValidatorManagerChanged struct {
 	OldValidatorManager common.Address
 	ValidatorManager    common.Address
 	Raw                 types.Log // Blockchain specific contextual infos
@@ -4040,21 +4592,21 @@ type PoolValidatorManagerChanged struct {
 // FilterValidatorManagerChanged is a free log retrieval operation binding the contract event 0xfcf16285f1e14b0b8a544860d3664317dd81073a42e811e33afe75a22886443e.
 //
 // Solidity: event ValidatorManagerChanged(address _oldValidatorManager, address _validatorManager)
-func (_Pool *PoolFilterer) FilterValidatorManagerChanged(opts *bind.FilterOpts) (*PoolValidatorManagerChangedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterValidatorManagerChanged(opts *bind.FilterOpts) (*NodedaopoolValidatorManagerChangedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "ValidatorManagerChanged")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "ValidatorManagerChanged")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolValidatorManagerChangedIterator{contract: _Pool.contract, event: "ValidatorManagerChanged", logs: logs, sub: sub}, nil
+	return &NodedaopoolValidatorManagerChangedIterator{contract: _Nodedaopool.contract, event: "ValidatorManagerChanged", logs: logs, sub: sub}, nil
 }
 
 // WatchValidatorManagerChanged is a free log subscription operation binding the contract event 0xfcf16285f1e14b0b8a544860d3664317dd81073a42e811e33afe75a22886443e.
 //
 // Solidity: event ValidatorManagerChanged(address _oldValidatorManager, address _validatorManager)
-func (_Pool *PoolFilterer) WatchValidatorManagerChanged(opts *bind.WatchOpts, sink chan<- *PoolValidatorManagerChanged) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchValidatorManagerChanged(opts *bind.WatchOpts, sink chan<- *NodedaopoolValidatorManagerChanged) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "ValidatorManagerChanged")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "ValidatorManagerChanged")
 	if err != nil {
 		return nil, err
 	}
@@ -4064,8 +4616,8 @@ func (_Pool *PoolFilterer) WatchValidatorManagerChanged(opts *bind.WatchOpts, si
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolValidatorManagerChanged)
-				if err := _Pool.contract.UnpackLog(event, "ValidatorManagerChanged", log); err != nil {
+				event := new(NodedaopoolValidatorManagerChanged)
+				if err := _Nodedaopool.contract.UnpackLog(event, "ValidatorManagerChanged", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -4089,18 +4641,18 @@ func (_Pool *PoolFilterer) WatchValidatorManagerChanged(opts *bind.WatchOpts, si
 // ParseValidatorManagerChanged is a log parse operation binding the contract event 0xfcf16285f1e14b0b8a544860d3664317dd81073a42e811e33afe75a22886443e.
 //
 // Solidity: event ValidatorManagerChanged(address _oldValidatorManager, address _validatorManager)
-func (_Pool *PoolFilterer) ParseValidatorManagerChanged(log types.Log) (*PoolValidatorManagerChanged, error) {
-	event := new(PoolValidatorManagerChanged)
-	if err := _Pool.contract.UnpackLog(event, "ValidatorManagerChanged", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseValidatorManagerChanged(log types.Log) (*NodedaopoolValidatorManagerChanged, error) {
+	event := new(NodedaopoolValidatorManagerChanged)
+	if err := _Nodedaopool.contract.UnpackLog(event, "ValidatorManagerChanged", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolValidatorRegistrationIterator is returned from FilterValidatorRegistration and is used to iterate over the raw logs and unpacked data for ValidatorRegistration events raised by the Pool contract.
-type PoolValidatorRegistrationIterator struct {
-	Event *PoolValidatorRegistration // Event containing the contract specifics and raw log
+// NodedaopoolValidatorRegistrationIterator is returned from FilterValidatorRegistration and is used to iterate over the raw logs and unpacked data for ValidatorRegistration events raised by the Nodedaopool contract.
+type NodedaopoolValidatorRegistrationIterator struct {
+	Event *NodedaopoolValidatorRegistration // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -4114,7 +4666,7 @@ type PoolValidatorRegistrationIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolValidatorRegistrationIterator) Next() bool {
+func (it *NodedaopoolValidatorRegistrationIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -4123,7 +4675,7 @@ func (it *PoolValidatorRegistrationIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolValidatorRegistration)
+			it.Event = new(NodedaopoolValidatorRegistration)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -4138,7 +4690,7 @@ func (it *PoolValidatorRegistrationIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolValidatorRegistration)
+		it.Event = new(NodedaopoolValidatorRegistration)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -4154,19 +4706,19 @@ func (it *PoolValidatorRegistrationIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolValidatorRegistrationIterator) Error() error {
+func (it *NodedaopoolValidatorRegistrationIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolValidatorRegistrationIterator) Close() error {
+func (it *NodedaopoolValidatorRegistrationIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolValidatorRegistration represents a ValidatorRegistration event raised by the Pool contract.
-type PoolValidatorRegistration struct {
+// NodedaopoolValidatorRegistration represents a ValidatorRegistration event raised by the Nodedaopool contract.
+type NodedaopoolValidatorRegistration struct {
 	Pubkeys [][]byte
 	Raw     types.Log // Blockchain specific contextual infos
 }
@@ -4174,21 +4726,21 @@ type PoolValidatorRegistration struct {
 // FilterValidatorRegistration is a free log retrieval operation binding the contract event 0xe585eadb0042252d35431ecfed1027caf5672811fdf1db08cb49e32fee170505.
 //
 // Solidity: event ValidatorRegistration(bytes[] _pubkeys)
-func (_Pool *PoolFilterer) FilterValidatorRegistration(opts *bind.FilterOpts) (*PoolValidatorRegistrationIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterValidatorRegistration(opts *bind.FilterOpts) (*NodedaopoolValidatorRegistrationIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "ValidatorRegistration")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "ValidatorRegistration")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolValidatorRegistrationIterator{contract: _Pool.contract, event: "ValidatorRegistration", logs: logs, sub: sub}, nil
+	return &NodedaopoolValidatorRegistrationIterator{contract: _Nodedaopool.contract, event: "ValidatorRegistration", logs: logs, sub: sub}, nil
 }
 
 // WatchValidatorRegistration is a free log subscription operation binding the contract event 0xe585eadb0042252d35431ecfed1027caf5672811fdf1db08cb49e32fee170505.
 //
 // Solidity: event ValidatorRegistration(bytes[] _pubkeys)
-func (_Pool *PoolFilterer) WatchValidatorRegistration(opts *bind.WatchOpts, sink chan<- *PoolValidatorRegistration) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchValidatorRegistration(opts *bind.WatchOpts, sink chan<- *NodedaopoolValidatorRegistration) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "ValidatorRegistration")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "ValidatorRegistration")
 	if err != nil {
 		return nil, err
 	}
@@ -4198,8 +4750,8 @@ func (_Pool *PoolFilterer) WatchValidatorRegistration(opts *bind.WatchOpts, sink
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolValidatorRegistration)
-				if err := _Pool.contract.UnpackLog(event, "ValidatorRegistration", log); err != nil {
+				event := new(NodedaopoolValidatorRegistration)
+				if err := _Nodedaopool.contract.UnpackLog(event, "ValidatorRegistration", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -4223,18 +4775,18 @@ func (_Pool *PoolFilterer) WatchValidatorRegistration(opts *bind.WatchOpts, sink
 // ParseValidatorRegistration is a log parse operation binding the contract event 0xe585eadb0042252d35431ecfed1027caf5672811fdf1db08cb49e32fee170505.
 //
 // Solidity: event ValidatorRegistration(bytes[] _pubkeys)
-func (_Pool *PoolFilterer) ParseValidatorRegistration(log types.Log) (*PoolValidatorRegistration, error) {
-	event := new(PoolValidatorRegistration)
-	if err := _Pool.contract.UnpackLog(event, "ValidatorRegistration", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseValidatorRegistration(log types.Log) (*NodedaopoolValidatorRegistration, error) {
+	event := new(NodedaopoolValidatorRegistration)
+	if err := _Nodedaopool.contract.UnpackLog(event, "ValidatorRegistration", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolValidatorRegistryChangedIterator is returned from FilterValidatorRegistryChanged and is used to iterate over the raw logs and unpacked data for ValidatorRegistryChanged events raised by the Pool contract.
-type PoolValidatorRegistryChangedIterator struct {
-	Event *PoolValidatorRegistryChanged // Event containing the contract specifics and raw log
+// NodedaopoolValidatorRegistryChangedIterator is returned from FilterValidatorRegistryChanged and is used to iterate over the raw logs and unpacked data for ValidatorRegistryChanged events raised by the Nodedaopool contract.
+type NodedaopoolValidatorRegistryChangedIterator struct {
+	Event *NodedaopoolValidatorRegistryChanged // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -4248,7 +4800,7 @@ type PoolValidatorRegistryChangedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolValidatorRegistryChangedIterator) Next() bool {
+func (it *NodedaopoolValidatorRegistryChangedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -4257,7 +4809,7 @@ func (it *PoolValidatorRegistryChangedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolValidatorRegistryChanged)
+			it.Event = new(NodedaopoolValidatorRegistryChanged)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -4272,7 +4824,7 @@ func (it *PoolValidatorRegistryChangedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolValidatorRegistryChanged)
+		it.Event = new(NodedaopoolValidatorRegistryChanged)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -4288,19 +4840,19 @@ func (it *PoolValidatorRegistryChangedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolValidatorRegistryChangedIterator) Error() error {
+func (it *NodedaopoolValidatorRegistryChangedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolValidatorRegistryChangedIterator) Close() error {
+func (it *NodedaopoolValidatorRegistryChangedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolValidatorRegistryChanged represents a ValidatorRegistryChanged event raised by the Pool contract.
-type PoolValidatorRegistryChanged struct {
+// NodedaopoolValidatorRegistryChanged represents a ValidatorRegistryChanged event raised by the Nodedaopool contract.
+type NodedaopoolValidatorRegistryChanged struct {
 	OldValidatorManager common.Address
 	ValidatorManager    common.Address
 	Raw                 types.Log // Blockchain specific contextual infos
@@ -4309,21 +4861,21 @@ type PoolValidatorRegistryChanged struct {
 // FilterValidatorRegistryChanged is a free log retrieval operation binding the contract event 0x5f98eb9c39a016a522ab1ca3601f349c89b557a9b6471ce04afa8770d5589062.
 //
 // Solidity: event ValidatorRegistryChanged(address _oldValidatorManager, address _validatorManager)
-func (_Pool *PoolFilterer) FilterValidatorRegistryChanged(opts *bind.FilterOpts) (*PoolValidatorRegistryChangedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterValidatorRegistryChanged(opts *bind.FilterOpts) (*NodedaopoolValidatorRegistryChangedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "ValidatorRegistryChanged")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "ValidatorRegistryChanged")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolValidatorRegistryChangedIterator{contract: _Pool.contract, event: "ValidatorRegistryChanged", logs: logs, sub: sub}, nil
+	return &NodedaopoolValidatorRegistryChangedIterator{contract: _Nodedaopool.contract, event: "ValidatorRegistryChanged", logs: logs, sub: sub}, nil
 }
 
 // WatchValidatorRegistryChanged is a free log subscription operation binding the contract event 0x5f98eb9c39a016a522ab1ca3601f349c89b557a9b6471ce04afa8770d5589062.
 //
 // Solidity: event ValidatorRegistryChanged(address _oldValidatorManager, address _validatorManager)
-func (_Pool *PoolFilterer) WatchValidatorRegistryChanged(opts *bind.WatchOpts, sink chan<- *PoolValidatorRegistryChanged) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchValidatorRegistryChanged(opts *bind.WatchOpts, sink chan<- *NodedaopoolValidatorRegistryChanged) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "ValidatorRegistryChanged")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "ValidatorRegistryChanged")
 	if err != nil {
 		return nil, err
 	}
@@ -4333,8 +4885,8 @@ func (_Pool *PoolFilterer) WatchValidatorRegistryChanged(opts *bind.WatchOpts, s
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolValidatorRegistryChanged)
-				if err := _Pool.contract.UnpackLog(event, "ValidatorRegistryChanged", log); err != nil {
+				event := new(NodedaopoolValidatorRegistryChanged)
+				if err := _Nodedaopool.contract.UnpackLog(event, "ValidatorRegistryChanged", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -4358,18 +4910,18 @@ func (_Pool *PoolFilterer) WatchValidatorRegistryChanged(opts *bind.WatchOpts, s
 // ParseValidatorRegistryChanged is a log parse operation binding the contract event 0x5f98eb9c39a016a522ab1ca3601f349c89b557a9b6471ce04afa8770d5589062.
 //
 // Solidity: event ValidatorRegistryChanged(address _oldValidatorManager, address _validatorManager)
-func (_Pool *PoolFilterer) ParseValidatorRegistryChanged(log types.Log) (*PoolValidatorRegistryChanged, error) {
-	event := new(PoolValidatorRegistryChanged)
-	if err := _Pool.contract.UnpackLog(event, "ValidatorRegistryChanged", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseValidatorRegistryChanged(log types.Log) (*NodedaopoolValidatorRegistryChanged, error) {
+	event := new(NodedaopoolValidatorRegistryChanged)
+	if err := _Nodedaopool.contract.UnpackLog(event, "ValidatorRegistryChanged", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolWithdrawalDelayChangedIterator is returned from FilterWithdrawalDelayChanged and is used to iterate over the raw logs and unpacked data for WithdrawalDelayChanged events raised by the Pool contract.
-type PoolWithdrawalDelayChangedIterator struct {
-	Event *PoolWithdrawalDelayChanged // Event containing the contract specifics and raw log
+// NodedaopoolWithdrawalDelayChangedIterator is returned from FilterWithdrawalDelayChanged and is used to iterate over the raw logs and unpacked data for WithdrawalDelayChanged events raised by the Nodedaopool contract.
+type NodedaopoolWithdrawalDelayChangedIterator struct {
+	Event *NodedaopoolWithdrawalDelayChanged // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -4383,7 +4935,7 @@ type PoolWithdrawalDelayChangedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolWithdrawalDelayChangedIterator) Next() bool {
+func (it *NodedaopoolWithdrawalDelayChangedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -4392,7 +4944,7 @@ func (it *PoolWithdrawalDelayChangedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolWithdrawalDelayChanged)
+			it.Event = new(NodedaopoolWithdrawalDelayChanged)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -4407,7 +4959,7 @@ func (it *PoolWithdrawalDelayChangedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolWithdrawalDelayChanged)
+		it.Event = new(NodedaopoolWithdrawalDelayChanged)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -4423,19 +4975,19 @@ func (it *PoolWithdrawalDelayChangedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolWithdrawalDelayChangedIterator) Error() error {
+func (it *NodedaopoolWithdrawalDelayChangedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolWithdrawalDelayChangedIterator) Close() error {
+func (it *NodedaopoolWithdrawalDelayChangedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolWithdrawalDelayChanged represents a WithdrawalDelayChanged event raised by the Pool contract.
-type PoolWithdrawalDelayChanged struct {
+// NodedaopoolWithdrawalDelayChanged represents a WithdrawalDelayChanged event raised by the Nodedaopool contract.
+type NodedaopoolWithdrawalDelayChanged struct {
 	OldWithdrawalDelayBlocks *big.Int
 	WithdrawalDelayBlocks    *big.Int
 	Raw                      types.Log // Blockchain specific contextual infos
@@ -4444,21 +4996,21 @@ type PoolWithdrawalDelayChanged struct {
 // FilterWithdrawalDelayChanged is a free log retrieval operation binding the contract event 0xab3f1d5eaee409b7067167f77f1fa3f8a863366d6fb2b88559cd4f9b8e03e182.
 //
 // Solidity: event WithdrawalDelayChanged(uint256 _oldWithdrawalDelayBlocks, uint256 _withdrawalDelayBlocks)
-func (_Pool *PoolFilterer) FilterWithdrawalDelayChanged(opts *bind.FilterOpts) (*PoolWithdrawalDelayChangedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterWithdrawalDelayChanged(opts *bind.FilterOpts) (*NodedaopoolWithdrawalDelayChangedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "WithdrawalDelayChanged")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "WithdrawalDelayChanged")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolWithdrawalDelayChangedIterator{contract: _Pool.contract, event: "WithdrawalDelayChanged", logs: logs, sub: sub}, nil
+	return &NodedaopoolWithdrawalDelayChangedIterator{contract: _Nodedaopool.contract, event: "WithdrawalDelayChanged", logs: logs, sub: sub}, nil
 }
 
 // WatchWithdrawalDelayChanged is a free log subscription operation binding the contract event 0xab3f1d5eaee409b7067167f77f1fa3f8a863366d6fb2b88559cd4f9b8e03e182.
 //
 // Solidity: event WithdrawalDelayChanged(uint256 _oldWithdrawalDelayBlocks, uint256 _withdrawalDelayBlocks)
-func (_Pool *PoolFilterer) WatchWithdrawalDelayChanged(opts *bind.WatchOpts, sink chan<- *PoolWithdrawalDelayChanged) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchWithdrawalDelayChanged(opts *bind.WatchOpts, sink chan<- *NodedaopoolWithdrawalDelayChanged) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "WithdrawalDelayChanged")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "WithdrawalDelayChanged")
 	if err != nil {
 		return nil, err
 	}
@@ -4468,8 +5020,8 @@ func (_Pool *PoolFilterer) WatchWithdrawalDelayChanged(opts *bind.WatchOpts, sin
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolWithdrawalDelayChanged)
-				if err := _Pool.contract.UnpackLog(event, "WithdrawalDelayChanged", log); err != nil {
+				event := new(NodedaopoolWithdrawalDelayChanged)
+				if err := _Nodedaopool.contract.UnpackLog(event, "WithdrawalDelayChanged", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -4493,18 +5045,18 @@ func (_Pool *PoolFilterer) WatchWithdrawalDelayChanged(opts *bind.WatchOpts, sin
 // ParseWithdrawalDelayChanged is a log parse operation binding the contract event 0xab3f1d5eaee409b7067167f77f1fa3f8a863366d6fb2b88559cd4f9b8e03e182.
 //
 // Solidity: event WithdrawalDelayChanged(uint256 _oldWithdrawalDelayBlocks, uint256 _withdrawalDelayBlocks)
-func (_Pool *PoolFilterer) ParseWithdrawalDelayChanged(log types.Log) (*PoolWithdrawalDelayChanged, error) {
-	event := new(PoolWithdrawalDelayChanged)
-	if err := _Pool.contract.UnpackLog(event, "WithdrawalDelayChanged", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseWithdrawalDelayChanged(log types.Log) (*NodedaopoolWithdrawalDelayChanged, error) {
+	event := new(NodedaopoolWithdrawalDelayChanged)
+	if err := _Nodedaopool.contract.UnpackLog(event, "WithdrawalDelayChanged", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolWithdrawalsClaimedIterator is returned from FilterWithdrawalsClaimed and is used to iterate over the raw logs and unpacked data for WithdrawalsClaimed events raised by the Pool contract.
-type PoolWithdrawalsClaimedIterator struct {
-	Event *PoolWithdrawalsClaimed // Event containing the contract specifics and raw log
+// NodedaopoolWithdrawalsClaimedIterator is returned from FilterWithdrawalsClaimed and is used to iterate over the raw logs and unpacked data for WithdrawalsClaimed events raised by the Nodedaopool contract.
+type NodedaopoolWithdrawalsClaimedIterator struct {
+	Event *NodedaopoolWithdrawalsClaimed // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -4518,7 +5070,7 @@ type PoolWithdrawalsClaimedIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolWithdrawalsClaimedIterator) Next() bool {
+func (it *NodedaopoolWithdrawalsClaimedIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -4527,7 +5079,7 @@ func (it *PoolWithdrawalsClaimedIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolWithdrawalsClaimed)
+			it.Event = new(NodedaopoolWithdrawalsClaimed)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -4542,7 +5094,7 @@ func (it *PoolWithdrawalsClaimedIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolWithdrawalsClaimed)
+		it.Event = new(NodedaopoolWithdrawalsClaimed)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -4558,19 +5110,19 @@ func (it *PoolWithdrawalsClaimedIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolWithdrawalsClaimedIterator) Error() error {
+func (it *NodedaopoolWithdrawalsClaimedIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolWithdrawalsClaimedIterator) Close() error {
+func (it *NodedaopoolWithdrawalsClaimedIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolWithdrawalsClaimed represents a WithdrawalsClaimed event raised by the Pool contract.
-type PoolWithdrawalsClaimed struct {
+// NodedaopoolWithdrawalsClaimed represents a WithdrawalsClaimed event raised by the Nodedaopool contract.
+type NodedaopoolWithdrawalsClaimed struct {
 	Receiver    common.Address
 	RequestId   *big.Int
 	ClaimAmount *big.Int
@@ -4580,21 +5132,21 @@ type PoolWithdrawalsClaimed struct {
 // FilterWithdrawalsClaimed is a free log retrieval operation binding the contract event 0xf39bbe3e7fb2d887fe7e6e23dea5a53c1e720410dfb13e87567b873845136cf4.
 //
 // Solidity: event WithdrawalsClaimed(address _receiver, uint256 _requestId, uint256 _claimAmount)
-func (_Pool *PoolFilterer) FilterWithdrawalsClaimed(opts *bind.FilterOpts) (*PoolWithdrawalsClaimedIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterWithdrawalsClaimed(opts *bind.FilterOpts) (*NodedaopoolWithdrawalsClaimedIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "WithdrawalsClaimed")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "WithdrawalsClaimed")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolWithdrawalsClaimedIterator{contract: _Pool.contract, event: "WithdrawalsClaimed", logs: logs, sub: sub}, nil
+	return &NodedaopoolWithdrawalsClaimedIterator{contract: _Nodedaopool.contract, event: "WithdrawalsClaimed", logs: logs, sub: sub}, nil
 }
 
 // WatchWithdrawalsClaimed is a free log subscription operation binding the contract event 0xf39bbe3e7fb2d887fe7e6e23dea5a53c1e720410dfb13e87567b873845136cf4.
 //
 // Solidity: event WithdrawalsClaimed(address _receiver, uint256 _requestId, uint256 _claimAmount)
-func (_Pool *PoolFilterer) WatchWithdrawalsClaimed(opts *bind.WatchOpts, sink chan<- *PoolWithdrawalsClaimed) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchWithdrawalsClaimed(opts *bind.WatchOpts, sink chan<- *NodedaopoolWithdrawalsClaimed) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "WithdrawalsClaimed")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "WithdrawalsClaimed")
 	if err != nil {
 		return nil, err
 	}
@@ -4604,8 +5156,8 @@ func (_Pool *PoolFilterer) WatchWithdrawalsClaimed(opts *bind.WatchOpts, sink ch
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolWithdrawalsClaimed)
-				if err := _Pool.contract.UnpackLog(event, "WithdrawalsClaimed", log); err != nil {
+				event := new(NodedaopoolWithdrawalsClaimed)
+				if err := _Nodedaopool.contract.UnpackLog(event, "WithdrawalsClaimed", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -4629,18 +5181,18 @@ func (_Pool *PoolFilterer) WatchWithdrawalsClaimed(opts *bind.WatchOpts, sink ch
 // ParseWithdrawalsClaimed is a log parse operation binding the contract event 0xf39bbe3e7fb2d887fe7e6e23dea5a53c1e720410dfb13e87567b873845136cf4.
 //
 // Solidity: event WithdrawalsClaimed(address _receiver, uint256 _requestId, uint256 _claimAmount)
-func (_Pool *PoolFilterer) ParseWithdrawalsClaimed(log types.Log) (*PoolWithdrawalsClaimed, error) {
-	event := new(PoolWithdrawalsClaimed)
-	if err := _Pool.contract.UnpackLog(event, "WithdrawalsClaimed", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseWithdrawalsClaimed(log types.Log) (*NodedaopoolWithdrawalsClaimed, error) {
+	event := new(NodedaopoolWithdrawalsClaimed)
+	if err := _Nodedaopool.contract.UnpackLog(event, "WithdrawalsClaimed", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
 	return event, nil
 }
 
-// PoolWithdrawalsRequestIterator is returned from FilterWithdrawalsRequest and is used to iterate over the raw logs and unpacked data for WithdrawalsRequest events raised by the Pool contract.
-type PoolWithdrawalsRequestIterator struct {
-	Event *PoolWithdrawalsRequest // Event containing the contract specifics and raw log
+// NodedaopoolWithdrawalsRequestIterator is returned from FilterWithdrawalsRequest and is used to iterate over the raw logs and unpacked data for WithdrawalsRequest events raised by the Nodedaopool contract.
+type NodedaopoolWithdrawalsRequestIterator struct {
+	Event *NodedaopoolWithdrawalsRequest // Event containing the contract specifics and raw log
 
 	contract *bind.BoundContract // Generic contract to use for unpacking event data
 	event    string              // Event name to use for unpacking event data
@@ -4654,7 +5206,7 @@ type PoolWithdrawalsRequestIterator struct {
 // Next advances the iterator to the subsequent event, returning whether there
 // are any more events found. In case of a retrieval or parsing error, false is
 // returned and Error() can be queried for the exact failure.
-func (it *PoolWithdrawalsRequestIterator) Next() bool {
+func (it *NodedaopoolWithdrawalsRequestIterator) Next() bool {
 	// If the iterator failed, stop iterating
 	if it.fail != nil {
 		return false
@@ -4663,7 +5215,7 @@ func (it *PoolWithdrawalsRequestIterator) Next() bool {
 	if it.done {
 		select {
 		case log := <-it.logs:
-			it.Event = new(PoolWithdrawalsRequest)
+			it.Event = new(NodedaopoolWithdrawalsRequest)
 			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 				it.fail = err
 				return false
@@ -4678,7 +5230,7 @@ func (it *PoolWithdrawalsRequestIterator) Next() bool {
 	// Iterator still in progress, wait for either a data or an error event
 	select {
 	case log := <-it.logs:
-		it.Event = new(PoolWithdrawalsRequest)
+		it.Event = new(NodedaopoolWithdrawalsRequest)
 		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
 			it.fail = err
 			return false
@@ -4694,19 +5246,19 @@ func (it *PoolWithdrawalsRequestIterator) Next() bool {
 }
 
 // Error returns any retrieval or parsing error occurred during filtering.
-func (it *PoolWithdrawalsRequestIterator) Error() error {
+func (it *NodedaopoolWithdrawalsRequestIterator) Error() error {
 	return it.fail
 }
 
 // Close terminates the iteration process, releasing any pending underlying
 // resources.
-func (it *PoolWithdrawalsRequestIterator) Close() error {
+func (it *NodedaopoolWithdrawalsRequestIterator) Close() error {
 	it.sub.Unsubscribe()
 	return nil
 }
 
-// PoolWithdrawalsRequest represents a WithdrawalsRequest event raised by the Pool contract.
-type PoolWithdrawalsRequest struct {
+// NodedaopoolWithdrawalsRequest represents a WithdrawalsRequest event raised by the Nodedaopool contract.
+type NodedaopoolWithdrawalsRequest struct {
 	Receiver         common.Address
 	WithdrawalAmount *big.Int
 	BlockNumber      *big.Int
@@ -4716,21 +5268,21 @@ type PoolWithdrawalsRequest struct {
 // FilterWithdrawalsRequest is a free log retrieval operation binding the contract event 0x74ffedfd7821cf30dd556fac01944f4d077a2099ae55773bb89444cce29755f4.
 //
 // Solidity: event WithdrawalsRequest(address _receiver, uint256 _withdrawalAmount, uint256 _blockNumber)
-func (_Pool *PoolFilterer) FilterWithdrawalsRequest(opts *bind.FilterOpts) (*PoolWithdrawalsRequestIterator, error) {
+func (_Nodedaopool *NodedaopoolFilterer) FilterWithdrawalsRequest(opts *bind.FilterOpts) (*NodedaopoolWithdrawalsRequestIterator, error) {
 
-	logs, sub, err := _Pool.contract.FilterLogs(opts, "WithdrawalsRequest")
+	logs, sub, err := _Nodedaopool.contract.FilterLogs(opts, "WithdrawalsRequest")
 	if err != nil {
 		return nil, err
 	}
-	return &PoolWithdrawalsRequestIterator{contract: _Pool.contract, event: "WithdrawalsRequest", logs: logs, sub: sub}, nil
+	return &NodedaopoolWithdrawalsRequestIterator{contract: _Nodedaopool.contract, event: "WithdrawalsRequest", logs: logs, sub: sub}, nil
 }
 
 // WatchWithdrawalsRequest is a free log subscription operation binding the contract event 0x74ffedfd7821cf30dd556fac01944f4d077a2099ae55773bb89444cce29755f4.
 //
 // Solidity: event WithdrawalsRequest(address _receiver, uint256 _withdrawalAmount, uint256 _blockNumber)
-func (_Pool *PoolFilterer) WatchWithdrawalsRequest(opts *bind.WatchOpts, sink chan<- *PoolWithdrawalsRequest) (event.Subscription, error) {
+func (_Nodedaopool *NodedaopoolFilterer) WatchWithdrawalsRequest(opts *bind.WatchOpts, sink chan<- *NodedaopoolWithdrawalsRequest) (event.Subscription, error) {
 
-	logs, sub, err := _Pool.contract.WatchLogs(opts, "WithdrawalsRequest")
+	logs, sub, err := _Nodedaopool.contract.WatchLogs(opts, "WithdrawalsRequest")
 	if err != nil {
 		return nil, err
 	}
@@ -4740,8 +5292,8 @@ func (_Pool *PoolFilterer) WatchWithdrawalsRequest(opts *bind.WatchOpts, sink ch
 			select {
 			case log := <-logs:
 				// New log arrived, parse the event and forward to the user
-				event := new(PoolWithdrawalsRequest)
-				if err := _Pool.contract.UnpackLog(event, "WithdrawalsRequest", log); err != nil {
+				event := new(NodedaopoolWithdrawalsRequest)
+				if err := _Nodedaopool.contract.UnpackLog(event, "WithdrawalsRequest", log); err != nil {
 					return err
 				}
 				event.Raw = log
@@ -4765,9 +5317,9 @@ func (_Pool *PoolFilterer) WatchWithdrawalsRequest(opts *bind.WatchOpts, sink ch
 // ParseWithdrawalsRequest is a log parse operation binding the contract event 0x74ffedfd7821cf30dd556fac01944f4d077a2099ae55773bb89444cce29755f4.
 //
 // Solidity: event WithdrawalsRequest(address _receiver, uint256 _withdrawalAmount, uint256 _blockNumber)
-func (_Pool *PoolFilterer) ParseWithdrawalsRequest(log types.Log) (*PoolWithdrawalsRequest, error) {
-	event := new(PoolWithdrawalsRequest)
-	if err := _Pool.contract.UnpackLog(event, "WithdrawalsRequest", log); err != nil {
+func (_Nodedaopool *NodedaopoolFilterer) ParseWithdrawalsRequest(log types.Log) (*NodedaopoolWithdrawalsRequest, error) {
+	event := new(NodedaopoolWithdrawalsRequest)
+	if err := _Nodedaopool.contract.UnpackLog(event, "WithdrawalsRequest", log); err != nil {
 		return nil, err
 	}
 	event.Raw = log
