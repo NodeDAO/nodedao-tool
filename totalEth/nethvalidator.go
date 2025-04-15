@@ -2,6 +2,7 @@ package totalEth
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"github.com/NodeDAO/nodedao-tool/conf"
 	"github.com/NodeDAO/nodedao-tool/contract/elreward"
@@ -9,7 +10,9 @@ import (
 	"github.com/NodeDAO/nodedao-tool/eth1"
 	"github.com/NodeDAO/nodedao-tool/eth2"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
 	"math/big"
+	"net/http"
 	"strings"
 )
 
@@ -107,7 +110,24 @@ func CalcNethTotalEth() error {
 	}
 	log.Infow("neth", "eth2Balance", eth2Balance.String())
 
+	pufEthReward, err := getPufEthReward() // puffer validator reward
+	if err != nil {
+		return err
+	}
+	config := conf.GetConfig()
+	eth1Client, cancel, err := eth1.GetEthClient(config.Eth1Rpc)
+	if err != nil {
+		return err
+	}
+	balance, err := eth1Client.BalanceAt(context.Background(), common.HexToAddress("0xBDfE7fc2cAAc000e8436C72C104d611277DEf3d8"), nil) // 另外未结算集群奖励
+	if err != nil {
+		return err
+	}
+	cancel()
+
 	totalETH := big.NewInt(0).Add(eth1Balance, eth2Balance)
+	totalETH = big.NewInt(0).Add(totalETH, pufEthReward)
+	totalETH = big.NewInt(0).Add(totalETH, balance)
 
 	fmt.Println("===========================================================")
 	fmt.Printf("totalETH : %f ETH (%s WEI) \n", WEIToEth(totalETH), totalETH.String())
@@ -115,4 +135,45 @@ func CalcNethTotalEth() error {
 	fmt.Printf("totalAsset - totalETH: %f ETH \n", WEIToEth(big.NewInt(0).Sub(totalAssets, totalETH)))
 	fmt.Println("===========================================================")
 	return nil
+}
+
+type MerkleProof struct {
+	NodeAddress    string `json:"node_address"`
+	MerkleProof    string `json:"merkle_proof"`
+	StartEpoch     int64  `json:"start_epoch"`
+	StartTimestamp int64  `json:"start_timestamp"`
+	EndEpoch       int64  `json:"end_epoch"`
+	EndTimestamp   int64  `json:"end_timestamp"`
+	RewardsAmount  string `json:"rewards_amount"`
+	MerkleRoot     string `json:"merkle_root"`
+	LeafIndex      int    `json:"leaf_index"`
+	IntervalID     string `json:"interval_id"`
+	IsContract     bool   `json:"is_contract"`
+}
+
+func getPufEthReward() (*big.Int, error) {
+	apiURL := "https://api.puffer.fi/backend-for-frontend/noop/merkle-proofs?node_addresses=0x18C6456c8959f524B430d818Ea9d45Fee766aDbb"
+	resp, err := http.Get(apiURL)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var proofs []MerkleProof
+	if err := json.NewDecoder(resp.Body).Decode(&proofs); err != nil {
+		return nil, err
+	}
+
+	totalRewards := calculateTotalRewards(proofs)
+	return totalRewards, nil
+}
+
+func calculateTotalRewards(proofs []MerkleProof) *big.Int {
+	total := big.NewInt(0)
+	for _, proof := range proofs {
+		amount := new(big.Int)
+		amount.SetString(proof.RewardsAmount, 10)
+		total.Add(total, amount)
+	}
+	return total
 }
